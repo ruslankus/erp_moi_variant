@@ -302,3 +302,153 @@ Stack trace:
 REQUEST_URI=/products/categories
 HTTP_REFERER=http://erpgit.loc/main
 ---
+2014/07/09 18:54:25 [error] [php] Non-static method Debug::d() should not be called statically (C:\OpenServer\domains\yerp.local\protected\helpers\Label.php:14)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require()
+#1 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): MainController->renderInternal()
+#2 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): MainController->renderFile()
+#3 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): MainController->renderPartial()
+#4 C:\OpenServer\domains\yerp.local\protected\controllers\MainController.php(54): MainController->render()
+#5 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): MainController->actionLogin()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): MainController->runAction()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): MainController->runActionWithFilters()
+#9 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): MainController->run()
+#10 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/main/login
+in C:\OpenServer\domains\yerp.local\protected\helpers\Label.php (14)
+in C:\OpenServer\domains\yerp.local\protected\helpers\Label.php (14)
+in C:\OpenServer\domains\yerp.local\protected\views\main\login.php (8)
+2014/07/09 18:54:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2014/07/09 18:57:21 [error] [php] Missing argument 1 for CActiveRecord::getAttribute(), called in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php on line 111 and defined (C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php:691)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\protected\helpers\Label.php(14): Labels->__get()
+#1 C:\OpenServer\domains\yerp.local\protected\views\main\login.php(8): Get()
+#2 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require()
+#3 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): MainController->renderInternal()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): MainController->renderFile()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): MainController->renderPartial()
+#6 C:\OpenServer\domains\yerp.local\protected\controllers\MainController.php(54): MainController->render()
+#7 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): MainController->actionLogin()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): MainController->runAction()
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): MainController->runActionWithFilters()
+#11 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): MainController->run()
+#12 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/main/login
+in C:\OpenServer\domains\yerp.local\protected\helpers\Label.php (14)
+in C:\OpenServer\domains\yerp.local\protected\views\main\login.php (8)
+in C:\OpenServer\domains\yerp.local\protected\controllers\MainController.php (54)
+2014/07/09 19:12:49 [error] [exception.CDbException] exception 'CDbException' with message 'The DB query must contain the "from" portion.' in C:\OpenServer\domains\yerp.local\framework\db\CDbCommand.php:566
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\CDbCommand.php(160): CDbCommand->buildQuery(Array)
+#1 C:\OpenServer\domains\yerp.local\framework\db\CDbCommand.php(484): CDbCommand->getText()
+#2 C:\OpenServer\domains\yerp.local\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#3 C:\OpenServer\domains\yerp.local\protected\helpers\Label.php(17): CDbCommand->queryAll()
+#4 C:\OpenServer\domains\yerp.local\protected\views\main\login.php(8): Label::Get('enter password')
+#5 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#6 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#7 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('login', Array, true)
+#9 C:\OpenServer\domains\yerp.local\protected\controllers\MainController.php(54): CController->render('login', Array)
+#10 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): MainController->actionLogin()
+#11 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#12 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#13 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('login')
+#15 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('main/login')
+#16 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/main/login
+---
+2014/07/09 19:18:16 [error] [php] array_merge() [<a href='function.array-merge'>function.array-merge</a>]: Argument #2 is not an array (C:\OpenServer\domains\yerp.local\framework\db\CDbCommand.php:472)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\protected\helpers\Label.php(18): CDbCommand->queryColumn()
+#1 C:\OpenServer\domains\yerp.local\protected\views\main\login.php(8): Get()
+#2 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require()
+#3 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): MainController->renderInternal()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): MainController->renderFile()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): MainController->renderPartial()
+#6 C:\OpenServer\domains\yerp.local\protected\controllers\MainController.php(54): MainController->render()
+#7 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): MainController->actionLogin()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): MainController->runAction()
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): MainController->runActionWithFilters()
+#11 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): MainController->run()
+#12 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/main/login
+in C:\OpenServer\domains\yerp.local\protected\helpers\Label.php (18)
+in C:\OpenServer\domains\yerp.local\protected\views\main\login.php (8)
+in C:\OpenServer\domains\yerp.local\protected\controllers\MainController.php (54)
+2014/07/09 19:19:02 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[HY000]: General error: 25 bind or column index out of range. The SQL statement executed was: SELECT *
+FROM 'labels'
+GROUP BY "label", "value".
+in C:\OpenServer\domains\yerp.local\protected\helpers\Label.php (18)
+in C:\OpenServer\domains\yerp.local\protected\views\main\login.php (8)
+in C:\OpenServer\domains\yerp.local\protected\controllers\MainController.php (54)
+2014/07/09 19:19:02 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 25 bind or column index out of range. The SQL statement executed was: SELECT *
+FROM 'labels'
+GROUP BY "label", "value"' in C:\OpenServer\domains\yerp.local\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\CDbCommand.php(455): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\OpenServer\domains\yerp.local\protected\helpers\Label.php(18): CDbCommand->queryColumn(Array)
+#2 C:\OpenServer\domains\yerp.local\protected\views\main\login.php(8): Label::Get('enter password')
+#3 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#4 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('login', Array, true)
+#7 C:\OpenServer\domains\yerp.local\protected\controllers\MainController.php(54): CController->render('login', Array)
+#8 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): MainController->actionLogin()
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('login')
+#13 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('main/login')
+#14 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/main/login
+---
+2014/07/09 19:19:42 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[HY000]: General error: 25 bind or column index out of range. The SQL statement executed was: SELECT "labels", "value"
+FROM 'labels'
+GROUP BY "label", "value".
+in C:\OpenServer\domains\yerp.local\protected\helpers\Label.php (18)
+in C:\OpenServer\domains\yerp.local\protected\views\main\login.php (8)
+in C:\OpenServer\domains\yerp.local\protected\controllers\MainController.php (54)
+2014/07/09 19:19:42 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 25 bind or column index out of range. The SQL statement executed was: SELECT "labels", "value"
+FROM 'labels'
+GROUP BY "label", "value"' in C:\OpenServer\domains\yerp.local\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\CDbCommand.php(455): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\OpenServer\domains\yerp.local\protected\helpers\Label.php(18): CDbCommand->queryColumn(Array)
+#2 C:\OpenServer\domains\yerp.local\protected\views\main\login.php(8): Label::Get('enter password')
+#3 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#4 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('login', Array, true)
+#7 C:\OpenServer\domains\yerp.local\protected\controllers\MainController.php(54): CController->render('login', Array)
+#8 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): MainController->actionLogin()
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('login')
+#13 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('main/login')
+#14 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/main/login
+---
