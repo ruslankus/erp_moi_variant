@@ -452,3 +452,65 @@ Stack trace:
 #16 {main}
 REQUEST_URI=/main/login
 ---
+2014/07/09 22:05:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2014/07/09 22:06:00 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'alex_erp'@'localhost' (using password: YES)' in C:\OpenServer\domains\yerp.local\framework\db\CDbConnection.php:382
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\CDbConnection.php(330): CDbConnection->open()
+#1 C:\OpenServer\domains\yerp.local\framework\db\CDbConnection.php(308): CDbConnection->setActive(true)
+#2 C:\OpenServer\domains\yerp.local\framework\base\CModule.php(387): CDbConnection->init()
+#3 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(450): CModule->getComponent('db')
+#4 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(634): CApplication->getDb()
+#5 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1428): CActiveRecord->getDbConnection()
+#6 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1517): CActiveRecord->getTableAlias(true)
+#7 C:\OpenServer\domains\yerp.local\protected\components\UserIdentity.php(21): CActiveRecord->findByAttributes(Array)
+#8 C:\OpenServer\domains\yerp.local\protected\models\LoginForm.php(43): UserIdentity->authenticate()
+#9 C:\OpenServer\domains\yerp.local\framework\validators\CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#10 C:\OpenServer\domains\yerp.local\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#11 C:\OpenServer\domains\yerp.local\framework\base\CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#12 C:\OpenServer\domains\yerp.local\protected\controllers\MainController.php(43): CModel->validate()
+#13 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): MainController->actionLogin()
+#14 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('login')
+#18 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('main/login')
+#19 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/main/login
+HTTP_REFERER=http://yerp.local/main/login
+---
+2014/07/09 22:08:05 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'alex_erp'@'localhost' (using password: YES)' in C:\OpenServer\domains\yerp.local\framework\db\CDbConnection.php:382
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\CDbConnection.php(330): CDbConnection->open()
+#1 C:\OpenServer\domains\yerp.local\framework\db\CDbConnection.php(308): CDbConnection->setActive(true)
+#2 C:\OpenServer\domains\yerp.local\framework\base\CModule.php(387): CDbConnection->init()
+#3 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(450): CModule->getComponent('db')
+#4 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(634): CApplication->getDb()
+#5 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1428): CActiveRecord->getDbConnection()
+#6 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1517): CActiveRecord->getTableAlias(true)
+#7 C:\OpenServer\domains\yerp.local\protected\components\UserIdentity.php(21): CActiveRecord->findByAttributes(Array)
+#8 C:\OpenServer\domains\yerp.local\protected\models\LoginForm.php(43): UserIdentity->authenticate()
+#9 C:\OpenServer\domains\yerp.local\framework\validators\CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#10 C:\OpenServer\domains\yerp.local\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#11 C:\OpenServer\domains\yerp.local\framework\base\CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#12 C:\OpenServer\domains\yerp.local\protected\controllers\MainController.php(43): CModel->validate()
+#13 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): MainController->actionLogin()
+#14 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('login')
+#18 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('main/login')
+#19 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/main/login
+HTTP_REFERER=http://yerp.local/main/login
+---

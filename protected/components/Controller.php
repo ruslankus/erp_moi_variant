@@ -28,7 +28,7 @@ class Controller extends CController
     public $page_title = "default";
     
     public function init(){
-        $this->labels = Label::Get();
+        $this->labels = Labels::model()->getLabels();
     }
 
     //returns user rights
