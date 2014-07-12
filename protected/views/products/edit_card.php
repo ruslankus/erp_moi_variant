@@ -38,14 +38,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/add_product.css');
                     <label><?php echo $this->labels['category']; ?></label>
 
                     
-                    <select name="category_id" class="form-control">
-<!--                        <option selected>--><?php //echo $this->labels['select']; ?><!--</option>-->
-                        <?php foreach($categories as $category): ?>
-                            <option <?php if($card->category_id == $category->id): ?>selected<?php endif;?> value="<?php echo $category->id; ?>"><?php echo $category->name; ?></option>
-                        <?php endforeach;?>
-                    </select> 
-                    
-                    <?php echo $form->dropDownList($model,'category_id',$categories,array('clsss'=>'form-control'))?>
+                    <?php echo $form->dropDownList($model,'category_id',$categories,array('class'=>'form-control'))?>
                 </div>
 
                 <fieldset>
