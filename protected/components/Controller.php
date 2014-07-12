@@ -22,23 +22,17 @@ class Controller extends CController
 	public $breadcrumbs=array();
     
     public $labels;
-
+    protected $rights = array();
     //default titles of site pages
     public $site_title = "ERP";
     public $page_title = "default";
     
     public function init(){
        $this->labels = Labels::model()->getLabels();
+       $this->rights = Yii::app()->user->getState('rights');
     }
 
-    //returns user rights
-    public static function GetUserRights()
-    {
-        /* @var $user_rights UserRights */
-        $user_rights = Yii::app()->user->GetState('rights');
-        return $user_rights;
-    }
-
+    
     //do before every action
     protected function beforeAction($action) {
 

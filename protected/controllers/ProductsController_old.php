@@ -235,7 +235,7 @@ class ProductsController extends Controller
     {
         $model = new ProductCardForm();
         //get all categories
-        $categories = ProductCardCategories::model()->getDropList();
+        $categories = ProductCardCategories::model()->findAll();
 
         //render form
         $this->render('edit_card',array('categories' => $categories,'model'=>$model ,'card' => new ProductCards()));
