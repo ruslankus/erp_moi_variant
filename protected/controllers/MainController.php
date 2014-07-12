@@ -5,7 +5,8 @@ class MainController extends Controller
     //I N D E X
     public function actionIndex()
     {
-        //redirect to ERP module
+        
+           
         $this->render('welcome');
     }
 

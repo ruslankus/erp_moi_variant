@@ -8,7 +8,7 @@
 return array(
     'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
     'name'=>'ERP',
-
+    'defaultController' => 'main',
     // preloading 'log' component
     'preload'=>array('log'),
 
@@ -58,7 +58,7 @@ return array(
                 '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/*'=>'<controller>/<action>',
 
-                '/' => 'main/index',
+               
             ),
         ),
 

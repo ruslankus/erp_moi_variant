@@ -12,14 +12,13 @@
                  <?php $form=$this->beginWidget('CActiveForm', array('id' =>'login-form','enableAjaxValidation'=>false,'htmlOptions'=>array('class'=>'clearfix'))); ?> 
 
                     <div class="form-group">
-                        <label for="login"><?php echo $this->labels['login']?></label>
-                      
+                        <?php echo $form->label($model,'username');?>                      
                         <?php echo $form->textField($model,'username',array('class'=>'form-control'));?>
                         <?php echo $form->error($model,'username'); ?>
                     </div>
 
                     <div class="form-group">
-                        <label for="password"><?php echo $this->labels['password']; ?></label>                        
+                        <?php echo $form->label($model,'password');?>                       
                         <?php echo $form->passwordField($model,'password',array('class'=>'form-control'));?>
                         <?php echo $form->error($model,'password');?>                       
                     </div>

@@ -1,7 +1,7 @@
 <?php
 
 
-class MainMenu extends CWidget {
+class MainMenu extends Widget {
 
 
     public function run(){
@@ -9,19 +9,16 @@ class MainMenu extends CWidget {
         /* @var $rights UserRights */
 
         //get user rights
-        $rights = Yii::app()->user->GetState('rights');
-
-        //default action for all links
-        $default_action = 'index';
+        $curr_controller = Yii::app()->controller->id;
 
         //array of menu-links
         $main_menu = array(
-            'Products' => array('controller' => 'products','image' => 'stock.png','visible' => $rights->products_see),
-            'Contractors' => array('controller' => 'contractors', 'image' => 'kontragent.png', 'visible' => $rights->contractors_see),
-            'Employees' => array('controller' => 'employees', 'image' => 'person.png', 'visible' => $rights->users_see)
+            'products' => array('controller' => 'products','image' => 'product.png','visible' => $this->rights['products_section_see'] ? 1 : 0 ),
+            'contractors' => array('controller' => 'contractors', 'image' => 'kontragent.png', 'visible' => $this->rights['contractors_section_see'] ? 1 : 0),
+            'employees' => array('controller' => 'employees', 'image' => 'person.png', 'visible' => $this->rights['employees_section_see'] ? 1 : 0)
         );
 
-        $this->render('_main_menu',array('links' => $main_menu, 'default_action' => $default_action));
+        $this->render('main_menu',array('links' => $main_menu, 'curr_controller' => $curr_controller));
     }
 }
 ?>

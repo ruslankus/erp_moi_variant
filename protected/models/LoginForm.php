@@ -43,8 +43,8 @@ class LoginForm extends BaseForm
             if(!$this->_identity->authenticate())
             {
                 if($this->_identity->errorCode == UserIdentity::ERROR_PASSWORD_INVALID){$this->addError('password',$this->_messages['Incorrect password']);}
-                elseif($this->_identity->errorCode == UserIdentity::ERROR_USERNAME_INVALID){$this->addError('username',$this->_messages['This user not exist']);}
-                elseif($this->_identity->errorCode == UserIdentity::ERROR_UNKNOWN_IDENTITY){$this->addError('username',$this->_messages['Unknown error. Authentication failed']);}
+                if($this->_identity->errorCode == UserIdentity::ERROR_USERNAME_INVALID){$this->addError('username',$this->_messages['This user not exist']);}
+                if($this->_identity->errorCode == UserIdentity::ERROR_UNKNOWN_IDENTITY){$this->addError('username',$this->_messages['Unknown error. Authentication failed']);}
             }
         }
     }
