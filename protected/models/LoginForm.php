@@ -5,7 +5,7 @@
  * LoginForm is the data structure for keeping
  * user login form data. It is used by the 'login' action of 'SiteController'.
  */
-class LoginForm extends CFormModel
+class LoginForm extends BaseForm
 {
 	public $username;
 	public $password;
@@ -22,7 +22,7 @@ class LoginForm extends CFormModel
 	{
 		return array(
 			// username and password are required
-			array('username, password', 'required'),
+			array('username, password', 'required','message'=> $this->_messages['fill the field'].' "{attribute}"'),
 			// rememberMe needs to be a boolean
 //			array('remember_me', 'boolean'),
 			// password needs to be authenticated
@@ -42,12 +42,21 @@ class LoginForm extends CFormModel
             $this->_identity=new UserIdentity($this->username,$this->password);
             if(!$this->_identity->authenticate())
             {
-                if($this->_identity->errorCode == UserIdentity::ERROR_PASSWORD_INVALID){$this->addError('password','Incorrect password');}
-                elseif($this->_identity->errorCode == UserIdentity::ERROR_USERNAME_INVALID){$this->addError('username','This user not exist');}
-                elseif($this->_identity->errorCode == UserIdentity::ERROR_UNKNOWN_IDENTITY){$this->addError('username','Unknown error. Authentication failed');}
+                if($this->_identity->errorCode == UserIdentity::ERROR_PASSWORD_INVALID){$this->addError('password',$this->_messages['Incorrect password']);}
+                elseif($this->_identity->errorCode == UserIdentity::ERROR_USERNAME_INVALID){$this->addError('username',$this->_messages['This user not exist']);}
+                elseif($this->_identity->errorCode == UserIdentity::ERROR_UNKNOWN_IDENTITY){$this->addError('username',$this->_messages['Unknown error. Authentication failed']);}
             }
         }
     }
+    
+    
+    public function attributeLabels()
+	{
+		return array(
+			'username' => $this->_labels['login'],
+            'password' => $this->_labels['password']
+		);
+	}
 
 	/**
 	 * Logs in the user using the given username and password in the model.

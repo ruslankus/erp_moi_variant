@@ -5,7 +5,8 @@ class Label
     public static function Get($language=null)
     {
         
-        $labels = array();    
+        $labels = array();
+        
                
         $connection = Yii::app()->labels;
         $sql="SELECT label, value FROM labels";

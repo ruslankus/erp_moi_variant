@@ -13,7 +13,8 @@ class MainController extends Controller
     public function actionLogout()
     {
         //delete user info from session
-        Yii::app()->user->logout(false);
+        Yii::app()->user->logout();
+        $this->redirect('/main/login');
     }
 
     //L O G  I N
@@ -29,30 +30,24 @@ class MainController extends Controller
 
         //if logged in - redirect to index
         if(!Yii::app()->user->isGuest){$this->redirect($this->createUrl('main/index'));}
+        
+        $model = new LoginForm();
 
         //if post request
-        if(Yii::app()->request->isPostRequest)
+        if(isset($_POST['LoginForm']))
         {
-            //create validation from-model object
-            $validation=new LoginForm();
-
             //set all parameters from post
-            $validation->attributes = $_POST;
+            $model->attributes = $_POST['LoginForm'];
 
             // validate user input and redirect to the previous page if valid
-            if($validation->validate() && $validation->login())
+            if($model->validate() && $model->login())
             {
-                $this->redirect(Yii::app()->createUrl('main/index'));
+                $this->redirect('index');
             }
 
-            // render form and errors
-            $this->render('login',array('errors'=>$validation->getErrors()));
         }
-        else
-        {
-            //render form
-            $this->render('login',array('errors'=>array()));
-        }
-
+        //render form
+        $this->render('login',array('model' => $model));
+      
     }
 }
