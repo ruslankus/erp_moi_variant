@@ -215,9 +215,10 @@ class ProductsController extends Controller
         $id = (int)$id;
 
         /* @var $card ProductCards */
+        $model = new ProductCardForm();
 
         //get all categories
-        $categories = ProductCardCategories::model()->findAll();
+        $categories = ProductCardCategories::model()->getDropList();
 
         //try find in base
         $card = ProductCards::model()->findByPk($id);
@@ -226,7 +227,7 @@ class ProductsController extends Controller
         if(empty($card)){throw new CHttpException(404,$this->labels['item not found in base']);}
 
         //render form
-        $this->render('edit_card',array('categories' => $categories, 'card' => $card));
+        $this->render('edit_card',array('categories' => $categories, 'card' => $card,'model'=>$model));
 
     }
 

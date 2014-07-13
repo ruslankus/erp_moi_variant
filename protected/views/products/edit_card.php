@@ -25,20 +25,18 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/add_product.css');
 
                 <div class="form-group">
                     <?php echo $form->label($model,'code');?>
-                    <?php echo $form->textField($model,'code',array('class'=>'form-control'));?>
+                    <?php echo $form->textField($model,'code',array('class'=>'form-control','value'=> $card->product_code,));?>
                     <?php echo $form->error($model,'code');?>
                 </div>
                 <div class="form-group">
                     <?php echo $form->label($model,'name');?>
-                    <?php echo $form->textField($model,'name',array('class'=>'form-control'));?>
+                    <?php echo $form->textField($model,'name',array('class'=>'form-control','value'=> $card->product_name));?>
                     <?php echo $form->error($model,'name');?>
                 </div>
 
                 <div class="form-group">
-                    <label><?php echo $this->labels['category']; ?></label>
-
-                    
-                    <?php echo $form->dropDownList($model,'category_id',$categories,array('class'=>'form-control'))?>
+                    <?php echo $form->label($model,'category_id');?>                  
+                    <?php echo $form->dropDownList($model,'category_id',$categories,array('class'=>'form-control','options' => array($card->category_id =>array('selected'=>true))));?>
                 </div>
 
                 <fieldset>
