@@ -237,10 +237,20 @@ class ProductsController extends Controller
         $model = new ProductCardForm();
         //get all categories
         $categories = ProductCardCategories::model()->getDropList();
-
+        if(isset($_POST['ProductCardForm'])){
+            $model->attributes = $_POST['ProductCardForm'];
+            if($model->validate()){
+                $saveModel = new ProductCards();
+                $saveModel->attributes = $_POST['ProductCardForm'];
+                $saveModel->save();
+                $this->redirect('cards');
+            }
+        }        
         //render form
         $this->render('edit_card',array('categories' => $categories,'model'=>$model ,'card' => new ProductCards()));
     }
+    
+    
 
     // D E L E T E
     public function actionDeleteCard($id = null)

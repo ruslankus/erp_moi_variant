@@ -24,14 +24,14 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/add_product.css');
                 <?php endif;?>
 
                 <div class="form-group">
-                    <?php echo $form->label($model,'code');?>
-                    <?php echo $form->textField($model,'code',array('class'=>'form-control','value'=> $card->product_code,));?>
-                    <?php echo $form->error($model,'code');?>
+                    <?php echo $form->label($model,'product_code');?>
+                    <?php echo $form->textField($model,'product_code',array('class'=>'form-control','value'=> $card->product_code,));?>
+                    <?php echo $form->error($model,'product_code');?>
                 </div>
                 <div class="form-group">
-                    <?php echo $form->label($model,'name');?>
-                    <?php echo $form->textField($model,'name',array('class'=>'form-control','value'=> $card->product_name));?>
-                    <?php echo $form->error($model,'name');?>
+                    <?php echo $form->label($model,'product_name');?>
+                    <?php echo $form->textField($model,'product_name',array('class'=>'form-control','value'=> $card->product_name));?>
+                    <?php echo $form->error($model,'product_name');?>
                 </div>
 
                 <div class="form-group">
@@ -44,19 +44,20 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/add_product.css');
                     <div class="form-group">
                         <div class="radio">
                             <label>
-                                <input <?php if($card->units == 'units'): ?>checked<?php endif; ?> type="radio" name="dim_units" value="units">
+                                <?php echo $form->radioButton($model,'units',array('value'=>'units','uncheckValue'=>null,'checked'=>true));?>
                                 <?php echo $this->labels['units']; ?>
                             </label>
+                            
                         </div>
                         <div class="radio">
-                            <label>
-                                <input <?php if($card->units == 'kg'): ?>checked<?php endif; ?> type="radio" name="dim_units" value="kg">
+                              <label>
+                                 <?php echo $form->radioButton($model,'units',array('value'=>'kg','uncheckValue'=>null));?>
                                 <?php echo $this->labels['kg']; ?>
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input <?php if($card->units == 'liters'): ?>checked<?php endif; ?> type="radio" name="dim_units" value="liters">
+                                 <?php echo $form->radioButton($model,'units',array('value'=>'litres','uncheckValue'=>null));?>
                                 <?php echo $this->labels['liters']; ?>
                             </label>
                         </div>
@@ -64,8 +65,8 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/add_product.css');
                 </fieldset>
 
                 <div class="form-group">
-                    <label><?php echo $this->labels['description']; ?></label>
-                    <textarea name="description" class="form-control"><?php echo $card->description; ?></textarea>
+                    <?php echo $form->label($model,'description')?>
+                    <?php echo $form->textArea($model,'description',array('class'=>'form-control'));?>
                 </div>
                 <button type="submit"><span><?php echo $this->labels['save']; ?></span><span class="glyphicon glyphicon-plus"></span></button>
             <?php $this->endWidget();?>

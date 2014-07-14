@@ -7,9 +7,12 @@
  */
 class ProductCardForm extends CFormModel
 {
-	public $code;
-	public $name;
+	
+    public $product_name;
+    public $product_code;
     public $category_id;
+    public $units;
+    public $description;
 
     public $current_card_id = null;
 
@@ -19,10 +22,10 @@ class ProductCardForm extends CFormModel
 	{
 		return array(
 			// username and password are required
-			array('code, name, category_id', 'required'),
-
+			array('product_code, product_name, category_id', 'required'),
+            array('units', 'safe'),
 			// password needs to be authenticated
-			array('code', 'unique'),
+			array('product_code', 'unique'),
 		);
 	}
 
@@ -38,7 +41,7 @@ class ProductCardForm extends CFormModel
             /* @var $card ProductCards */
 
             //try find product card by product-code
-            $card = ProductCards::model()->findByAttributes(array('product_code' => $this->code));
+            $card = ProductCards::model()->findByAttributes(array('product_code' => $this->product_code));
 
             //if found
             if($card)
@@ -46,7 +49,7 @@ class ProductCardForm extends CFormModel
                 //if found card is not same as card that we need update (in that case product key can be the same)
                 if(!($this->current_card_id != null && $this->current_card_id == $card->id))
                 {
-                    $this->addError('code','product code already used');
+                    $this->addError('product_code','product code already used');
                 }
             }
         }
