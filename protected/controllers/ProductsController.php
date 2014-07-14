@@ -209,29 +209,39 @@ class ProductsController extends Controller
     }
 
 
-    // E D I T
+  /**
+   * E D I T
+   */ 
     public function actionEditCard($id = null)
     {
         $id = (int)$id;
-
-        /* @var $card ProductCards */
-        $model = new ProductCardForm();
-
-        //get all categories
-        $categories = ProductCardCategories::model()->getDropList();
-
-        //try find in base
         $card = ProductCards::model()->findByPk($id);
+        if(!empty($card)){
+              
+            $model = new ProductCardForm();
+    
+            //get all categories
+            $categories = ProductCardCategories::model()->getDropList();
+            if(isset($_POST['ProductCardForm'])){
+                $model->attributes = $_POST['ProductCardForm'];
+                if($model->validate()){
+                    $card->attributes = $_POST['ProductCardForm'];
+                    $card->update();
+                    $this->redirect('/products/cards');
+                }
+            }
+            //render form
+            $this->render('edit_card',array('categories' => $categories, 'card' => $card,'model'=>$model));
+            
+        }else{        
+            throw new CHttpException(404,$this->labels['item not found in base']);
+        }      
+    }// edit
 
-        //if not found - exception
-        if(empty($card)){throw new CHttpException(404,$this->labels['item not found in base']);}
-
-        //render form
-        $this->render('edit_card',array('categories' => $categories, 'card' => $card,'model'=>$model));
-
-    }
-
-    // C R E A T E
+    
+    /**
+     *  ADD CARD
+     */
     public function actionAddCard()
     {
         $model = new ProductCardForm();
@@ -252,111 +262,26 @@ class ProductsController extends Controller
     
     
 
-    // D E L E T E
-    public function actionDeleteCard($id = null)
-    {
-        /* @var $card ProductCards */
+    
+    
+    /**
+     * DELETE
+     */
+    public function actionDeleteCard($id = null){
         $id = (int)$id;
-
-        //array of restrict-reasons
-        $restricts = array();
-
-        //try find in base
         $card = ProductCards::model()->with('operationsIns','operationsOuts','productInStocks')->findByPk($id);
-
-        //if not found - exception
-        if(empty($card)){throw new CHttpException(404,$this->labels['item not found in base']);}
-
-        //check for usages
-        if(count($card->operationsIns) > 0){$restricts[]=$this->labels['this item used in'].' '.$this->labels['incoming operations'];}
-        if(count($card->operationsOuts) > 0){$restricts[]=$this->labels['this item used in'].' '.$this->labels['outgoing operations'];}
-        if(count($card->productInStocks) > 0){$restricts[]=$this->labels['this item used in'].' '.$this->labels['stock products'];}
-
-        //if not used anywhere
-        if(empty($restricts))
-        {
-            //delete card
-            $card->delete();
-
-            //redirect to list
-            $this->redirect(Yii::app()->createUrl(Yii::app()->controller->id.'/cards'));
-        }
-        //if used somewhere
-        else
-        {
-            //render restricts reasons
-            $this->render('restricts',array('restricts' => $restricts));
-        }
-    }
-
-    //U P D A T E  C A R D
-    public function actionUpdateCard()
-    {
-        /* @var $card ProductCards */
-
-        //get id form request
-        $id = Yii::app()->request->getParam('id',null);
-        $product_code = Yii::app()->request->getParam('code','');
-        $product_name = Yii::app()->request->getParam('name','');
-        $category_id = Yii::app()->request->getParam('category_id','');
-        $dimension_units = Yii::app()->request->getParam('dim_units','units');
-        $description = Yii::app()->request->getParam('description','');
-
-        //try find from db
-        $card = ProductCards::model()->findByPk($id);
-        //if not found - create new object
-        if(empty($card)){$card = new ProductCards();}
-
-        //create form validation object
-        $validation = new ProductCardForm();
-        //set params from form
-        $validation->attributes = $_POST;
-        //if we update old card - set current card id to validation obj
-        if(!$card->isNewRecord){$validation->current_card_id = $card->id;}
-        //validate
-        $validation->validate();
-        //get errors
-        $errors = $validation->getErrors();
-
-        //if no errors
-        if(empty($errors))
-        {
-            //set main params
-            $card->product_code = $product_code;
-            $card->product_name = $product_name;
-            $card->status = 1;
-            $card->description = $description;
-            $card->units = $dimension_units;
-            $card->date_changed = time();
-            $card->category_id = $category_id;
-
-            //if new object
-            if($card->isNewRecord)
-            {
-                //creation time
-                $card->date_created = time();
-                $card->save();
+        
+        if(!empty($card)){
+            if(count($card->operationsIns)== 0 && count($card->operationsOuts) == 0 && count($card->productInStocks)== 0 ){
+                $card->delete();
+                $this->redirect('/products/cards');
+            }else{
+                $restricts=$this->labels['this item used in'];
+                $this->render('restricts',array('restricts' => $restricts));
             }
-            //if update old object
-            else
-            {
-                //update time
-                $card->update();
-            }
-
-            //redirect to list
-            $this->redirect(Yii::app()->createUrl(Yii::app()->controller->id.'/cards'));
+            
+        }else{
+            throw new CHttpException(404,$this->labels['item not found in base']);    
         }
-        //if have som errors
-        else
-        {
-            //get all categories
-            $categories = ProductCardCategories::model()->findAll();
-
-            //render with errors
-            $this->render('edit_card',array('categories' => $categories, 'card' => $card, 'errors' => $errors));
-        }
-
-    }
-
+    }// delete
 }
