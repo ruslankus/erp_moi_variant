@@ -2,7 +2,7 @@ $(document).ready(function(e) {
 
     $('.btn-toggle').click(function(e) {
 
-        ChangeStatus($(this));
+        ChangeStatus($(this);
 
 
         $(this).find('.btn').toggleClass('active');
@@ -24,7 +24,9 @@ $(document).ready(function(e) {
  */
 var ChangeStatus = function(obj)
 {
-     var url_path = '/ajax/changeproductstatus/'+ (obj).attr('prod_id');
+    Console.log(obj);
+    
+    var url_path = '/ajax/changeproductstatus/'+ (obj).attr('prod_id');
     //ajax load data
-    jQuery.ajax({ url: url_path,beforeSend: function(){/*TODO: pre-loader*/}}).done(function(data){});
+    
 };
