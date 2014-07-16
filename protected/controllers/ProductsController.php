@@ -174,38 +174,17 @@ class ProductsController extends Controller
      ****************************************** P R O D U C T  C A R D S ********************************************
      ***************************************************************************************************************/
 
-    // L I S T  C A R D S
+     /**
+     * List cards
+     */
     public function actionCards()
     {
-
-        //get filter params
-        $category_id = Yii::app()->request->getParam('cat','');
-        $product_code = Yii::app()->request->getParam('cod','');
-        $name = Yii::app()->request->getParam('nam','');
-
-        //get page
-        $page = Yii::app()->request->getParam('page',1);
-
-        //criteria
-        $c = new CDbCriteria();
-
-        //if have filter params - add conditions to criteria
-        if($category_id != ''){$c -> addInCondition('category_id',array($category_id));}
-        if($product_code != ''){$c -> addInCondition('product_code',array($product_code));}
-        if($name != ''){$c -> addInCondition('product_name',array($name));}
-
         //get all cards
-        $cards = ProductCards::model()->with('category')->findAll($c);
-        $categories = ProductCardCategories::model()->findAll();
-
-        //actions for every record
-        $actions = array(
-            'edit' => array('controller' => Yii::app()->controller->id, 'action' => 'editcard', 'class' => 'actions action-edit', 'visible' => $this->rights['categories_edit'] ? 1 : 0),
-            'delete' => array('controller' => Yii::app()->controller->id, 'action' => 'deletecard', 'class' => 'actions action-delete' , 'visible' => $this->rights['categories_delete'] ? 1 : 0),
-        );
+        $cards = ProductCards::model()->with('category')->findAll();
+        $categories = ProductCardCategories::model()->getDropList();
 
         //render list
-        $this->render('list_cards',array('cards' => $cards, 'table_actions' => $actions, 'categories' => $categories));
+        $this->render('card_list',array('cards' => $cards, 'categories' => $categories));
     }
 
 

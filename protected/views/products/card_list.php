@@ -2,7 +2,6 @@
 <?php /* @var $category ProductCardCategories */ ?>
 <?php /* @var $rights UserRights */ ?>
 <?php /* @var $this ProductsController */ ?>
-<?php /* @var $table_actions array */ ?>
 <?php /* @var $cards array */?>
 <?php /* @var $card ProductCards */ ?>
 
@@ -27,8 +26,8 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/table.css');
 
                 <div class="filter filter1">
                     <div>
-                        <label><?php echo $this->labels['category']; ?> :</label>
-                        <input name="cat" type="text" />
+                        
+                        <?php echo CHtml::dropDownList('category','',$categories,array('class'=> 'form-control','id'=>'filter-select'))?>
                     </div>
                 </div><!--/filter1 -->
 
@@ -68,14 +67,19 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/table.css');
                             <td><?php echo $this->labels[$card->units]; ?></td>
 
                             <td class="status">
-                                <div prod_id ="<?php echo $card->id; ?>" state="<?php echo $card->status; ?>" class="btn-group btn-toggle">                                    
-                                    <button class="btn <?php echo ($card->status == 1) ?  'active btn-primary' : 'btn-default'?> " >ON</button>
+                                <div prod_id ="<?php echo $card->id; ?>" state="<?php echo $card->status; ?>" class="btn-group btn-toggle">
+                                    <button class="btn <?php if($card->status == 1):?>active btn-primary<?php else: ?>btn-default<?php endif; ?>">ON</button>
                                     <button class="btn <?php if($card->status == 0):?>active btn-primary<?php else: ?>btn-default<?php endif; ?>">OFF</button>
                                 </div>
                             </td>
 
                             <td>
-                                <?php $this->renderPartial('//partials/_table_actions',array('links' => $table_actions , 'params' => array('id' => $card->id), 'separator' => '')); ?>
+                                <?php if($this->rights['products_edit']): ?>
+                                    <?php echo CHtml::link($this->labels['edit'],'/'.$this->id.'/editcard/'.$card->id,array('class' => 'actions action-edit')); ?>
+                                <?php endif; ?>
+                                <?php if($this->rights['products_delete']): ?>
+                                    <?php echo CHtml::link($this->labels['delete'],'/'.$this->id.'/deletecard/'.$card->id,array('class' => 'actions action-delete')); ?>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
