@@ -1,0 +1,9 @@
+2014/07/29 00:28:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/user_thumbs".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('images/user_thu...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/user_thumbs/4eyKD9En.jpg
+HTTP_REFERER=http://yerp.local/main/index
+---

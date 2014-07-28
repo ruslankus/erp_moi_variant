@@ -2,23 +2,30 @@
 
 class MainController extends Controller
 {
-    //I N D E X
+  
+    /**
+    * Entry point
+    */
     public function actionIndex()
     {
-        
-           
+        //render welcome screen
         $this->render('welcome');
-    }
+    }//entryPoint
 
-    //L O G  O U T
+    
+    /**
+     * Logout
+     */
     public function actionLogout()
     {
         //delete user info from session
         Yii::app()->user->logout();
         $this->redirect('/main/login');
-    }
+    }//logoout
 
-    //L O G  I N
+    /**
+     * Login
+     */
     public function actionLogin()
     {
 
@@ -50,5 +57,5 @@ class MainController extends Controller
         //render form
         $this->render('login',array('model' => $model));
       
-    }
+    }//actionLogin
 }
