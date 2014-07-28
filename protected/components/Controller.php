@@ -21,8 +21,9 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
     
-    public $labels;
+    protected $labels;
     protected $rights = array();
+    protected $messages = array();
     //default titles of site pages
     public $site_title = "ERP";
     public $page_title = "default";
@@ -30,6 +31,7 @@ class Controller extends CController
     public function init(){
        $this->labels = Labels::model()->getLabels();
        $this->rights = Yii::app()->user->getState('rights');
+       $this->messages = FormMessages::model()->getLabels();
     }
 
     

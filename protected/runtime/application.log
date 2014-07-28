@@ -1,55 +1,79 @@
-2014/07/29 00:28:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/user_thumbs".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+2014/07/29 01:23:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/buy-ops.css".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
 Stack trace:
-#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('images/user_thu...')
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('css/buy-ops.css')
 #1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
 #2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
 #3 {main}
-REQUEST_URI=/images/user_thumbs/4eyKD9En.jpg
-HTTP_REFERER=http://yerp.local/main/index
+REQUEST_URI=/css/buy-ops.css
+HTTP_REFERER=http://yerp.local/buy/create?client_id=
 ---
-2014/07/29 01:05:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "buy/index".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+2014/07/29 01:23:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jqueryui-touch-punch/jquery.ui.touch-punch.min.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
 Stack trace:
-#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('buy/index')
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jqueryui-tou...')
 #1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
 #2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
 #3 {main}
-REQUEST_URI=/buy
-HTTP_REFERER=http://yerp.local/users
+REQUEST_URI=/js/jqueryui-touch-punch/jquery.ui.touch-punch.min.js
+HTTP_REFERER=http://yerp.local/buy/create?client_id=
 ---
-2014/07/29 01:06:03 [error] [exception.CException] exception 'CException' with message 'Property "CUniqueValidator.model_class" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:173
+2014/07/29 01:23:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/buy-ops.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
 Stack trace:
-#0 C:\OpenServer\domains\yerp.local\framework\validators\CValidator.php(189): CComponent->__set('model_class', 'Users')
-#1 C:\OpenServer\domains\yerp.local\framework\base\CModel.php(287): CValidator::createValidator('unique', Object(UserForm), 'username, email', Array)
-#2 C:\OpenServer\domains\yerp.local\framework\base\CModel.php(260): CModel->createValidators()
-#3 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(2236): CModel->getValidators('username')
-#4 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(UserForm), 'username', Array)
-#5 C:\OpenServer\domains\yerp.local\framework\web\widgets\CActiveForm.php(725): CHtml::activeTextField(Object(UserForm), 'username', Array)
-#6 C:\OpenServer\domains\yerp.local\protected\views\users\user_edit.php(24): CActiveForm->textField(Object(UserForm), 'username', Array)
-#7 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
-#8 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
-#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
-#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('user_edit', Array, true)
-#11 C:\OpenServer\domains\yerp.local\protected\controllers\UsersController.php(166): CController->render('user_edit', Array)
-#12 [internal function]: UsersController->actionEdit('1')
-#13 C:\OpenServer\domains\yerp.local\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(UsersController), Array)
-#14 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(UsersController), Object(ReflectionMethod), Array)
-#15 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
-#16 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
-#17 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#18 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('edit')
-#19 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('users/edit')
-#20 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
-#21 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
-#22 {main}
-REQUEST_URI=/users/edit/id/1
-HTTP_REFERER=http://yerp.local/users
----
-2014/07/29 01:06:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "buy/index".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
-Stack trace:
-#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('buy/index')
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/buy-ops.js')
 #1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
 #2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
 #3 {main}
-REQUEST_URI=/buy
-HTTP_REFERER=http://yerp.local/users
+REQUEST_URI=/js/buy-ops.js
+HTTP_REFERER=http://yerp.local/buy/create?client_id=
+---
+2014/07/29 01:25:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/buy-ops.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/buy-ops.js')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/buy-ops.js
+HTTP_REFERER=http://yerp.local/buy/create?client_id=
+---
+2014/07/29 01:25:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jqueryui-touch-punch/jquery.ui.touch-punch.min.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jqueryui-tou...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jqueryui-touch-punch/jquery.ui.touch-punch.min.js
+HTTP_REFERER=http://yerp.local/buy/create?client_id=
+---
+2014/07/29 01:27:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2014/07/29 01:27:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2014/07/29 01:41:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "sell/index".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('sell/index')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sell
+HTTP_REFERER=http://yerp.local/buy/create
+---
+2014/07/29 01:41:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "services/index".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('services/index')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/services
+HTTP_REFERER=http://yerp.local/buy/create
 ---
