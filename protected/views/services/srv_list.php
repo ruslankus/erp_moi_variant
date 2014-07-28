@@ -43,7 +43,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/tickets_list.css');
                             <td><?php echo $service->priority; ?></td>
                             <td><?php echo $service->problemType->label; ?></td>
                             <td><?php echo $service->client->type == 0 ? $service->client->name.' '.$service->client->surname : $service->client->company_name; ?></td>
-                            <td><?php echo time('Y.m.d',$service->date_created); ?></td>
+                            <td><?php echo date('Y.m.d',$service->date_created); ?></td>
                             <td><?php echo $service->userModifiedBy->name.' '.$service->userModifiedBy->surname; ?></td>
                             <td><?php echo $service->currentEmployee->name.' '.$service->currentEmployee->surname; ?></td>
                             <td><?php echo $service->timeLeft('days d hours h minutes m seconds s'); ?></td>
@@ -51,11 +51,11 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/tickets_list.css');
 
                             <td>
                                 <?php if($this->rights['services_delete']): ?>
-                                    <?php echo CHtml::link($this->labels['close'],'/services/close/id/'.$service->id,array('class' => 'actions action-delete')); ?>
+                                    <?php echo CHtml::link($this->labels['close'],'/services/close/'.$service->id,array('class' => 'actions action-delete')); ?>
                                 <?php endif; ?>
 
                                 <?php if($this->rights['services_edit']): ?>
-                                    <?php echo CHtml::link($this->labels['edit'],'/services/edit/id/'.$service->id,array('class' => 'actions action-edit')); ?>
+                                    <?php echo CHtml::link($this->labels['edit'],'/services/edit/'.$service->id,array('class' => 'actions action-edit')); ?>
                                 <?php endif; ?>
                             </td>
                         </tr>
