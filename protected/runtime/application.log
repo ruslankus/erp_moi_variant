@@ -1,9 +1,200 @@
-2014/07/29 00:28:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/user_thumbs".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+2014/07/29 01:23:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/buy-ops.css".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
 Stack trace:
-#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('images/user_thu...')
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('css/buy-ops.css')
 #1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
 #2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
 #3 {main}
-REQUEST_URI=/images/user_thumbs/4eyKD9En.jpg
-HTTP_REFERER=http://yerp.local/main/index
+REQUEST_URI=/css/buy-ops.css
+HTTP_REFERER=http://yerp.local/buy/create?client_id=
 ---
+2014/07/29 01:23:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jqueryui-touch-punch/jquery.ui.touch-punch.min.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jqueryui-tou...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jqueryui-touch-punch/jquery.ui.touch-punch.min.js
+HTTP_REFERER=http://yerp.local/buy/create?client_id=
+---
+2014/07/29 01:23:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/buy-ops.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/buy-ops.js')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/buy-ops.js
+HTTP_REFERER=http://yerp.local/buy/create?client_id=
+---
+2014/07/29 01:25:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/buy-ops.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/buy-ops.js')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/buy-ops.js
+HTTP_REFERER=http://yerp.local/buy/create?client_id=
+---
+2014/07/29 01:25:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jqueryui-touch-punch/jquery.ui.touch-punch.min.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jqueryui-tou...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jqueryui-touch-punch/jquery.ui.touch-punch.min.js
+HTTP_REFERER=http://yerp.local/buy/create?client_id=
+---
+2014/07/29 01:27:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2014/07/29 01:27:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2014/07/29 01:41:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "sell/index".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('sell/index')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sell
+HTTP_REFERER=http://yerp.local/buy/create
+---
+2014/07/29 01:41:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "services/index".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('services/index')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/services
+HTTP_REFERER=http://yerp.local/buy/create
+---
+2014/07/29 01:43:39 [error] [php] include(ServiceProcesses.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\OpenServer\domains\yerp.local\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(33): spl_autoload_call()
+#1 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(24): ServicesController->actionList()
+#2 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionIndex()
+#3 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): ServicesController->runAction()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): ServicesController->runActionWithFilters()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): ServicesController->run()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#8 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/services
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (33)
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (24)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/07/29 01:45:12 [error] [php] include(ServiceProcesses.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\OpenServer\domains\yerp.local\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(33): spl_autoload_call()
+#1 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(24): ServicesController->actionList()
+#2 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionIndex()
+#3 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): ServicesController->runAction()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): ServicesController->runActionWithFilters()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): ServicesController->run()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#8 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/services
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (33)
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (24)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/07/29 01:45:51 [error] [php] include(ServiceProblemTypes.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\OpenServer\domains\yerp.local\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(395): spl_autoload_call()
+#1 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveFinder.php(182): model()
+#2 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveFinder.php(230): CActiveFinder->getModel()
+#3 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveFinder.php(296): CActiveFinder->buildJoinTree()
+#4 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveFinder.php(48): CActiveFinder->buildJoinTree()
+#5 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(909): CActiveFinder->__construct()
+#6 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1355): ServiceProcesses->getActiveFinder()
+#7 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1470): ServiceProcesses->query()
+#8 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(33): ServiceProcesses->findAll()
+#9 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(24): ServicesController->actionList()
+#10 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionIndex()
+#11 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#12 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): ServicesController->runAction()
+#13 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): ServicesController->runActionWithFilters()
+#14 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): ServicesController->run()
+#15 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/services
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (33)
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (24)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/07/29 01:46:11 [error] [php] include(ServiceResolutions.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\OpenServer\domains\yerp.local\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(395): spl_autoload_call()
+#1 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveFinder.php(182): model()
+#2 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveFinder.php(230): CActiveFinder->getModel()
+#3 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveFinder.php(296): CActiveFinder->buildJoinTree()
+#4 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveFinder.php(48): CActiveFinder->buildJoinTree()
+#5 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(909): CActiveFinder->__construct()
+#6 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1355): ServiceProcesses->getActiveFinder()
+#7 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1470): ServiceProcesses->query()
+#8 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(33): ServiceProcesses->findAll()
+#9 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(24): ServicesController->actionList()
+#10 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionIndex()
+#11 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#12 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): ServicesController->runAction()
+#13 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): ServicesController->runActionWithFilters()
+#14 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): ServicesController->run()
+#15 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/services
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (33)
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (24)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/07/29 01:46:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/tickets_list.css".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('css/tickets_lis...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/tickets_list.css
+HTTP_REFERER=http://yerp.local/services
+---
+2014/07/29 01:48:55 [error] [php] include(SrvEditForm.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\OpenServer\domains\yerp.local\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(197): spl_autoload_call()
+#1 unknown(0): ServicesController->actionEdit()
+#2 C:\OpenServer\domains\yerp.local\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#3 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): ServicesController->runAction()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): ServicesController->runActionWithFilters()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): ServicesController->run()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/services/edit/id/2
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (197)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/07/29 02:02:52 [error] [php] include(SrvEditForm.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\OpenServer\domains\yerp.local\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(197): spl_autoload_call()
+#1 unknown(0): ServicesController->actionEdit()
+#2 C:\OpenServer\domains\yerp.local\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#3 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): ServicesController->runAction()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): ServicesController->runActionWithFilters()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): ServicesController->run()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/services/edit/id/2
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (197)
+in C:\OpenServer\domains\yerp.local\index.php (13)
