@@ -68,8 +68,27 @@ class AjaxController extends Controller {
     {
         if(Yii::app()->request->isAjaxRequest)
         {
-            $result = Clients::model()->getAllClientsJson($start);
-            echo $result;
+            //declare empty array
+            $result = array();
+
+            //sql statement
+            $sql = "SELECT * FROM clients WHERE company_name LIKE '".$start."%' OR `name` LIKE '".$start."%'";
+
+            //connection
+            $con = Yii::app()->db;
+
+            //get all data by query
+            $data=$con->createCommand($sql)->queryAll();
+
+            //foreach row
+            foreach($data as $row)
+            {
+                //add to result array
+                $result[] = array('label' => $row['type'] == 1 ? $row['company_name'] : $row['name'].' '.$row['surname'], 'id' => $row['id']);
+            }
+
+            //print encoded to json array
+            echo json_encode($result);
         }
         else
         {

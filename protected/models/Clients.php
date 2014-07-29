@@ -33,11 +33,10 @@
  * @property integer $status
  *
  * The followings are the available model relations:
- * @property InvoicesOut $lastInvoice
- * @property ServiceCards $lastService
- * @property ServiceCards $nextService
  * @property InvoicesOut $firstInvoice
+ * @property InvoicesOut $lastInvoice
  * @property InvoicesOut[] $invoicesOuts
+ * @property ServiceProcesses[] $serviceProcesses
  */
 class Clients extends CActiveRecord
 {
@@ -73,11 +72,10 @@ class Clients extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'lastInvoice' => array(self::BELONGS_TO, 'InvoicesOut', 'last_invoice_id'),
-			'lastService' => array(self::BELONGS_TO, 'ServiceCards', 'last_service_id'),
-			'nextService' => array(self::BELONGS_TO, 'ServiceCards', 'next_service_id'),
 			'firstInvoice' => array(self::BELONGS_TO, 'InvoicesOut', 'first_invoice_id'),
+			'lastInvoice' => array(self::BELONGS_TO, 'InvoicesOut', 'last_invoice_id'),
 			'invoicesOuts' => array(self::HAS_MANY, 'InvoicesOut', 'client_id'),
+			'serviceProcesses' => array(self::HAS_MANY, 'ServiceProcesses', 'client_id'),
 		);
 	}
 
@@ -178,4 +176,50 @@ class Clients extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+
+    /**
+     * Returns all clients as pairs 'id'=>'name'
+     * @return array
+     */
+    public function findAllAsArray()
+    {
+        /* @var $client Clients */
+
+        //declare empty array
+        $arr = array();
+
+        //get all
+        $all = Clients::model()->findAll();
+
+        //make array
+        foreach($all as $client)
+        {
+            $arr[$client->id] = ($client->type == 1 ? $client->company_name : $client->name.' '.$client->surname);
+        }
+
+        return $arr;
+    }
+    
+    
+    public function getAllClientsJson($clientName =  null){
+        if(!empty($clientName)){
+            $result = array();
+             //sql statement
+            $sql = "SELECT * FROM clients WHERE company_name LIKE '".$start."%' OR `name` LIKE '".$start."%'";
+            $con = $this->dbConnection;
+            
+            //get all data by query
+            $data=$con->createCommand($sql)->queryAll();
+
+            //foreach row
+            foreach($data as $row)
+            {
+                //add to result array
+                $result[] = array('label' => $row['type'] == 1 ? $row['company_name'] : $row['name'].' '.$row['surname'], 'id' => $row['id']);
+            }
+            
+            return json_encode($result);
+        }
+    }//getAllClientsJson
 }
