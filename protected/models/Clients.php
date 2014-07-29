@@ -206,11 +206,11 @@ class Clients extends CActiveRecord
         if(!empty($clientName)){
             $result = array();
              //sql statement
-            $sql = "SELECT * FROM clients WHERE company_name LIKE '".$start."%' OR `name` LIKE '".$start."%'";
+            $sql = "SELECT * FROM clients WHERE company_name LIKE '%".$clientName."%' OR `name` LIKE '%".$clientName."%'";
             $con = $this->dbConnection;
             
             //get all data by query
-            $data=$con->createCommand($sql)->queryAll();
+            $data=$con->createCommand($sql)->query();
 
             //foreach row
             foreach($data as $row)
