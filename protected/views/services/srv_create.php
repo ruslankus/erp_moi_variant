@@ -16,6 +16,7 @@ $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/bootstrap-editable.css');
 $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/tickets_card.css');
 
+$cs->registerCoreScript('jquery.ui',CClientScript::POS_END);
 $cs->registerScriptFile(Yii::app()->baseUrl.'/js/bootstrap-editable.js',CClientScript::POS_END);
 $cs->registerScriptFile(Yii::app()->baseUrl.'/js/service.js',CClientScript::POS_END);
 ?>
@@ -39,10 +40,36 @@ $cs->registerScriptFile(Yii::app()->baseUrl.'/js/service.js',CClientScript::POS_
 
                     <div class="form-group">
                         <?php echo $form->label($form_mdl,'client_name');?>
-                        <input type="hidden" name="found_client_name" value="" id="cli_found">
-                        <?php echo $form->textField($form_mdl,'client_name',array('id' => 'fio', 'class'=>'form-control auto-complete-clients', 'placeholder' => 'Enter customer name'));?>
+                        <!--<input type="hidden" name="found_client_name" value="" id="cli_found"> -->
+                        <?php //echo $form->textField($form_mdl,'client_name',array('id' => 'fio', 'class'=>'form-control auto-complete-clients', 'placeholder' => 'Enter customer name'));?>
+                        <?php $this->widget('zii.widgets.jui.CJuiAutoComplete',array(
+                            'model' => $form_mdl,
+                            'attribute' => 'client_name',  // атрибут модели
+                            'source' => '/ajax/clients',
+                            
+                            'options' => array(
+                            'showAnim'=>'fold',
+                            'select' =>'js: function(event, ui) {
+                                // действие по умолчанию, значение текстового поля
+                                // устанавливается в значение выбранного пункта
+                                this.value = ui.item.label;
+                                // устанавливаем значения скрытого поля
+                                $("#fio").val(ui.item.value);
+                                $("#fio").attr("cust_id",ui.item.id);
+                                return false;
+                            }'),
+                            
+                            'htmlOptions'=>array(
+                                'class' => 'form-control',
+                                'id'=>'fio',
+                                'placeholder'=>'Enter customer name',
+                            ),
+                        
+                        ));?>
+                        
                         <?php echo $form->error($form_mdl,'client_name'); ?>
                     </div>
+                    <?php echo $form->hiddenField($form_mdl,'client_id', array('style'=>'display: none;'));?>
                     <hr/>
 
                     <div class="row">

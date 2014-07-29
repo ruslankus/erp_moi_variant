@@ -281,3 +281,264 @@ Stack trace:
 REQUEST_URI=/ajax/clifi/name/Vasia%20Pipkin
 HTTP_REFERER=http://yerp.local/services/create
 ---
+2014/07/29 17:39:11 [error] [exception.CException] exception 'CException' with message 'AjaxController cannot find the requested view "_client_form_new_client".' in C:\OpenServer\domains\yerp.local\framework\web\CController.php:878
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\protected\controllers\AjaxController.php(135): CController->renderPartial('_client_form_ne...', Array)
+#1 [internal function]: AjaxController->actionCliFi('Vasia Pipkin')
+#2 C:\OpenServer\domains\yerp.local\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(AjaxController), Array)
+#3 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(AjaxController), Object(ReflectionMethod), Array)
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('clifi')
+#8 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('ajax/clifi')
+#9 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ajax/clifi/name/Vasia%20Pipkin
+HTTP_REFERER=http://yerp.local/services/create
+---
+2014/07/29 20:40:56 [error] [php] Object of class CJuiAutoComplete could not be converted to string (C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php:48)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): ServicesController->renderFile()
+#1 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): ServicesController->renderPartial()
+#2 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(192): ServicesController->render()
+#3 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionCreate()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): ServicesController->runAction()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): ServicesController->runActionWithFilters()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): ServicesController->run()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/services/create
+in C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php (48)
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (192)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/07/29 20:41:47 [error] [php] Object of class CJuiAutoComplete could not be converted to string (C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php:48)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): ServicesController->renderFile()
+#1 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): ServicesController->renderPartial()
+#2 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(192): ServicesController->render()
+#3 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionCreate()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): ServicesController->runAction()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): ServicesController->runActionWithFilters()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): ServicesController->run()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/services/create
+in C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php (48)
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (192)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/07/29 20:43:24 [error] [php] Object of class CJuiAutoComplete could not be converted to string (C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php:49)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): ServicesController->renderFile()
+#1 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): ServicesController->renderPartial()
+#2 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(192): ServicesController->render()
+#3 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionCreate()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): ServicesController->runAction()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): ServicesController->runActionWithFilters()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): ServicesController->run()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/services/create
+in C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php (49)
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (192)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/07/29 20:44:05 [error] [exception.CException] exception 'CException' with message 'Property "ClientForm.client_name" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(2529): CComponent->__get('client_name')
+#1 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(ClientForm), 'client_name')
+#2 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(ClientForm), 'client_name', Array)
+#3 C:\OpenServer\domains\yerp.local\framework\zii\widgets\jui\CJuiAutoComplete.php(85): CHtml::activeTextField(Object(ClientForm), 'client_name', Array)
+#4 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(173): CJuiAutoComplete->run()
+#5 C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php(49): CBaseController->widget('zii.widgets.jui...', Array)
+#6 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#7 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('srv_create', Array, true)
+#10 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(192): CController->render('srv_create', Array)
+#11 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionCreate()
+#12 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#13 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#14 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('create')
+#16 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('services/create')
+#17 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/services/create
+HTTP_REFERER=http://yerp.local/services
+---
+2014/07/29 20:44:44 [error] [php] Object of class CJuiAutoComplete could not be converted to string (C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php:49)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): ServicesController->renderFile()
+#1 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): ServicesController->renderPartial()
+#2 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(192): ServicesController->render()
+#3 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionCreate()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): ServicesController->runAction()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): ServicesController->runActionWithFilters()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): ServicesController->run()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/services/create
+in C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php (49)
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (192)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/07/29 20:46:15 [error] [php] Object of class CJuiAutoComplete could not be converted to string (C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php:49)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): ServicesController->renderFile()
+#1 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): ServicesController->renderPartial()
+#2 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(192): ServicesController->render()
+#3 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionCreate()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): ServicesController->runAction()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): ServicesController->runActionWithFilters()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): ServicesController->run()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/services/create
+in C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php (49)
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (192)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/07/29 20:54:21 [error] [php] Object of class CJuiAutoComplete could not be converted to string (C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php:49)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): ServicesController->renderFile()
+#1 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): ServicesController->renderPartial()
+#2 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(192): ServicesController->render()
+#3 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionCreate()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): ServicesController->runAction()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): ServicesController->runActionWithFilters()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): ServicesController->run()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/services/create
+in C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php (49)
+in C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php (192)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/07/29 22:00:06 [error] [exception.CException] exception 'CException' with message 'Property "CJuiAutoComplete.minChars" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWidgetFactory.php(161): CComponent->__set('minChars', 2)
+#1 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(ServicesController), 'zii.widgets.jui...', Array)
+#2 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.jui...', Array)
+#3 C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php(57): CBaseController->widget('zii.widgets.jui...', Array)
+#4 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#5 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#7 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('srv_create', Array, true)
+#8 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(192): CController->render('srv_create', Array)
+#9 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionCreate()
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('create')
+#14 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('services/create')
+#15 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/services/create
+HTTP_REFERER=http://yerp.local/services
+---
+2014/07/29 22:01:56 [error] [exception.CException] exception 'CException' with message 'Property "CAutoComplete.source" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWidgetFactory.php(161): CComponent->__set('source', '/ajax/clients')
+#1 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(ServicesController), 'CAutoComplete', Array)
+#2 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(172): CBaseController->createWidget('CAutoComplete', Array)
+#3 C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php(57): CBaseController->widget('CAutoComplete', Array)
+#4 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#5 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#7 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('srv_create', Array, true)
+#8 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(192): CController->render('srv_create', Array)
+#9 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionCreate()
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('create')
+#14 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('services/create')
+#15 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/services/create
+HTTP_REFERER=http://yerp.local/services
+---
+2014/07/29 22:27:07 [error] [exception.CException] exception 'CException' with message 'Property "CJuiAutoComplete.select" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWidgetFactory.php(161): CComponent->__set('select', 'js: function(ev...')
+#1 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(ServicesController), 'zii.widgets.jui...', Array)
+#2 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.jui...', Array)
+#3 C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php(65): CBaseController->widget('zii.widgets.jui...', Array)
+#4 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#5 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#7 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('srv_create', Array, true)
+#8 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(192): CController->render('srv_create', Array)
+#9 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionCreate()
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('create')
+#14 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('services/create')
+#15 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/services/create
+HTTP_REFERER=http://yerp.local/services
+---
+2014/07/29 22:47:34 [error] [exception.CException] exception 'CException' with message 'Property "ServiceForm.customer_id" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(2529): CComponent->__get('customer_id')
+#1 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(ServiceForm), 'customer_id')
+#2 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(1609): CHtml::activeInputField('hidden', Object(ServiceForm), 'customer_id', Array)
+#3 C:\OpenServer\domains\yerp.local\framework\web\widgets\CActiveForm.php(756): CHtml::activeHiddenField(Object(ServiceForm), 'customer_id', Array)
+#4 C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php(70): CActiveForm->hiddenField(Object(ServiceForm), 'customer_id', Array)
+#5 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#6 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#7 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('srv_create', Array, true)
+#9 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(192): CController->render('srv_create', Array)
+#10 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionCreate()
+#11 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#12 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#13 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('create')
+#15 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('services/create')
+#16 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/services/create
+HTTP_REFERER=http://yerp.local/services
+---
+2014/07/29 22:48:25 [error] [exception.CException] exception 'CException' with message 'Property "ServiceForm.id" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(2529): CComponent->__get('id')
+#1 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(ServiceForm), 'id')
+#2 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(1609): CHtml::activeInputField('hidden', Object(ServiceForm), 'id', Array)
+#3 C:\OpenServer\domains\yerp.local\framework\web\widgets\CActiveForm.php(756): CHtml::activeHiddenField(Object(ServiceForm), 'id', Array)
+#4 C:\OpenServer\domains\yerp.local\protected\views\services\srv_create.php(70): CActiveForm->hiddenField(Object(ServiceForm), 'id', Array)
+#5 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#6 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#7 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('srv_create', Array, true)
+#9 C:\OpenServer\domains\yerp.local\protected\controllers\ServicesController.php(192): CController->render('srv_create', Array)
+#10 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ServicesController->actionCreate()
+#11 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#12 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#13 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('create')
+#15 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('services/create')
+#16 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/services/create
+HTTP_REFERER=http://yerp.local/services
+---

@@ -64,11 +64,12 @@ class AjaxController extends Controller {
      * @param string $start
      * @throws CHttpException
      */
-    public function actionClients($start = '')
+    public function actionClients($term=null)
     {
+       
         if(Yii::app()->request->isAjaxRequest)
         {
-            $result = Clients::model()->getAllClientsJson($start);
+            $result = Clients::model()->getAllClientsJson($term);
             echo $result;
         }
         else

@@ -2,6 +2,7 @@
 
 class ServiceForm extends CBaseForm
 {
+    public $client_id;
     public $client_name;
     public $city_id;
     public $worker_id;

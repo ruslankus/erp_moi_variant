@@ -7,17 +7,16 @@ jQuery(document).ready(function(){
     var client_field = jQuery(".auto-complete-clients");
     var form_holder = jQuery(".client-settings");
 
-    client_field.autocomplete({
-        source: tags
-    })
+     client_field.autocomplete({
+      source: "/ajax/clients" ,
+      minLength: 1,  
+      });
    
 
 }); // document ready
 
 
-var tags = function(){
-    console.log(test);
-}
+
 
 
 
