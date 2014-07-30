@@ -80,6 +80,25 @@ class AjaxController extends Controller {
     }//Clients
     
     
+    public function actionCheck_customer(){
+        $request = Yii::app()->request;
+        if($request->isAjaxRequest){
+            $name = $request->getPost('name');
+            
+            if(!empty($name)){
+                //clear 
+                $name = trim($name);
+                $arrName = explode(" ",$name);
+                
+                $data = Clients::model()->checkClient($arrName);
+                Debug::d($data);
+            }
+        }else{
+            throw new CHttpException(404);
+        }
+    }//Check_customer
+    
+    
     
     
     /**

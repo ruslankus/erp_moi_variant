@@ -4,18 +4,37 @@
 
 jQuery(document).ready(function(){
     $.fn.editable.defaults.mode = 'inline';
-    var client_field = jQuery(".auto-complete-clients");
-    var form_holder = jQuery(".client-settings");
+	
+    //var client_field = jQuery(".auto-complete-clients");
+    //var form_holder = jQuery(".client-settings");
 
-     client_field.autocomplete({
+    /* client_field.autocomplete({
       source: "/ajax/clients" ,
       minLength: 1,  
       });
+	 */ 
+      
+      
+	  $(document).on('focusout','#fio',function(){
+			clientForm($(this));					  
+	   });
+	    
+     
+     $(document).on('keypress','#fio', function() {
+        $(this).attr('cust_id','new');
+        
+     } );
    
 
 }); // document ready
 
 
+var clientForm = function(obj){
+    var clientName = obj.val();
+	console.log(clientName);
+	$('.right-part .form-holder').load('/ajax/check_customer',
+		{name : clientName},function(data){});
+ }
 
 
 

@@ -54,12 +54,23 @@ $cs->registerScriptFile(Yii::app()->baseUrl.'/js/service.js',CClientScript::POS_
                                 // устанавливается в значение выбранного пункта
                                 this.value = ui.item.label;
                                 // устанавливаем значения скрытого поля
+                                
                                 $("#fio").val(ui.item.value);
-                                $("#fio").attr("cust_id",ui.item.id);
-                                return false;
+                                if(ui.item.id){
+                                    $("#fio").attr("cust_id",ui.item.id);
+                                }else{
+                                    $("#fio").attr("cust_id","new");   
+                                }
+                            }',
+                            'open'=>'js:function(event,ui){
+                                console.log(ui);
                             }'),
                             
+                            
+                            
+                            
                             'htmlOptions'=>array(
+                                'cust_id' => 'new',
                                 'class' => 'form-control',
                                 'id'=>'fio',
                                 'placeholder'=>'Enter customer name',
@@ -69,7 +80,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl.'/js/service.js',CClientScript::POS_
                         
                         <?php echo $form->error($form_mdl,'client_name'); ?>
                     </div>
-                    <?php echo $form->hiddenField($form_mdl,'client_id', array('style'=>'display: none;'));?>
+                    
                     <hr/>
 
                     <div class="row">
