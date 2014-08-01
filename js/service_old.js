@@ -3,88 +3,42 @@
  */
 
 jQuery(document).ready(function(){
-
-    var client_field = jQuery(".auto-complete-clients");
-    var form_holder = jQuery(".client-settings");
-
     $.fn.editable.defaults.mode = 'inline';
+	
+    //var client_field = jQuery(".auto-complete-clients");
+    //var form_holder = jQuery(".client-settings");
 
-    //add auto-complete feature for client-field
-    client_field.autocomplete({
-        source: function( request, response ) {
-            $.ajax({
-                url: "/ajax/clients",
-                dataType: "json",
-                data: {
-                    start: request.term
-                },
-                success: function( data ) {
-                    response( data );
-                }
-            });
-        },
-        minLength: 1,
-        //when selected
-        select:function(event,ui){
-            //get id
-            var id = ui.item.id;
+    /* client_field.autocomplete({
+      source: "/ajax/clients" ,
+      minLength: 1,  
+      });
+	 */ 
+      
+      
+	  $(document).on('focusout','#fio',function(){
+			clientForm($(this));					  
+	   });
+	    
+     
+     $(document).on('keypress','#fio', function() {
+        $(this).attr('cust_id','new');
+        
+     } );
+   
 
-            //load client info by id
-            jQuery.ajax({ url: '/ajax/clifiid/id/'+id, beforeSend: function(){/*TODO: pre-loader*/}}).done(function(data)
-            {
-                //if loaded successfully
-                if(data != 'ERROR')
-                {
-                    //add content to holder
-                    form_holder.html(data);
+}); // document ready
 
-                    //set found client name
-                    jQuery("#cli_found").val(ui.item.label);
 
-                    //show
-                    form_holder.removeClass('hidden');
-                }
+var clientForm = function(obj){
+    var clientName = obj.val();
+	console.log(clientName);
+	$('.right-part .form-holder').load('/ajax/check_customer',
+		{name : clientName},function(data){});
+ }
 
-            });
 
-        }
-    });
 
-    //when focus out form client-filed
-    client_field.focusout(function()
-    {
-        //if new value entered by hands is not equal to old
-        if(jQuery("#cli_found").val() != client_field.val())
-        {
-            //try find in database by name
-            jQuery.ajax({ url: '/ajax/clifi/name/'+client_field.val(), beforeSend: function(){/*TODO: pre-loader*/}}).done(function(data)
-            {
-                //add content to holder
-                form_holder.html(data);
 
-                //last found
-                jQuery("#cli_found").val(client_field.val());
-
-                //show
-                form_holder.removeClass('hidden');
-            });
-        }
-    });
-
-    //when selected city
-    jQuery(".ajax-filter-city").change(function(){
-        jQuery.ajax({ url: '/ajax/workers/city/'+jQuery(this).val(), beforeSend: function(){/*TODO: pre-loader*/}}).done(function(data){
-            jQuery(".filtered-users").html(data);
-        });
-    });
-
-    //clear and hide client form when pressed on reset button
-    jQuery(".btn-reset").click(function(){
-        form_holder.addClass('hidden');
-        form_holder.html('');
-    });
-
-}); //document ready
 
 //when ajax loaded
 jQuery(document).ajaxComplete(function(){

@@ -163,6 +163,22 @@ class AjaxController extends Controller {
     }//actionCliFi 
     
     
+    public function actionFselector($id = null){
+        
+        if(Yii::app()->request->isAjaxrequest){
+            
+            if($id == 1){                
+                echo $this->renderPartial('_filter',array(),true);                
+            }else if($id == 2){
+                echo $this->renderPartial('_filter_jur',array(),true);
+            }
+            
+        }else{
+            throw new CHttpException(404);
+        }
+        
+    }//Fselector
+    
     
 }
 ?>

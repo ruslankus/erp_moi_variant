@@ -5,28 +5,21 @@
 jQuery(document).ready(function(){
     $.fn.editable.defaults.mode = 'inline';
 	
-    //var client_field = jQuery(".auto-complete-clients");
-    //var form_holder = jQuery(".client-settings");
+    $('#client-type').change(function(e) {
+		var val = $(this).val()
+		if(val == 0){
+        	$('.filter-wrapper').html('<h5 class="text-center">Select client type</h5>');
+		}else{
+			changeFilter(val);
+		}
+    });
 
-    /* client_field.autocomplete({
-      source: "/ajax/clients" ,
-      minLength: 1,  
-      });
-	 */ 
-      
-      
-	  $(document).on('focusout','#fio',function(){
-			clientForm($(this));					  
-	   });
-	    
-     
-     $(document).on('keypress','#fio', function() {
-        $(this).attr('cust_id','new');
-        
-     } );
-   
 
 }); // document ready
+
+var changeFilter = function(val){
+	$(".filter-wrapper").load('/ajax/fselector/'+val);
+}//changeFilter
 
 
 var clientForm = function(obj){

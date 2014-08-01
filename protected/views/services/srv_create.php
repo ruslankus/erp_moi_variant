@@ -23,112 +23,155 @@ $cs->registerScriptFile(Yii::app()->baseUrl.'/js/service.js',CClientScript::POS_
 
 <?php $this->renderPartial('//partials/_sub_menu',array('links' => $this->GetSubMenu(), 'params' => array())); ?>
 
-<div class="container-fluid  main-content-holder content-wrapper">
-    <div class="row card-holder">
-            <?php $form=$this->beginWidget('CActiveForm', array('id' =>'add-product-form','enableAjaxValidation'=>false,'htmlOptions'=>array('class'=>'clearfix'))); ?>
-
-
-            <div class="col-lg-5 col-md-5 col-sm-6 right-part">
-                <div class="form-holder client-settings hidden">
-
-                </div><!--/form holder-->
-            </div><!--/right -->
-
-
-            <div class="col-lg-6 col-md-6 col-sm-6 left-part">
+    <div class="container-fluid  main-content-holder content-wrapper">	  
+        <div class="row card-holder">
+        
+            <div class="col-md-12">
                 <div class="form-holder">
-
+                
                     <div class="form-group">
-                        <?php echo $form->label($form_mdl,'client_name');?>
-                        <!--<input type="hidden" name="found_client_name" value="" id="cli_found"> -->
-                        <?php //echo $form->textField($form_mdl,'client_name',array('id' => 'fio', 'class'=>'form-control auto-complete-clients', 'placeholder' => 'Enter customer name'));?>
-                        <?php $this->widget('zii.widgets.jui.CJuiAutoComplete',array(
-                            'model' => $form_mdl,
-                            'attribute' => 'client_name',  // атрибут модели
-                            'source' => '/ajax/clients',
-                            
-                            'options' => array(
-                            'showAnim'=>'fold',
-                            'select' =>'js: function(event, ui) {
-                                // действие по умолчанию, значение текстового поля
-                                // устанавливается в значение выбранного пункта
-                                this.value = ui.item.label;
-                                // устанавливаем значения скрытого поля
-                                
-                                $("#fio").val(ui.item.value);
-                                if(ui.item.id){
-                                    $("#fio").attr("cust_id",ui.item.id);
-                                }else{
-                                    $("#fio").attr("cust_id","new");   
-                                }
-                            }',
-                            'open'=>'js:function(event,ui){
-                                console.log(ui);
-                            }'),
-                            
-                            
-                            
-                            
-                            'htmlOptions'=>array(
-                                'cust_id' => 'new',
-                                'class' => 'form-control',
-                                'id'=>'fio',
-                                'placeholder'=>'Enter customer name',
-                            ),
-                        
-                        ));?>
-                        
-                        <?php echo $form->error($form_mdl,'client_name'); ?>
-                    </div>
+                        <label for="client-type">Client Type</label>
+                        <select id="client-type" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">Fizinis</option>
+                            <option value="2">Juridinis</option>
+                        </select>
+                    </div><!--/form-group -->
                     
-                    <hr/>
-
-                    <div class="row">
-                        <div  class="col-sm-6">
-                            <?php echo $form->label($form_mdl,'city_id');?>
-                            <?php echo $form->dropDownList($form_mdl,'city_id',$cities,array('id' => 'branch', 'class'=>'form-control ajax-filter-city'));?>
-                        </div>
-
-                        <div  class="col-sm-6">
-                            <?php echo $form->label($form_mdl,'worker_id');?>
-                            <?php echo $form->dropDownList($form_mdl,'worker_id',$workers,array('id' => 'worker', 'class'=>'form-control filtered-users'));?>
-                        </div>
-                    </div><!--/row -->
-
-                    <hr/>
-
-                    <div class="form-group">
-                        <?php echo $form->label($form_mdl,'select_priority');?>
-                        <div class="col-xs-12 btn-group" data-toggle="buttons">
-                            <label class="btn btn-primary active">
-                                <input type="radio" value="low" name="ServiceForm[priority]" id="option1" checked> <?php echo $this->labels['low']; ?>
-                            </label>
-                            <label class="btn btn-primary">
-                                <input type="radio" value="medium" name="ServiceForm[priority]" id="option2"> <?php echo $this->labels['medium']; ?>
-                            </label>
-                            <label class="btn btn-primary">
-                                <input type="radio" value="high" name="ServiceForm[priority]" id="option3"> <?php echo $this->labels['high']; ?>
-                            </label>
-                        </div>
-                    </div><!--/form-group -->
-
-                    <div class="form-group">
-                        <?php echo $form->label($form_mdl,'problem_type_id');?>
-                        <?php echo $form->dropDownList($form_mdl,'problem_type_id',$problems,array('class'=>'form-control'));?>
-                    </div><!--/form-group -->
-
-                    <div class="form-group">
-                        <?php echo $form->label($form_mdl,'remark');?>
-                        <?php echo $form->textArea($form_mdl,'remark',array('class'=>'form-control'));?>
-                        <?php echo $form->error($form_mdl,'remark'); ?>
-                    </div>
+                    <div class="col-md-12 filter-wrapper">
+                    <!--/filter ajax goes here --> 
+                    <h5 class="text-center">Select client type</h5>
+                    </div><!--filter-wrapper -->
+                    
+                    <div class="light-box-holder">
+                        <div class="modal cust-info"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-md">
+                                <div class="modal-content">
+                                    <div class="modal-header clearfix">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title">Jonas Petraitis</h4>
+                                    </div><!--/modal-header -->
+                                    
+                                    <div class="modal-body">
+                                    	<div class="cust-info-table">
+                                        	<h5>Customer info</h5>
+                                        	<table>
+                                            	<tr>
+                                                	<td>First name</td>
+                                                    <td>Jonas</td>
+                                                </tr>
+                                            	<tr>
+                                                	<td>Last Name</td>
+                                                    <td>Petraitis</td>
+                                                </tr>
+                                            	<tr>
+                                                	<td>Personal code</td>
+                                                    <td>23432432432</td>
+                                                </tr>
+                                            	<tr>
+                                                	<td>tel</td>
+                                                    <td>353454354</td>
+                                                </tr>
+                                            	<tr>
+                                                	<td>email</td>
+                                                    <td>4354365436</td>
+                                                </tr>
+                                                <tr>
+                                                	<td>Adress</td>
+                                                    <td>Kanto al. 18-29, Kaunas ,Lithuania</td>
+                                                </tr>
+										     </table>                                   
+                                        </div><!--/cust-info-table -->
+                                        <div class="last-purchase-table">
+                                        <h5>Last Purchase</h5>
+                                        	<table>
+                                        		<thead>
+                                                	<tr>
+                                                    	<th>#</th>
+                                                    	<th>date</th>
+                                                        <th>code</th>
+                                                        <th>product</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                	<tr>
+                                                    	<td>1</td>
+                                                        <td>12.23.2014</td>
+                                                        <td>F2143214321</td>
+                                                        <td>Filtras 131</td>
+                                                    </tr>
+                                                    
+                                                	<tr>
+                                                    	<td>1</td>
+                                                        <td>12.23.2014</td>
+                                                        <td>F2143214321</td>
+                                                        <td>Filtras 131</td>
+                                                    </tr>
+                                                    
+                                                	<tr>
+                                                    	<td>1</td>
+                                                        <td>12.23.2014</td>
+                                                        <td>F2143214321</td>
+                                                        <td>Filtras 131</td>
+                                                    </tr>
+                                                </tbody>
+                                                </tbody>
+                                                </tbody>
+                                        	</table>
+                                        </div><!--/last-purchase-table -->
+                                    </div><!--/modoal-body -->
+                                    
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close<span class="glyphicon glyphicon-thumbs-down"></span></button>
+                                        <button type="button" class="btn btn-primary">Continue<span class="glyphicon glyphicon-share-alt"></span></button>
+                                    </div><!--/modal-footer -->
+                                    
+                                </div><!--/modal-content -->
+                            </div><!--/modal-dialog -->
+                        </div><!--/modal -->                    
+                    	
+                        <div class="modal new-customer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-md">
+                                <div class="modal-content">
+                                    <div class="modal-header clearfix">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title">New user</h4>
+                                    </div><!--/modal-header -->
+									<form action="#" method="post";>
+                                    
+                                    <div class="modal-body">
+                                    	<div class="new-customer-table-holder">
+                                        	<table>
+                                            	<tr>
+                                                	<td><label>First Name</label></td>
+                                                    <td><input type="text" name="fname"><div class="errorMessage error">Error message</div></td>
+                                                </tr>
+                                                
+                                            	<tr>
+                                                	<td><label>Last Name</label></td>
+                                                    <td><input type="text" name="fname"><div class="errorMessage error">Error message</div></td>
+                                                </tr>
+                                                
+                                            	<tr>
+                                                	<td><label>email</label></td>
+                                                    <td><input type="text" name="fname"></td>
+                                                </tr>
+                                        	</table>
+                                        </div><!--/new-customer-table-holder -->
+                                    </div><!--/modal-body -->
+                                    
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close<span class="glyphicon glyphicon-thumbs-down"></span></button>
+                                        <button type="button" class="btn btn-primary">Continue<span class="glyphicon glyphicon-share-alt"></span></button>
+                                    </div><!--/modal-footer -->
+                                    </form>
+                                </div><!--/modal-content -->
+                            </div><!--/modal-dioalog -->
+                        </div><!--/moda new-customer -->
+                    </div><!--/light-box-holder -->
                 </div><!--/form-holder -->
             </div><!--/left -->
-            <div class="btn-holder col-sm-12 clearfix">
-                <button class="btn-submit" type="submit"><span><?php echo $this->labels['create ticket']; ?></span><span class="glyphicon glyphicon-chevron-right"></span></button>
-                <button class="btn-reset" type="reset"><span><?php echo $this->labels['reset fields']; ?></span> <span class="glyphicon glyphicon-remove"></span></button>
-            </div><!--/btn-holder -->
-            <?php $this->endWidget(); ?>
-    </div>
-</div>
+        </div><!--row -->
+    </div><!--/container -->
+
 
