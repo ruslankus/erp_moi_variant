@@ -2,7 +2,7 @@
  * Created by Wolfdark on 21.07.14.
  */
 
-jQuery(document).ready(function(){
+$(function() {
     $.fn.editable.defaults.mode = 'inline';
 	
     $('#client-type').change(function(e) {
@@ -12,10 +12,55 @@ jQuery(document).ready(function(){
 		}else{
 			changeFilter(val);
 		}
-    });
+    });//change
+    
+     $(document).on('keydown','.by-name',function(){
 
-
+        $('.by-name').autocomplete({
+            source: function( request, response ) {
+                $.ajax({
+                    url: "/ajax/clients",
+                    dataType: "json",
+                    data: {
+                        term: request.term,
+                        type: jQuery("#client-type").val()
+                    },
+                    success: function( data ) {
+                        response( data );
+                    }
+                });
+            },
+            minLength: 1,
+            
+            select:function(event,ui){
+                var id = ui.item.id; //get id of client
+                var label = ui.item.label; //get entered word
+            
+            }
+        });  
+    
+    });//live
+    
+     $(document).on('click','#filter-search',function(){
+        var value = $('.by-name').val();
+        var type = $("#client-type").val();
+      
+        clientFilter(type,value);
+    });//click
+   
+  
+  
 }); // document ready
+
+
+
+var clientFilter = function(type,value){
+    console.log(type,value);
+	$('.body-holder table tbody').load('/ajax/custfilter/',
+		{type: type, name : value}
+	);	
+}//clientFilter
+
 
 var changeFilter = function(val){
 	$(".filter-wrapper").load('/ajax/fselector/'+val);

@@ -202,16 +202,24 @@ class Clients extends CActiveRecord
     }
     
     
-    public function getAllClientsJson($clientName =  null){
+    public function getAllClientsJson($clientName =  null,$type = null){
         if(!empty($clientName)){
+            
+            $companyName = trim($clientName);
             $names = explode(" ",$clientName,2);
-            if(!array_key_exists(1,$names)){
-                $names[1] = '';
-            }
+            
            
             $result = array();
              //sql statement
-            $sql = "SELECT * FROM clients WHERE company_name LIKE '%".$names[0]."%' OR (`name` LIKE '%".$names[0]."%' AND `surname` LIKE '%".$names[1]."%')";
+            if($type == 1){
+                $sql = "SELECT * FROM clients WHERE company_name LIKE '%".$companyName."%'";
+            }else{
+                if(count($names) > 1){
+                    $sql = "SELECT * FROM clients WHERE `name` LIKE '%".$names[0]."%' AND `surname` LIKE '%".$names[1]."%'";
+                 }else{
+                    $sql = "SELECT * FROM clients WHERE `name` LIKE '%".$names[0]."%' OR `surname` LIKE '%".$names[0]."%'";
+                 }
+            }
             $con = $this->dbConnection;
             
             //get all data by query
@@ -227,6 +235,32 @@ class Clients extends CActiveRecord
             return json_encode($result);
         }
     }//getAllClientsJson
+    
+    public function getClients($clientName = null,$type = null){
+        if(!empty($clientName) && !empty($type)){
+            
+            $companyName = trim($clientName);
+            $names = explode(" ",$clientName,2);
+            
+            
+            $arrRow = array();
+            $con = $this->dbConnection;
+            if($type == 1){
+                $sql = "SELECT * FROM clients WHERE company_name LIKE '".$companyName."'";
+            }else{
+                if(count($names) > 1){
+                    $sql = "SELECT * FROM clients WHERE `name` LIKE '".$names[0]."' AND `surname` LIKE '".$names[1]."'";
+                }else{
+                    $sql = "SELECT * FROM clients WHERE `name` LIKE '".$names[0]."' OR `surname` LIKE '".$names[0]."'";
+                }
+            }
+             $data=$con->createCommand($sql)->query();
+             foreach($data as $row){
+                $arrRow[] = $row;
+             }
+        }
+        return $arrRow;
+    }//getClients
     
     public function checkClient($arrName){
         $con = $this->dbConnection;

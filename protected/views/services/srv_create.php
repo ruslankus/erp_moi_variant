@@ -13,6 +13,7 @@
 
 <?php
 $cs = Yii::app()->clientScript;
+$cs->registerCssFile(Yii::app()->request->baseUrl.'/css/ui-lightness/jquery-ui-1.10.4.custom.min.css');
 $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/bootstrap-editable.css');
 $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/tickets_card.css');
 
@@ -32,15 +33,15 @@ $cs->registerScriptFile(Yii::app()->baseUrl.'/js/service.js',CClientScript::POS_
                     <div class="form-group">
                         <label for="client-type">Client Type</label>
                         <select id="client-type" class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="1">Fizinis</option>
-                            <option value="2">Juridinis</option>
+                            <?php foreach($select as $key => $value):?>
+                            <option value="<?php echo $key?>"><?php echo $value; ?></option>
+                            <?php endforeach;?>
                         </select>
                     </div><!--/form-group -->
                     
                     <div class="col-md-12 filter-wrapper">
-                    <!--/filter ajax goes here --> 
-                    <h5 class="text-center">Select client type</h5>
+                        <!--/filter ajax goes here --> 
+                        <h5 class="text-center">Select client type</h5>
                     </div><!--filter-wrapper -->
                     
                     <div class="light-box-holder">

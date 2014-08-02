@@ -41,7 +41,9 @@ class ServicesController extends Controller
      */
     public function actionCreate()
     {
-        $this->render('srv_create');
+        $select = array('0' => 'Select customer','1'=>'juridinys','2' => 'fizinis');
+        
+        $this->render('srv_create',array('select'=> $select));
         
     }//createAction
 

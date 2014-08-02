@@ -47,15 +47,15 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/tickets_list.css');
                             <td><?php echo $service->userModifiedBy->name.' '.$service->userModifiedBy->surname; ?></td>
                             <td><?php echo $service->currentEmployee->name.' '.$service->currentEmployee->surname; ?></td>
                             <td><?php echo $service->timeLeft('days d hours h minutes m seconds s'); ?></td>
-                            <td><?php echo $service->statusLabel(); ?></td>
+                            <td><?php echo $service->status->status_name; ?></td>
 
                             <td>
                                 <?php if($this->rights['services_delete']): ?>
-                                    <?php echo CHtml::link($this->labels['close'],'/services/close/'.$service->id,array('class' => 'actions action-delete')); ?>
+                                    <?php echo CHtml::link($this->labels['close'],'/services/close/id/'.$service->id,array('class' => 'actions action-delete')); ?>
                                 <?php endif; ?>
 
                                 <?php if($this->rights['services_edit']): ?>
-                                    <?php echo CHtml::link($this->labels['edit'],'/services/edit/'.$service->id,array('class' => 'actions action-edit')); ?>
+                                    <?php echo CHtml::link($this->labels['edit'],'/services/edit/id/'.$service->id,array('class' => 'actions action-edit')); ?>
                                 <?php endif; ?>
                             </td>
                         </tr>

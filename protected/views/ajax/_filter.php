@@ -1,7 +1,14 @@
-<div class="form-group">
-    <label>Filter</label>
-    <input type="text" class="form-control client-filter">
-</div><!--/form-group -->
+
+<div class="form-inline">
+    <div class="form-group filter-group">
+        <label>Filter</label>
+        <input type="text" class="form-control client-filter by-name">
+        <input type="text" class="form-control client-filter by-number">
+        <button id="filter-search" class="form-control clearfix">Search<span class="glyphicon glyphicon-search text-right"></span></button>
+    </div><!--/form-group -->
+</div><!--/form-inline -->
+
+
 <div class="table-holder header-holder">
     <table class="table table-bordered table-hover">
         <thead>

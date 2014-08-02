@@ -64,12 +64,12 @@ class AjaxController extends Controller {
      * @param string $start
      * @throws CHttpException
      */
-    public function actionClients($term=null)
+    public function actionClients($term=null,$type=null)
     {
        
         if(Yii::app()->request->isAjaxRequest)
         {
-            $result = Clients::model()->getAllClientsJson($term);
+            $result = Clients::model()->getAllClientsJson($term,$type);
             echo $result;
         }
         else
@@ -80,89 +80,27 @@ class AjaxController extends Controller {
     }//Clients
     
     
-    public function actionCheck_customer(){
+       
+    
+    public function actionCustfilter(){
         $request = Yii::app()->request;
         if($request->isAjaxRequest){
             $name = $request->getPost('name');
+            $type = $request->getPost('type');
             
-            if(!empty($name)){
-                //clear 
-                $name = trim($name);
-                $arrName = explode(" ",$name);
-                
-                $data = Clients::model()->checkClient($arrName);
-                Debug::d($data);
+            $data = Clients::model()->getClients($name,$type);
+            if(!empty($data)){
+                echo $this->renderPartial('_filterTable',array('data'=>$data),true);
+            }else{
+                echo $this->renderPartial('_emptyTable',array(),true); 
             }
+                        
         }else{
             throw new CHttpException(404);
         }
-    }//Check_customer
+    }// custFilter
     
-    
-    
-    
-    /**
-     * Finds client by name or company name, and prints his ID if found (used in srv_create.php)
-     * @param string $name
-     * @throws CHttpException
-     */
-    public function actionCliFi($name = '')
-    {
-        if(Yii::app()->request->isAjaxRequest)
-        {
-            //remove all connecting symbols, replace them with spaces
-            $name = str_replace("%20"," ",$name);
-            $name = str_replace("+"," ",$name);
-            
-            //get array of separated-by-spaces words
-            $words = explode(" ",$name);
-
-            //if complex name (name and surname expecting)
-            if(count($words) > 1)
-            {
-                //sql statement
-                $sql = "SELECT * FROM clients WHERE company_name = '".$name."' OR ((name LIKE '".$words[0]."') AND (surname LIKE '".$words[1]."'))";
-            }
-            //if simple name (one word)
-            else
-            {
-                $sql = "SELECT * FROM clients WHERE company_name = '".$name."' OR name LIKE '".$name."%'";
-            }
-
-            //connection
-            $con = Yii::app()->db;
-
-            //get row by query
-            $data=$con->createCommand($sql)->queryRow();
-
-            //if find something
-            if(!empty($data))
-            {
-                //client
-                $client = new Clients();
-                //set attributes from base to client
-                $client -> attributes = $data;
-                //render form partial
-                $this->renderPartial('_client_form_old_client',array('client' => $client, 'id' => $data['id']));
-            }
-            //if not find
-            else
-            {
-                //get full name or company name
-                count($words) > 1 ? $client_name = $words[0].' '.$words[1] : $client_name = $words[0];
-
-                //render partial
-                $this->renderPartial('_client_form_new_client',array('client_name' => $client_name));
-            }
-
-        }
-        else
-        {
-            throw new CHttpException(404);
-        }
-    }//actionCliFi 
-    
-    
+     
     public function actionFselector($id = null){
         
         if(Yii::app()->request->isAjaxrequest){
