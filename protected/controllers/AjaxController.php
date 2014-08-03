@@ -90,7 +90,7 @@ class AjaxController extends Controller {
             
             $data = Clients::model()->getClients($name,$type);
             if(!empty($data)){
-                echo $this->renderPartial('_filterTable',array('data'=>$data),true);
+                echo $this->renderPartial('_filterTable',array('data'=>$data,'type' => $type),true);
             }else{
                 echo $this->renderPartial('_emptyTable',array(),true); 
             }
@@ -100,15 +100,27 @@ class AjaxController extends Controller {
         }
     }// custFilter
     
+    
+    public function actionCustinfo($id = null){
+        $id = (int)$id;
+        $request = Yii::app()->request;
+        if($request->isAjaxRequest){
+            $data = Clients::model()->findByPk($id);
+            $modal = $this->renderPartial('customer_info_modal',array('data' => $data,),true);
+            echo $modal;
+        }else{
+            throw new CHttpException(404);
+        }
+    }//custInfo
      
     public function actionFselector($id = null){
         
         if(Yii::app()->request->isAjaxrequest){
             
             if($id == 1){                
-                echo $this->renderPartial('_filter',array(),true);                
+                echo $this->renderPartial('_filter_jur',array(),true);                
             }else if($id == 2){
-                echo $this->renderPartial('_filter_jur',array(),true);
+                echo $this->renderPartial('_filter_fiz',array(),true);
             }
             
         }else{

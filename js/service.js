@@ -47,11 +47,23 @@ $(function() {
       
         clientFilter(type,value);
     });//click
+    
+    $(document).on('click','.cust-link',function(e){
+        var link = $(this).attr('data-link');
+        modalInfo(link);
+        return false;
+	});// click on body-holder
    
   
   
 }); // document ready
 
+
+var modalInfo = function(link){
+    $.ajaxSetup({async:false});
+    $('#modal-user-info').load(link);
+    $('.cust-info').modal('show');
+}//modalInfo
 
 
 var clientFilter = function(type,value){
