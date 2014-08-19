@@ -154,4 +154,34 @@ class Suppliers extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+    
+    
+    
+    
+    public function getAllClientsJson($suppName =  null){
+        if(!empty($suppName)){
+            
+            $companyName = trim($suppName);           
+           
+            $result = array();
+             //sql statement
+            
+                $sql = "SELECT * FROM `".$this->tableName()."` WHERE company_name LIKE '%".$companyName."%'";
+            
+            $con = $this->dbConnection;
+            
+            //get all data by query
+            $data=$con->createCommand($sql)->query();
+
+            //foreach row
+            foreach($data as $row)
+            {
+                //add to result array
+                $result[] = array( 'label' => $row['company_name'] ,'id' => $row['id']);
+            }
+            
+            return json_encode($result);
+        }
+    }//getAllClientsJson
+    
 }

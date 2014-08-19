@@ -59,6 +59,18 @@ class AjaxController extends Controller {
     }//actionChangrProductStatus
     
     
+    public function actionSellers($term = null){
+        if(Yii::app()->request->isAjaxRequest)
+        {   
+            $result = Suppliers::model()->getAllClientsJson($term);
+            echo $result;
+        
+        }else{
+            throw new CHttpException(404);
+        }
+    }//actionSellers
+    
+    
     /**
      * Prints json-converted array of client-ids and client-names (used in srv_create.php)
      * @param string $start
@@ -79,7 +91,7 @@ class AjaxController extends Controller {
 
     }//Clients
     
-    
+      
        
     
     public function actionCustfilter(){

@@ -1,1 +1,64 @@
 
+2014/08/19 15:44:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.min.map".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.min.m...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.min.map
+HTTP_REFERER=http://yerp.local/services/create
+---
+2014/08/19 15:45:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.min.map".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.min.m...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.min.map
+HTTP_REFERER=http://yerp.local/buy
+---
+2014/08/19 15:45:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.min.map".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.min.m...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.min.map
+HTTP_REFERER=http://yerp.local/buy/create
+---
+2014/08/19 15:52:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.min.map".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.min.m...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.min.map
+HTTP_REFERER=http://yerp.local/buy/create
+---
+2014/08/19 15:52:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.min.map".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.min.m...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.min.map
+HTTP_REFERER=http://yerp.local/buy/createstep1
+---
+2014/08/19 15:56:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.min.map".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.min.m...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.min.map
+HTTP_REFERER=http://yerp.local/
+---
+2014/08/19 19:05:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "sell/index".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('sell/index')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sell
+HTTP_REFERER=http://yerp.local/buy/createstep1
+---

@@ -10,7 +10,7 @@ class BuyController extends Controller
     {
         $arr = array(
             'invoices' => array('action' => 'invoices','visible' => $this->rights['purchases_see'] ? 1 : 0 , 'class' => 'list-products'),
-            'add invoice' => array('action' => 'create', 'visible' => $this->rights['purchases_add'] ? 1 : 0, 'class' => 'create-product'),
+            'add invoice' => array('action' => 'createstep1', 'visible' => $this->rights['purchases_add'] ? 1 : 0, 'class' => 'create-product'),
         );
 
         return $arr;
@@ -35,6 +35,12 @@ class BuyController extends Controller
 
         //render table
         $this->render('purchases_list', array('invoices' => $invoices));
+    }
+    
+    
+    
+    public function actionCreateStep1(){
+        $this->render('in_purchases_step1');
     }
 
 
