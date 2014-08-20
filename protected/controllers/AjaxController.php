@@ -122,7 +122,7 @@ class AjaxController extends Controller {
         $request = Yii::app()->request;
         if($request->isAjaxRequest){
             $data = Suppliers::model()->findByPk($id);
-            $modal = $this->renderPartial('customer_info_modal',array('data' => $data,),true);
+            $modal = $this->renderPartial('supp_info_modal',array('data' => $data,),true);
             echo $modal;
         }else{
             throw new CHttpException(404);

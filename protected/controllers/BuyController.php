@@ -41,8 +41,12 @@ class BuyController extends Controller
     
     public function actionCreateStep1(){
         $this->render('in_purchases_step1');
-    }
-
+    }//step1
+    
+    
+    public function actionCreateinvoice($id = null){
+        echo 'createInvoice id-'.$id;
+    }//createInvoice
 
     /**
      * Make new purchase-invoice

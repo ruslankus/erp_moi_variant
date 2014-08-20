@@ -59,7 +59,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl.'/js/purchase.js',CClientScript::POS
                     <div class="light-box-holder">
                         <div class="modal cust-info"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-md">
-                                <div class="modal-content">
+                                <div class="modal-content" id="modal-user-info">
                                 
                                 <!-- modal goes here -->
                                     
