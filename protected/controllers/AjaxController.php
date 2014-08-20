@@ -59,6 +59,9 @@ class AjaxController extends Controller {
     }//actionChangrProductStatus
     
     
+    /**
+     * autocoplite fir purchase step1
+     */
     public function actionSellers($term = null){
         if(Yii::app()->request->isAjaxRequest)
         {   
@@ -69,6 +72,28 @@ class AjaxController extends Controller {
             throw new CHttpException(404);
         }
     }//actionSellers
+    
+    
+    public function actionSellfilter(){
+        $request = Yii::app()->request;
+        if($request->isAjaxRequest){
+            $name = $request->getPost('name');
+           
+            
+            $data = Suppliers::model()->getSeller($name);
+            if(!empty($data)){
+                echo $this->renderPartial('_filterSuppTable',array('data'=>$data),true);
+            }else{
+                echo $this->renderPartial('_emptyTable',array(),true); 
+            }
+                        
+        }else{
+            throw new CHttpException(404);
+        }
+    }// sellFilter
+    
+    
+    
     
     
     /**
@@ -92,7 +117,17 @@ class AjaxController extends Controller {
     }//Clients
     
       
-       
+     public function actionSellinfo($id = null){
+        $id = (int)$id;
+        $request = Yii::app()->request;
+        if($request->isAjaxRequest){
+            $data = Suppliers::model()->findByPk($id);
+            $modal = $this->renderPartial('customer_info_modal',array('data' => $data,),true);
+            echo $modal;
+        }else{
+            throw new CHttpException(404);
+        }
+    }//custInfo   
     
     public function actionCustfilter(){
         $request = Yii::app()->request;

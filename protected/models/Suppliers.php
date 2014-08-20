@@ -184,4 +184,27 @@ class Suppliers extends CActiveRecord
         }
     }//getAllClientsJson
     
+    
+    public function getSeller($name = null){
+        if(!empty($name)){
+            
+            $companyName = trim($name);        
+            
+            $arrRow = array();
+            $con = $this->dbConnection;
+           
+            $sql = "SELECT * FROM `".$this->tableName()."` WHERE company_name LIKE '".$companyName."'";
+            
+             $data=$con->createCommand($sql)->query();
+             foreach($data as $row){
+                $arrRow[] = $row;
+             }
+        }
+        
+        return $arrRow;
+    }//getClients
+    
+    
+    
+    
 }

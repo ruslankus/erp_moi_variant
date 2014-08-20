@@ -27,6 +27,30 @@ $(document).ready(function(e) {
     
     });//live
 	
-	
-	
-});
+    $(document).on('click','#filter-search',function(){
+        var value = $('.by-name').val();
+        clientFilter(value);
+    });//click
+    
+    
+    $(document).on('click','.cust-link',function(e){
+        var link = $(this).attr('data-link');
+        modalInfo(link);
+        return false;
+	});// click on body-holder
+ 
+});//document ready
+
+
+var clientFilter = function(value){
+    console.log(value);
+	$('.body-holder table tbody').load('/ajax/sellfilter/',
+		{ name : value}
+	);	
+}//clientFilter
+
+var modalInfo = function(link){
+    $.ajaxSetup({async:false});
+    $('#modal-user-info').load(link);
+    $('.cust-info').modal('show');
+}//modalInfo
