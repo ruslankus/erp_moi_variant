@@ -1,5 +1,6 @@
 <?php
-class AjaxController extends Controller {
+class AjaxController extends Controller
+{
  
     
     public function actionProduct(){
@@ -62,7 +63,8 @@ class AjaxController extends Controller {
     /**
      * autocoplite fir purchase step1
      */
-    public function actionSellers($term = null){
+    public function actionSellers($term = null)
+    {
         if(Yii::app()->request->isAjaxRequest)
         {   
             $result = Suppliers::model()->getAllClientsJson($term);
@@ -74,7 +76,8 @@ class AjaxController extends Controller {
     }//actionSellers
     
     
-    public function actionSellfilter(){
+    public function actionSellfilter()
+    {
         $request = Yii::app()->request;
         if($request->isAjaxRequest){
             $name = $request->getPost('name');
@@ -117,7 +120,8 @@ class AjaxController extends Controller {
     }//Clients
     
       
-     public function actionSellinfo($id = null){
+     public function actionSellinfo($id = null)
+     {
         $id = (int)$id;
         $request = Yii::app()->request;
         if($request->isAjaxRequest){
@@ -129,7 +133,8 @@ class AjaxController extends Controller {
         }
     }//custInfo   
     
-    public function actionCustfilter(){
+    public function actionCustfilter()
+    {
         $request = Yii::app()->request;
         if($request->isAjaxRequest){
             $name = $request->getPost('name');
@@ -148,7 +153,8 @@ class AjaxController extends Controller {
     }// custFilter
     
     
-    public function actionCustinfo($id = null){
+    public function actionCustinfo($id = null)
+    {
         $id = (int)$id;
         $request = Yii::app()->request;
         if($request->isAjaxRequest){
@@ -160,7 +166,8 @@ class AjaxController extends Controller {
         }
     }//custInfo
      
-    public function actionFselector($id = null){
+    public function actionFselector($id = null)
+    {
         
         if(Yii::app()->request->isAjaxrequest){
             
