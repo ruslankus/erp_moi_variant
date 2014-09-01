@@ -54,6 +54,7 @@ class Stocks extends CActiveRecord
 			'operationsIns' => array(self::HAS_MANY, 'OperationsIn', 'stock_id'),
 			'operationsOuts' => array(self::HAS_MANY, 'OperationsOut', 'stock_id'),
 			'productInStocks' => array(self::HAS_MANY, 'ProductInStock', 'stock_id'),
+            'location' => array(self::BELONGS_TO, 'UserCities', 'location_id'),
 		);
 	}
 
