@@ -595,3 +595,138 @@ Stack trace:
 REQUEST_URI=/js/sales_list.js
 HTTP_REFERER=http://yerp.local/sell
 ---
+2014/09/02 01:08:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2014/09/02 01:09:14 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'alex_erp_2.client_types' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `client_types`.
+in C:\OpenServer\domains\yerp.local\protected\models\ClientTypes.php (108)
+in C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php (36)
+in C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php (24)
+2014/09/02 01:09:14 [error] [exception.CDbException] exception 'CDbException' with message 'The table "client_types" for active record class "ClientTypes" cannot be found in the database.' in C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(ClientTypes))
+#1 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(658): CActiveRecord->getMetaData()
+#2 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1350): CActiveRecord->getTableSchema()
+#3 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#4 C:\OpenServer\domains\yerp.local\protected\models\ClientTypes.php(108): CActiveRecord->findAll()
+#5 C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php(36): ClientTypes->findAllAsArray()
+#6 C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php(24): SellController->actionInvoices()
+#7 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): SellController->actionIndex()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('index')
+#12 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('sell/index')
+#13 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/sell
+HTTP_REFERER=http://yerp.local/main/index
+---
+2014/09/02 01:09:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/sales_list.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/sales_list.j...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/sales_list.js
+HTTP_REFERER=http://yerp.local/sell
+---
+2014/09/02 01:46:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/sales_list.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/sales_list.j...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/sales_list.js
+HTTP_REFERER=http://yerp.local/sell
+---
+2014/09/02 01:46:16 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "supplier" is not defined in active record class "OperationsIn".' in C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveFinder.php:226
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'supplier')
+#1 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(909): CActiveFinder->__construct(Object(OperationsIn), Array)
+#3 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#5 C:\OpenServer\domains\yerp.local\protected\controllers\BuyController.php(34): CActiveRecord->findAll()
+#6 C:\OpenServer\domains\yerp.local\protected\controllers\BuyController.php(25): BuyController->actionInvoices()
+#7 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): BuyController->actionIndex()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('index')
+#12 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('buy/index')
+#13 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/buy
+HTTP_REFERER=http://yerp.local/sell
+---
+2014/09/02 01:46:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2014/09/02 01:46:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2014/09/02 01:47:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/sales_list.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/sales_list.j...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/sales_list.js
+HTTP_REFERER=http://yerp.local/sell
+---
+2014/09/02 01:47:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/sales_list.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/sales_list.j...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/sales_list.js
+HTTP_REFERER=http://yerp.local/sell
+---
+2014/09/02 02:05:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "create".' in C:\OpenServer\domains\yerp.local\framework\web\CController.php:483
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(270): CController->missingAction('create')
+#1 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('create')
+#2 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('stock/create')
+#3 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/stock/create
+HTTP_REFERER=http://yerp.local/stock
+---
+2014/09/02 02:06:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/sales_list.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/sales_list.j...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/sales_list.js
+HTTP_REFERER=http://yerp.local/sell
+---
+2014/09/02 02:06:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/sales_list.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/sales_list.j...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/sales_list.js
+HTTP_REFERER=http://yerp.local/sell
+---

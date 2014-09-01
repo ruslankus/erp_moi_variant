@@ -1,6 +1,3 @@
-/**
- * Created by Wolfdark on 21.07.14.
- */
 
 $(function() {
     $.fn.editable.defaults.mode = 'inline';
