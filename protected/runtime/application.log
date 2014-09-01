@@ -493,3 +493,105 @@ Stack trace:
 #15 {main}
 REQUEST_URI=/stock
 ---
+2014/09/01 17:58:17 [error] [php] include(ClientTypes.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\OpenServer\domains\yerp.local\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php(36): spl_autoload_call()
+#1 C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php(24): SellController->actionInvoices()
+#2 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): SellController->actionIndex()
+#3 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): SellController->runAction()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): SellController->runActionWithFilters()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): SellController->run()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#8 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/sell
+in C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php (36)
+in C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php (24)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/01 17:58:45 [error] [php] include(OperationOutStatuses.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\OpenServer\domains\yerp.local\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php(37): spl_autoload_call()
+#1 C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php(24): SellController->actionInvoices()
+#2 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): SellController->actionIndex()
+#3 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): SellController->runAction()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): SellController->runActionWithFilters()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): SellController->run()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#8 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/sell
+in C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php (37)
+in C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php (24)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/01 18:00:22 [error] [php] include(OperationOutStatuses.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\OpenServer\domains\yerp.local\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php(37): spl_autoload_call()
+#1 C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php(24): SellController->actionInvoices()
+#2 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): SellController->actionIndex()
+#3 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): SellController->runAction()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): SellController->runActionWithFilters()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): SellController->run()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#8 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/sell
+in C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php (37)
+in C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php (24)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/01 18:03:59 [error] [exception.CException] exception 'CException' with message 'Clients and its behaviors do not have a method or closure named "getFullName".' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(227): CComponent->__call('getFullName', Array)
+#1 C:\OpenServer\domains\yerp.local\protected\views\sell\sales_list.php(64): CActiveRecord->__call('getFullName', Array)
+#2 C:\OpenServer\domains\yerp.local\protected\views\sell\sales_list.php(64): Clients->getFullName()
+#3 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#4 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('sales_list', Array, true)
+#7 C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php(41): CController->render('sales_list', Array)
+#8 C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php(24): SellController->actionInvoices()
+#9 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): SellController->actionIndex()
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('index')
+#14 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('sell/index')
+#15 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/sell
+HTTP_REFERER=http://yerp.local/sell
+---
+2014/09/01 18:11:05 [error] [exception.CException] exception 'CException' with message 'Property "OperationsOut.stock" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(145): CComponent->__get('stock')
+#1 C:\OpenServer\domains\yerp.local\protected\views\sell\sales_list.php(66): CActiveRecord->__get('stock')
+#2 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#3 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('sales_list', Array, true)
+#6 C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php(41): CController->render('sales_list', Array)
+#7 C:\OpenServer\domains\yerp.local\protected\controllers\SellController.php(24): SellController->actionInvoices()
+#8 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): SellController->actionIndex()
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('sell/index')
+#14 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/sell
+HTTP_REFERER=http://yerp.local/sell
+---
+2014/09/01 18:11:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/sales_list.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/sales_list.j...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/sales_list.js
+HTTP_REFERER=http://yerp.local/sell
+---

@@ -33,8 +33,12 @@ class SellController extends Controller
         //get all sale-invoices
         $invoices = OperationsOut::model()->with('client')->findAll();
 
+        $types = ClientTypes::model()->findAllAsArray();
+        $statuses = OperationOutStatuses::model()->findAllAsArray();
+        $cities = UserCities::model()->findAllAsArray();
+
         //render table
-        $this->render('sales_list', array('invoices' => $invoices));
+        $this->render('sales_list', array('invoices' => $invoices, 'types' => $types, 'cities' => $cities, 'statuses' => $statuses));
     }
 
     /**
@@ -83,7 +87,8 @@ class SellController extends Controller
         }
 
         //array for types-select-box
-        $types = array('' => 'Select', 0 => $this->labels['physical'], 1 => $this->labels['juridical']);
+        $types = ClientTypes::model()->findAllAsArray();
+        $types = array_merge(array('' => $this->labels['select type']), $types);
 
         $this->render('first_step', array('form_mdl' => $form_clients, 'form_srv' => $form_srv, 'client_types' => $types));
     }
@@ -91,12 +96,12 @@ class SellController extends Controller
     /**
      * Renders next step
      */
-    public function actionNextStepCreate($cid = null)
+    public function actionNextStepCreate($id = null)
     {
         /* @var $stocks Stocks[] */
         /* @var $available_stocks Stocks[] */
 
-        if($client = Clients::model()->findByPk($cid))
+        if($client = Clients::model()->findByPk($id))
         {
             $available_stocks_id = array();
             $stocks = Stocks::model()->findAll();
@@ -141,6 +146,8 @@ class SellController extends Controller
             $operation->user_modified_by = Yii::app()->user->id;
             $operation->vat_id = $vat_id;
             $operation->invoice_code = '';
+            $operation->stock_id = $stock_id;
+            $operation->status_id = 0;
             $operation->save();
 
             foreach($products as $pr_card_id => $product_item)

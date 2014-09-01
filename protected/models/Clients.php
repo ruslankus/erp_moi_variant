@@ -31,11 +31,18 @@
  * @property integer $user_modified_by
  * @property integer $priority
  * @property integer $status
+ * @property string $address
+ * @property string $country
+ * @property string $city
+ * @property string $street
+ * @property string $building_nr
+ * @property string $contract_number
  *
  * The followings are the available model relations:
- * @property InvoicesOut $firstInvoice
- * @property InvoicesOut $lastInvoice
- * @property InvoicesOut[] $invoicesOuts
+ * @property ClientTypes $typeObj
+ * @property OperationsOut $firstInvoice
+ * @property OperationsOut $lastInvoice
+ * @property OperationsOut[] $operationsOuts
  * @property ServiceProcesses[] $serviceProcesses
  */
 class Clients extends CActiveRecord
@@ -57,10 +64,11 @@ class Clients extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('first_invoice_id, last_invoice_id, last_service_id, next_service_id, last_service_date, next_service_date, type, date_created, date_changed, user_modified_by, priority, status', 'numerical', 'integerOnly'=>true),
+			array('address, country, city, street, building_nr, contract_number', 'length', 'max'=>255),
 			array('name, company_name, surname, personal_code, company_code, vat_code, phones, phone1, phone2, emails, email1, email2, remark, remark_for_service', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, company_name, surname, personal_code, company_code, vat_code, first_invoice_id, last_invoice_id, phones, phone1, phone2, emails, email1, email2, remark, remark_for_service, last_service_id, next_service_id, last_service_date, next_service_date, type, date_created, date_changed, user_modified_by, priority, status', 'safe', 'on'=>'search'),
+			array('id, name, company_name, surname, personal_code, company_code, vat_code, first_invoice_id, last_invoice_id, phones, phone1, phone2, emails, email1, email2, remark, remark_for_service, last_service_id, next_service_id, last_service_date, next_service_date, type, date_created, date_changed, user_modified_by, priority, status, address, country, city, street, building_nr, contract_number', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,9 +80,10 @@ class Clients extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'firstInvoice' => array(self::BELONGS_TO, 'InvoicesOut', 'first_invoice_id'),
-			'lastInvoice' => array(self::BELONGS_TO, 'InvoicesOut', 'last_invoice_id'),
-			'invoicesOuts' => array(self::HAS_MANY, 'InvoicesOut', 'client_id'),
+			'typeObj' => array(self::BELONGS_TO, 'ClientTypes', 'type'),
+			'firstInvoice' => array(self::BELONGS_TO, 'OperationsOut', 'first_invoice_id'),
+			'lastInvoice' => array(self::BELONGS_TO, 'OperationsOut', 'last_invoice_id'),
+			'operationsOuts' => array(self::HAS_MANY, 'OperationsOut', 'client_id'),
 			'serviceProcesses' => array(self::HAS_MANY, 'ServiceProcesses', 'client_id'),
 		);
 	}
@@ -112,6 +121,12 @@ class Clients extends CActiveRecord
 			'user_modified_by' => 'User Modified By',
 			'priority' => 'Priority',
 			'status' => 'Status',
+			'address' => 'Address',
+			'country' => 'Country',
+			'city' => 'City',
+			'street' => 'Street',
+			'building_nr' => 'Building Nr',
+			'contract_number' => 'Contract Number',
 		);
 	}
 
@@ -160,6 +175,12 @@ class Clients extends CActiveRecord
 		$criteria->compare('user_modified_by',$this->user_modified_by);
 		$criteria->compare('priority',$this->priority);
 		$criteria->compare('status',$this->status);
+		$criteria->compare('address',$this->address,true);
+		$criteria->compare('country',$this->country,true);
+		$criteria->compare('city',$this->city,true);
+		$criteria->compare('street',$this->street,true);
+		$criteria->compare('building_nr',$this->building_nr,true);
+		$criteria->compare('contract_number',$this->contract_number,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -176,7 +197,6 @@ class Clients extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-
 
     /**
      * Returns all clients as pairs 'id'=>'name'
@@ -200,28 +220,45 @@ class Clients extends CActiveRecord
 
         return $arr;
     }
-    
-    
+
+
+    /**
+     * Return json array for auto-complete
+     * @param null $clientName
+     * @param null $type
+     * @return string
+     */
     public function getAllClientsJson($clientName =  null,$type = null){
         if(!empty($clientName)){
-            
+
             $companyName = trim($clientName);
             $names = explode(" ",$clientName,2);
-            
-           
+
+
             $result = array();
-             //sql statement
-            if($type == 1){
-                $sql = "SELECT * FROM clients WHERE company_name LIKE '%".$companyName."%'";
-            }else{
-                if(count($names) > 1){
-                    $sql = "SELECT * FROM clients WHERE `name` LIKE '%".$names[0]."%' AND `surname` LIKE '%".$names[1]."%'";
-                 }else{
-                    $sql = "SELECT * FROM clients WHERE `name` LIKE '%".$names[0]."%' OR `surname` LIKE '%".$names[0]."%'";
-                 }
+            //sql statement
+
+            if($type != '')
+            {
+                if($type == 1){
+                    $sql = "SELECT * FROM clients WHERE company_name LIKE '%".$companyName."%'";
+                }else{
+                    if(count($names) > 1){
+                        $sql = "SELECT * FROM clients WHERE `name` LIKE '%".$names[0]."%' AND `surname` LIKE '%".$names[1]."%'";
+                    }else{
+                        $sql = "SELECT * FROM clients WHERE `name` LIKE '%".$names[0]."%' OR `surname` LIKE '%".$names[0]."%'";
+                    }
+                }
             }
+            else
+            {
+                if($names)
+                $sql = "SELECT * FROM clients WHERE company_name LIKE '%".$clientName."%' OR `name` LIKE '%".$names[0]."%'";
+            }
+
+
             $con = $this->dbConnection;
-            
+
             //get all data by query
             $data=$con->createCommand($sql)->query();
 
@@ -231,49 +268,268 @@ class Clients extends CActiveRecord
                 //add to result array
                 $result[] = array('label' => $row['type'] == 1 ? $row['company_name'] : $row['name'].' '.$row['surname'], 'id' => $row['id']);
             }
-            
+
             return json_encode($result);
         }
+
+        return "";
     }//getAllClientsJson
-    
+
+
+    /**
+     * For filter
+     * @param null $clientName
+     * @param null $type
+     * @return array
+     */
     public function getClients($clientName = null,$type = null){
-        if(!empty($clientName) && !empty($type)){
-            
+        $arrRow = array();
+
+        if(!empty($clientName)){
+
             $companyName = trim($clientName);
             $names = explode(" ",$clientName,2);
-            
-            
-            $arrRow = array();
-            $con = $this->dbConnection;
+
+            //sql statement
             if($type == 1){
-                $sql = "SELECT * FROM clients WHERE company_name LIKE '".$companyName."'";
+                $sql = "SELECT * FROM clients WHERE company_name LIKE '%".$companyName."%'";
             }else{
                 if(count($names) > 1){
-                    $sql = "SELECT * FROM clients WHERE `name` LIKE '".$names[0]."' AND `surname` LIKE '".$names[1]."'";
+                    $sql = "SELECT * FROM clients WHERE `name` LIKE '%".$names[0]."%' AND `surname` LIKE '%".$names[1]."%'";
                 }else{
-                    $sql = "SELECT * FROM clients WHERE `name` LIKE '".$names[0]."' OR `surname` LIKE '".$names[0]."'";
+                    $sql = "SELECT * FROM clients WHERE `name` LIKE '%".$names[0]."%' OR `surname` LIKE '%".$names[0]."%'";
                 }
             }
-             $data=$con->createCommand($sql)->query();
-             foreach($data as $row){
+            $con = $this->dbConnection;
+
+            $data=$con->createCommand($sql)->query();
+            foreach($data as $row){
                 $arrRow[] = $row;
-             }
+            }
         }
         return $arrRow;
     }//getClients
-    
-    public function checkClient($arrName){
-        $con = $this->dbConnection;
-        $data = null;
-        if(count($arrName) > 1){
-            $sql = "SELECT * FROM clients WHERE company_name LIKE '".$arrName[0]."' OR (`name` LIKE '".$arrName[0]."' AND `surname` LIKE '".$arrName[1]."')";
-            $data = $con->createCommand($sql)->queryRow();
-        }else{
-            $sql = "SELECT * FROM clients WHERE company_name LIKE '".$arrName[0]."' OR `name` LIKE '".$arrName[0]."'";
-            $data = $con->createCommand($sql)->queryRow();   
+
+
+    /**
+     * Takes name's surname's or company-name's start fragment, type of client and returns array of variants
+     * @param string $start
+     * @param int $type
+     * @return array
+     */
+    public function getClientsByNameParts($start,$type)
+    {
+        //declare empty array
+        $result = array();
+
+        //explode string to words
+        $words = explode(" ",$start, 2);
+
+        //if juridical client-type
+        if($type == 1)
+        {
+            $sql = "SELECT * FROM clients WHERE company_name LIKE '%".$start."%'";
         }
+        //if physical client-type
+        else
+        {
+            //if given two words
+            if(count($words) > 1)
+            {
+                //sql statement
+                $sql = "SELECT * FROM clients WHERE (`name` LIKE '%".$words[0]."%') AND (`surname` LIKE '%".$words[1]."%')";
+            }
+            //if just one word
+            else
+            {
+                //sql statement
+                $sql = "SELECT * FROM clients WHERE name LIKE '%".$start."%'";
+            }
+        }
+
+        //connection
+        $con = Yii::app()->db;
+
+        //get all data by query
+        $data=$con->createCommand($sql)->queryAll();
+
+        //foreach row
+        foreach($data as $row)
+        {
+            //add to result array
+            $result[] = array('label' => $row['type'] == 1 ? $row['company_name']: $row['name'].' '.$row['surname'], 'id' => $row['id']);
+        }
+
+        return $result;
+    }
+
+
+    /**
+     * Takes name, code and founds in base (used for auto-complete in step 1, and for regular table)
+     * @param string $name
+     * @param string $code
+     * @param bool $auto_complete
+     * @return array
+     */
+    public function getByCodeOrName($name = "",$code = "", $auto_complete = true)
+    {
+        $result = array();
+
+        if(!empty($code) || !empty($name))
+        {
+            if(empty($code))
+            {
+                //explode string to words (name and surname probably)
+                $words = explode(" ",$name, 2);
+
+                //sql statement
+                $sql = "SELECT * FROM clients WHERE ((`name` LIKE '%".$words[0]."%' OR `surname` LIKE '%".$words[0]."%') AND (`name` LIKE '%".$words[1]."%' OR  `surname` LIKE '%".$words[1]."%')) OR (`company_name` LIKE '%".$name."%')";
+            }
+            else
+            {
+                $sql = "SELECT * FROM clients WHERE (`company_code` LIKE '%".$code."%') OR (`personal_code` LIKE '%".$code."%')";
+            }
+            //connection
+            $con = Yii::app()->db;
+            //get all data by query
+            $data=$con->createCommand($sql)->queryAll(true);
+            //if data for auto-complete
+            if($auto_complete)
+            {
+                foreach($data as $row)
+                {
+                    //if not searching by code
+                    if(empty($code))
+                    {
+                        //add to result array
+                        $result[] = array('label' => $row['type'] == 1 ? $row['company_name']: $row['name'].' '.$row['surname'], 'id' => $row['id']);
+                    }
+                    //if searching by code
+                    else
+                    {
+                        //add to result array
+                        $result[] = array('label' => $row['type'] == 1 ? $row['company_code'] : $row['personal_code'], 'id' => $row['id']);
+                    }
+                }
+            }
+            //if for regular tables
+            else
+            {
+                $result = $data;
+            }
+        }
+
+        return $result;
+    }
+
+
+    /**
+     * Takes the star-fragments of name and surname, type and returns array of clients
+     * @param string $name
+     * @param int $type
+     * @return array
+     */
+    public function findClientsByNames($name,$type)
+    {
+        //get array of separated-by-spaces words
+        $words = explode(" ",$name,2);
+
+        //if juridical client-type
+        if($type == 1)
+        {
+            $sql = "SELECT * FROM clients WHERE company_name LIKE '%".$name."%'";
+        }
+        //if physical client-type
+        else
+        {
+            //if given two words
+            if(count($words) > 1)
+            {
+                //sql statement
+                $sql = "SELECT * FROM clients WHERE (`name` LIKE '%".$words[0]."%') AND (`surname` LIKE '%".$words[1]."%')";
+            }
+            //if just one word
+            else
+            {
+                //sql statement
+                $sql = "SELECT * FROM clients WHERE name LIKE '%".$name."%'";
+            }
+        }
+
+        //connection
+        $con = Yii::app()->db;
+
+        //get rows if name was not empty by query
+        $name != '' ? $data=$con->createCommand($sql)->queryAll() : $data = array();
+
         return $data;
     }
-    
-    
+
+    /**
+     * Returns array of clients
+     * @param string $code
+     * @param int $type
+     * @return array
+     */
+    public function findClientsByCode($code,$type)
+    {
+        $type == 1 ? $sql = "SELECT * FROM clients WHERE company_code LIKE '%".$code."%'" : $sql = "SELECT * FROM clients WHERE personal_code LIKE '%".$code."%'";
+        //connection
+        $con = Yii::app()->db;
+        //get rows if parameter not empty
+        $code != '' ? $data=$con->createCommand($sql)->queryAll() : $data = array();
+
+        return $data;
+    }
+
+    /**
+     * Returns one record-row from table by id
+     * @param int $id
+     * @return mixed
+     */
+    public function getOneRowByPk($id)
+    {
+        $sql = "SELECT * FROM clients WHERE id = '".$id."'";
+        $con = Yii::app()->db;
+        $data = $con->createCommand($sql)->queryRow();
+
+        return $data;
+    }
+
+    /**
+     * Returns name or company name
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->type == 1 ? $this->company_name : $this->name.' '.$this->surname;
+    }
+
+    /**
+     * Returns personal or company code
+     * @return string
+     */
+    public function getActiveCode()
+    {
+        return $this->type == 1 ? $this->company_code : $this->personal_code;
+    }
+
+    /**
+     * Returns formatted address string
+     * @param string $delimiter
+     * @return string
+     */
+    public function getAddressFormatted($delimiter = ',')
+    {
+        $address_arr = array();
+        $address_str = '';
+
+        if(!empty($this->country)) $address_arr[] = $this->country;
+        if(!empty($this->city)) $address_arr[] = $this->city;
+        if(!empty($this->street)) $address_arr[] = $this->street;
+        if(!empty($this->building_nr)) $address_arr[] = $this->building_nr;
+        if(!empty($address_arr)) $address_str = implode($delimiter,$address_arr);
+
+        return $address_str;
+    }
 }
