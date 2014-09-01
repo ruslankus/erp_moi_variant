@@ -88,8 +88,11 @@ class SellController extends Controller
 
         //array for types-select-box
         $types = ClientTypes::model()->findAllAsArray();
-        $types = array_merge(array('' => $this->labels['select type']), $types);
-
+        
+        //$types = array_merge(array('' => $this->labels['select type']), $types);
+        $emptyLabel = array('' => $this->labels['select type']);
+        $types =  $emptyLabel + $types;
+        
         $this->render('first_step', array('form_mdl' => $form_clients, 'form_srv' => $form_srv, 'client_types' => $types));
     }
 
