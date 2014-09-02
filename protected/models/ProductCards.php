@@ -18,9 +18,11 @@
  * @property integer $user_modified_by
  *
  * The followings are the available model relations:
- * @property OperationsIn[] $operationsIns
- * @property OperationsOut[] $operationsOuts
+ * @property OperationsInItems[] $operationsInItems
+ * @property OperationsOutItems[] $operationsOutItems
+ * @property OperationsOutOptItems[] $operationsOutOptItems
  * @property ProductCardCategories $category
+ * @property ProductFiles[] $productFiles
  * @property ProductInStock[] $productInStocks
  */
 class ProductCards extends CActiveRecord
@@ -57,9 +59,11 @@ class ProductCards extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'operationsIns' => array(self::HAS_MANY, 'OperationsIn', 'product_card_id'),
-			'operationsOuts' => array(self::HAS_MANY, 'OperationsOut', 'product_card_id'),
+			'operationsInItems' => array(self::HAS_MANY, 'OperationsInItems', 'product_card_id'),
+			'operationsOutItems' => array(self::HAS_MANY, 'OperationsOutItems', 'product_card_id'),
+			'operationsOutOptItems' => array(self::HAS_MANY, 'OperationsOutOptItems', 'card_id'),
 			'category' => array(self::BELONGS_TO, 'ProductCardCategories', 'category_id'),
+			'productFiles' => array(self::HAS_MANY, 'ProductFiles', 'product_card_id'),
 			'productInStocks' => array(self::HAS_MANY, 'ProductInStock', 'product_card_id'),
 		);
 	}
@@ -131,4 +135,96 @@ class ProductCards extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    /**
+     * Returns array of data-items - products from database by code or name
+     * @param string $name
+     * @param string $code
+     * @param bool $for_auto_complete
+     * @return array
+     */
+    public function findAllByNameOrCode($name,$code,$for_auto_complete = false)
+    {
+        $data = array();
+        $sql = "SELECT * FROM ".$this->tableName();
+        if($name != '' && $code == '') $sql = "SELECT * FROM ".$this->tableName()." WHERE product_name LIKE '%".$name."%'";
+        elseif($code != '') $sql = "SELECT * FROM ".$this->tableName()." WHERE product_code LIKE '%".$code."%'";
+
+        if($name != '' || $code != '')
+        {
+            if(!$for_auto_complete)
+            {
+                $con = Yii::app()->db;
+                $data = $con->createCommand($sql)->queryAll(true);
+            }
+            else
+            {
+                $con = Yii::app()->db;
+                $rows = $con->createCommand($sql)->queryAll(true);
+                foreach($rows as $row)
+                {
+                    $data[] = array('label' => $code != '' ? $row['product_code'] : $row['product_name'], 'id' => $row['id']);
+                }
+            }
+        }
+
+        return $data;
+    }
+
+
+    /**
+     * Returns array of data-item by stock, name, code (quantity in stock must be more than zero)
+     * @param string $name
+     * @param string $code
+     * @param int $stock_id
+     * @param bool $for_auto_complete
+     * @return array
+     */
+    public function findAllByNameOrCodeAndStock($name, $code, $stock_id, $for_auto_complete = false)
+    {
+        /* @var $stock Stocks */
+        /* @var $items ProductInStock[] */
+
+        $result = array();
+
+        $stock = Stocks::model()->findByPk($stock_id);
+        $items = $stock->productInStocks;
+
+        if(empty($stock_id)) return $result;
+
+        foreach($items as $item)
+        {
+            if(empty($code) && stristr($item->productCard->product_name,$name) != false)
+            {
+                if($item->qnt > 0)
+                {
+                    if($for_auto_complete)
+                    {
+                        $result[] = array('label' => $item->productCard->product_name, 'id' => $item->productCard->id);
+                    }
+                    else
+                    {
+                        $result[] = $item;
+                    }
+                }
+            }
+
+            if(!empty($code) && stristr($item->productCard->product_code,$code) != false)
+            {
+                if($item->qnt > 0)
+                {
+                    if($for_auto_complete)
+                    {
+                        $result[] = array('label' => $item->productCard->product_code, 'id' => $item->productCard->id);
+                    }
+                    else
+                    {
+                        $result[] = $item;
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
 }

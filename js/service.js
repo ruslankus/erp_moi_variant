@@ -3,6 +3,7 @@ $(function() {
     $.fn.editable.defaults.mode = 'inline';
 	
     $('#client-type').change(function(e) {
+        
 		var val = $(this).val()
 		if(val == 0){
         	$('.filter-wrapper').html('<h5 class="text-center">Select client type</h5>');

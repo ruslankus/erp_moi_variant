@@ -133,6 +133,10 @@ class AjaxController extends Controller
         }
     }//custInfo   
     
+    
+    /**
+     * controller for service parts partrts
+     */
     public function actionCustfilter()
     {
         $request = Yii::app()->request;
@@ -153,19 +157,11 @@ class AjaxController extends Controller
     }// custFilter
     
     
-    public function actionCustinfo($id = null)
-    {
-        $id = (int)$id;
-        $request = Yii::app()->request;
-        if($request->isAjaxRequest){
-            $data = Clients::model()->findByPk($id);
-            $modal = $this->renderPartial('customer_info_modal',array('data' => $data,),true);
-            echo $modal;
-        }else{
-            throw new CHttpException(404);
-        }
-    }//custInfo
-     
+    
+    
+ 
+/*---------- SELLER PART ----------------------------*/    
+    
     public function actionFselector($id = null)
     {
         
@@ -182,6 +178,119 @@ class AjaxController extends Controller
         }
         
     }//Fselector
+    
+    
+    
+    public function actionCusFilterSales()
+    {
+        $request = Yii::app()->request;
+    
+        if($request->isAjaxRequest){
+        
+            $name = $request->getPost('name');
+            $type = $request->getPost('type');        
+        
+            $data = Clients::model()->getClients($name,$type);
+        
+            if(!empty($data)){
+                echo $this->renderPartial('_filterTableSales',array('data'=>$data,'type' => $type),true);
+            }else{
+                echo $this->renderPartial('_emptyTable',array(),true);
+            }
+        
+        }else{
+            throw new CHttpException(404);
+        }
+    }//cusFilterSales
+    
+    
+    public function actionCusInfoSales($id = null)
+    {
+        $id = (int)$id;
+        $request = Yii::app()->request;
+        if($request->isAjaxRequest){
+            $data = Clients::model()->findByPk($id);
+            $modal = $this->renderPartial('_customer_info_modal_sales',array('client' => $data),true);
+            echo $modal;
+        }else{
+            throw new CHttpException(404);
+        }
+    }//cusInfoSales
+    
+    
+    public function actionAutoCompleteFromStockByName($term = null, $stock = null)
+    {
+        if(Yii::app()->request->isAjaxRequest)
+        {
+            $result = json_encode(ProductCards::model()->findAllByNameOrCodeAndStock($term,'',$stock,true));
+            echo $result;
+        }
+        else
+        {
+            throw new CHttpException(404);
+        }
+    }//actionAutoCompleteFromStockByName
+    
+    
+    public function actionFilterByStockCodeAndName($name = '',$code = '',$stock = '')
+    {
+        $request = Yii::app()->request; 
+        if($request->isAjaxRequest)
+        {
+            $name = $request->getPost('name');
+            $code = $request->getPost('code');
+            $stock = $request->getPost('stock');
+            
+            $result = ProductCards::model()->findAllByNameOrCodeAndStock($name,$code,$stock);
+            echo $this->renderPartial('_filtered_for_sales',array('items' => $result),true);
+            
+        }
+        else
+        {
+            throw new CHttpException(404);
+        }
+    }//actionFilterByStockCodeAndName
+    
+ 
+ 
+ 
+ /*--- old ---*/   
+
+    
+    /**
+     *  for service part
+     */
+    public function actionCustinfo($id = null)
+    {
+        $id = (int)$id;
+        $request = Yii::app()->request;
+        if($request->isAjaxRequest){
+            $data = Clients::model()->findByPk($id);
+            $modal = $this->renderPartial('_customer_info_modal_service',array('data' => $data,),true);
+            echo $modal;
+        }else{
+            throw new CHttpException(404);
+        }
+    }//custInfo
+    
+    
+    /**
+     *  for sell part
+     */
+    public function actionCustinfoInv($id = null)
+    {
+        $id = (int)$id;
+        $request = Yii::app()->request;
+        if($request->isAjaxRequest){
+            $data = Clients::model()->findByPk($id);
+            $modal = $this->renderPartial('_customer_info_modal_invoice',array('data' => $data,),true);
+            echo $modal;
+        }else{
+            throw new CHttpException(404);
+        }
+    }//custInfo
+     
+    
     
     
 }

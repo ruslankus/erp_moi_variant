@@ -7,12 +7,11 @@
 <?php /* @var $form CActiveForm */ ?>
 <?php
 $cs = Yii::app()->clientScript;
-$cs->registerCssFile(Yii::app()->request->baseUrl.'/css/bootstrap-editable.css');
+$cs->registerCssFile(Yii::app()->request->baseUrl."/css/ui-lightness/jquery-ui-1.10.4.custom.css");
 $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/tickets_card.css');
 
 $cs->registerScriptFile(Yii::app()->baseUrl.'/js/bootstrap-editable.js',CClientScript::POS_END);
-$cs->registerScriptFile(Yii::app()->baseUrl.'/js/service.js',CClientScript::POS_END);
-//$cs->registerScriptFile(Yii::app()->baseUrl.'/js/sales_first_step.js',CClientScript::POS_END);
+$cs->registerScriptFile(Yii::app()->baseUrl.'/js/sales_first_step.js',CClientScript::POS_END);
 ?>
 
 <?php $this->renderPartial('//partials/_sub_menu',array('links' => $this->GetSubMenu(), 'params' => array())); ?>
