@@ -110,28 +110,30 @@ class ProductCardCategories extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-    
-    
+
+
     /**
-     * Getting array for droplist
+     * Gets all categories from database and returns pairs 'id' => 'name' array
+     * @return array
      */
-    public function getDropList(){
-        
-        $labels = array();
-        
-        $connection = $this->getDbConnection();
-        $sql="SELECT id, name FROM ".$this->tableName();
-        $dataReader=$connection->createCommand($sql)->query();
-        // привязываем первое поле (label) к переменной $label
-        $dataReader->bindColumn(1,$label_id);
-        // привязываем второе поле (value) к переменной $value
-        $dataReader->bindColumn(2,$value);
-        
-        while($dataReader->read()!==false)
+    public function getAllAsArray()
+    {
+        /* @var $category ProductCardCategories */
+
+        //empty array
+        $arr = array();
+
+        //get all from base
+        $all = self::model()->findAll();
+
+        //pass through all
+        foreach($all as $category)
         {
-            $labels[$label_id] = $value;   
+            //set to array
+            $arr[$category->id] = $category->name;
         }
-        
-        return $labels;
+
+        //return array
+        return $arr;
     }
 }

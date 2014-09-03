@@ -158,9 +158,33 @@ class AjaxController extends Controller
     
     
     
+/*---------------------------- BUY PART ------------------------------------*/
+    
+ /**
+     * Renders table of products
+     * @param string $name
+     * @param string $code
+     */
+    public function actionFindProductsModal()
+    {
+        $request = Yii::app()->request;
+        if($request->isAjaxRequest){
+            
+            $name = $request->getPost('name');
+            $code = $request->getPost('code'); 
+            
+            $rows = ProductCards::model()->findAllByNameOrCode($name,$code);
+            $this->renderPartial('_find_prod_partial',array('rows' => $rows));
+            
+        }else{
+            throw new CHttpException(404);
+        }
+        
+    }// actionFindProductsModal  
+    
     
  
-/*---------- SELLER PART ----------------------------*/    
+/*-------------------------------- SELLER PART ----------------------------*/    
     
     public function actionFselector($id = null)
     {
