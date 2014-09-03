@@ -1483,3 +1483,154 @@ Stack trace:
 REQUEST_URI=/ajax/viewinvoicein/id/10
 HTTP_REFERER=http://yerp.local/buy/invoices
 ---
+2014/09/03 17:21:24 [error] [exception.CException] exception 'CException' with message 'Property "CUniqueValidator.model_class" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\validators\CValidator.php(189): CComponent->__set('model_class', 'Users')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CModel.php(287): CValidator::createValidator('unique', Object(UserForm), 'username, email', Array)
+#2 C:\OpenServer\domains\yerp.local\framework\base\CModel.php(260): CModel->createValidators()
+#3 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(2236): CModel->getValidators('username')
+#4 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(UserForm), 'username', Array)
+#5 C:\OpenServer\domains\yerp.local\framework\web\widgets\CActiveForm.php(725): CHtml::activeTextField(Object(UserForm), 'username', Array)
+#6 C:\OpenServer\domains\yerp.local\protected\views\users\user_create.php(24): CActiveForm->textField(Object(UserForm), 'username', Array)
+#7 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#8 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('user_create', Array, true)
+#11 C:\OpenServer\domains\yerp.local\protected\controllers\UsersController.php(102): CController->render('user_create', Array)
+#12 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): UsersController->actionAdd()
+#13 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#14 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#15 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('add')
+#17 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('users/add')
+#18 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#19 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/users/add
+HTTP_REFERER=http://yerp.local/users
+---
+2014/09/03 17:21:57 [error] [exception.CException] exception 'CException' with message 'Property "CUniqueValidator.model_class" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\validators\CValidator.php(189): CComponent->__set('model_class', 'Users')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CModel.php(287): CValidator::createValidator('unique', Object(UserForm), 'username, email', Array)
+#2 C:\OpenServer\domains\yerp.local\framework\base\CModel.php(260): CModel->createValidators()
+#3 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(2236): CModel->getValidators('username')
+#4 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(UserForm), 'username', Array)
+#5 C:\OpenServer\domains\yerp.local\framework\web\widgets\CActiveForm.php(725): CHtml::activeTextField(Object(UserForm), 'username', Array)
+#6 C:\OpenServer\domains\yerp.local\protected\views\users\user_create.php(24): CActiveForm->textField(Object(UserForm), 'username', Array)
+#7 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#8 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('user_create', Array, true)
+#11 C:\OpenServer\domains\yerp.local\protected\controllers\UsersController.php(102): CController->render('user_create', Array)
+#12 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): UsersController->actionAdd()
+#13 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#14 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#15 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('add')
+#17 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('users/add')
+#18 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#19 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/users/add
+HTTP_REFERER=http://yerp.local/users
+---
+2014/09/03 18:01:48 [error] [exception.CException] exception 'CException' with message 'Property "CUniqueValidator.model_class" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\validators\CValidator.php(189): CComponent->__set('model_class', 'Users')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CModel.php(287): CValidator::createValidator('unique', Object(UserForm), 'username, email', Array)
+#2 C:\OpenServer\domains\yerp.local\framework\base\CModel.php(260): CModel->createValidators()
+#3 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(2236): CModel->getValidators('username')
+#4 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(UserForm), 'username', Array)
+#5 C:\OpenServer\domains\yerp.local\framework\web\widgets\CActiveForm.php(725): CHtml::activeTextField(Object(UserForm), 'username', Array)
+#6 C:\OpenServer\domains\yerp.local\protected\views\users\user_create.php(24): CActiveForm->textField(Object(UserForm), 'username', Array)
+#7 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#8 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('user_create', Array, true)
+#11 C:\OpenServer\domains\yerp.local\protected\controllers\UsersController.php(182): CController->render('user_create', Array)
+#12 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): UsersController->actionAdd()
+#13 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#14 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#15 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('add')
+#17 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('users/add')
+#18 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#19 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/users/add
+HTTP_REFERER=http://yerp.local/users
+---
+2014/09/03 18:04:43 [error] [exception.CException] exception 'CException' with message 'Property "CUniqueValidator.model_class" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\validators\CValidator.php(189): CComponent->__set('model_class', 'Users')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CModel.php(287): CValidator::createValidator('unique', Object(UserForm), 'username, email', Array)
+#2 C:\OpenServer\domains\yerp.local\framework\base\CModel.php(260): CModel->createValidators()
+#3 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(2236): CModel->getValidators('username')
+#4 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(UserForm), 'username', Array)
+#5 C:\OpenServer\domains\yerp.local\framework\web\widgets\CActiveForm.php(725): CHtml::activeTextField(Object(UserForm), 'username', Array)
+#6 C:\OpenServer\domains\yerp.local\protected\views\users\user_create.php(24): CActiveForm->textField(Object(UserForm), 'username', Array)
+#7 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#8 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('user_create', Array, true)
+#11 C:\OpenServer\domains\yerp.local\protected\controllers\UsersController.php(182): CController->render('user_create', Array)
+#12 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): UsersController->actionAdd()
+#13 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#14 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#15 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('add')
+#17 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('users/add')
+#18 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#19 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/users/add
+HTTP_REFERER=http://yerp.local/users
+---
+2014/09/03 18:08:01 [error] [exception.CException] exception 'CException' with message 'UsersController cannot find the requested view "//partials/_right_edit_list".' in C:\OpenServer\domains\yerp.local\framework\web\CController.php:878
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\protected\views\users\user_create.php(95): CController->renderPartial('//partials/_rig...', Array)
+#1 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#2 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#3 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('user_create', Array, true)
+#5 C:\OpenServer\domains\yerp.local\protected\controllers\UsersController.php(182): CController->render('user_create', Array)
+#6 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): UsersController->actionAdd()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('add')
+#11 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('users/add')
+#12 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/users/add
+HTTP_REFERER=http://yerp.local/users
+---
+2014/09/03 18:08:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/add_user.css".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('css/add_user.cs...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/add_user.css
+HTTP_REFERER=http://yerp.local/users/add
+---
+2014/09/03 18:08:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/add_user.css".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('css/add_user.cs...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/add_user.css
+HTTP_REFERER=http://yerp.local/users/add
+---
+2014/09/03 18:11:01 [warning] [application] Failed to set unsafe attribute "city_id" of "UserForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\UsersController.php (129)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/03 18:11:01 [warning] [application] Failed to set unsafe attribute "avatar" of "UserForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\UsersController.php (129)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/03 18:11:01 [warning] [application] Failed to set unsafe attribute "repeat_password" of "Users".
+in C:\OpenServer\domains\yerp.local\protected\controllers\UsersController.php (141)
+in C:\OpenServer\domains\yerp.local\index.php (13)
