@@ -120,19 +120,7 @@ class AjaxController extends Controller
     }//Clients
     
       
-     public function actionSellinfo($id = null)
-     {
-        $id = (int)$id;
-        $request = Yii::app()->request;
-        if($request->isAjaxRequest){
-            $data = Suppliers::model()->findByPk($id);
-            $modal = $this->renderPartial('supp_info_modal',array('data' => $data,),true);
-            echo $modal;
-        }else{
-            throw new CHttpException(404);
-        }
-    }//custInfo   
-    
+
     
     /**
      * controller for service parts partrts
@@ -181,6 +169,45 @@ class AjaxController extends Controller
         }
         
     }// actionFindProductsModal  
+    
+    
+    public function actionAutoCompleteProductsName($term = null)
+    {
+        if(Yii::app()->request->isAjaxRequest)
+        {
+            $result = json_encode(ProductCards::model()->findAllByNameOrCode($term,'',true));
+            echo $result;
+        }else{
+            throw new CHttpException(404);
+        }
+    }//actionAutoCompleteProductsName
+    
+    
+    public function actionAutoCompleteProductsCode($term = null)
+    {
+        if(Yii::app()->request->isAjaxRequest)
+        {
+            $result = json_encode(ProductCards::model()->findAllByNameOrCode('',$term,true));
+            echo $result;
+        }else{
+            throw new CHttpException(404);
+        }
+    }//actionAutoCompleteProductsCode
+    
+    
+    public function actionSellinfo($id = null)
+    {
+        $id = (int)$id;
+        $request = Yii::app()->request;
+        if($request->isAjaxRequest){
+            $data = Suppliers::model()->findByPk($id);
+            $modal = $this->renderPartial('supp_info_modal',array('data' => $data,),true);
+            echo $modal;
+        }else{
+            throw new CHttpException(404);
+        }
+    }//custInfo
+    
     
     
  

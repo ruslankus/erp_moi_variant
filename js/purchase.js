@@ -251,7 +251,7 @@ var modalInfo = function(link){
     $.ajaxSetup({async:false});
     $('#modal-user-info').load(link);
     $('.cust-info').modal('show');
-}//modalInfo
+};//modalInfo
 
 var filterProds = function(name, code)
 {
@@ -263,7 +263,7 @@ var filterProds = function(name, code)
     jQuery('#filtered-tbl-body').load('/ajax/FindProductsModal/',
         {name:name,code:code}
     );
-}//filterProds
+};//filterProds
 
 
 var addProduct = function(objProd){

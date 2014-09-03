@@ -1389,3 +1389,97 @@ Stack trace:
 REQUEST_URI=/ajax/FindProductsModal/
 HTTP_REFERER=http://yerp.local/buy/createinvoice/9
 ---
+2014/09/03 16:34:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "autocompleteproductsname".' in C:\OpenServer\domains\yerp.local\framework\web\CController.php:483
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(270): CController->missingAction('autocompletepro...')
+#1 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('autocompletepro...')
+#2 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('ajax/autocomple...')
+#3 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ajax/autocompleteproductsname?term=in
+HTTP_REFERER=http://yerp.local/buy/createinvoice/9
+---
+2014/09/03 16:48:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "AutoCompleteProductsCode".' in C:\OpenServer\domains\yerp.local\framework\web\CController.php:483
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(270): CController->missingAction('AutoCompletePro...')
+#1 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('AutoCompletePro...')
+#2 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('ajax/AutoComple...')
+#3 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ajax/AutoCompleteProductsCode?term=p
+HTTP_REFERER=http://yerp.local/buy/createinvoice/9
+---
+2014/09/03 17:01:43 [warning] [application] Failed to set unsafe attribute "description" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\BuyController.php (93)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/03 17:02:06 [warning] [application] Failed to set unsafe attribute "description" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\BuyController.php (93)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/03 17:02:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "viewinvoicein".' in C:\OpenServer\domains\yerp.local\framework\web\CController.php:483
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(270): CController->missingAction('viewinvoicein')
+#1 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('viewinvoicein')
+#2 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('ajax/viewinvoic...')
+#3 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ajax/viewinvoicein/id/14
+HTTP_REFERER=http://yerp.local/buy/invoices
+---
+2014/09/03 17:16:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "viewinvoicein".' in C:\OpenServer\domains\yerp.local\framework\web\CController.php:483
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(270): CController->missingAction('viewinvoicein')
+#1 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('viewinvoicein')
+#2 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('ajax/viewinvoic...')
+#3 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ajax/viewinvoicein/id/14
+HTTP_REFERER=http://yerp.local/buy/invoices
+---
+2014/09/03 17:16:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "viewinvoicein".' in C:\OpenServer\domains\yerp.local\framework\web\CController.php:483
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(270): CController->missingAction('viewinvoicein')
+#1 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('viewinvoicein')
+#2 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('ajax/viewinvoic...')
+#3 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ajax/viewinvoicein/id/13
+HTTP_REFERER=http://yerp.local/buy/invoices
+---
+2014/09/03 17:16:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "viewinvoicein".' in C:\OpenServer\domains\yerp.local\framework\web\CController.php:483
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(270): CController->missingAction('viewinvoicein')
+#1 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('viewinvoicein')
+#2 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('ajax/viewinvoic...')
+#3 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ajax/viewinvoicein/id/12
+HTTP_REFERER=http://yerp.local/buy/invoices
+---
+2014/09/03 17:16:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "viewinvoicein".' in C:\OpenServer\domains\yerp.local\framework\web\CController.php:483
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(270): CController->missingAction('viewinvoicein')
+#1 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('viewinvoicein')
+#2 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('ajax/viewinvoic...')
+#3 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ajax/viewinvoicein/id/11
+HTTP_REFERER=http://yerp.local/buy/invoices
+---
+2014/09/03 17:16:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "viewinvoicein".' in C:\OpenServer\domains\yerp.local\framework\web\CController.php:483
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(270): CController->missingAction('viewinvoicein')
+#1 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('viewinvoicein')
+#2 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('ajax/viewinvoic...')
+#3 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ajax/viewinvoicein/id/10
+HTTP_REFERER=http://yerp.local/buy/invoices
+---

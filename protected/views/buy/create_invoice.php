@@ -9,6 +9,7 @@
 /* @var $card ProductCards */
 
 $cs = Yii::app()->clientScript;
+$cs->registerCssFile(Yii::app()->request->baseUrl."/css/ui-lightness/jquery-ui-1.10.4.custom.css");
 $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/invoice_in.css');
 $cs->registerScriptFile(Yii::app()->baseUrl.'/js/purchase.js',CClientScript::POS_END);
 ?>
