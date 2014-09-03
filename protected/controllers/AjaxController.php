@@ -232,7 +232,7 @@ class AjaxController extends Controller
     }//actionAutoCompleteFromStockByName
     
     
-    public function actionFilterByStockCodeAndName($name = '',$code = '',$stock = '')
+    public function actionFilterByStockCodeAndName()
     {
         $request = Yii::app()->request; 
         if($request->isAjaxRequest)
@@ -250,6 +250,19 @@ class AjaxController extends Controller
             throw new CHttpException(404);
         }
     }//actionFilterByStockCodeAndName
+    
+    
+    public function actionOperationOutInfo($id = null)
+    {
+        if($operation = OperationsOut::model()->findByPk($id))
+        {
+            $this->renderPartial('_operation_out',array('operation' => $operation));
+        }
+        else
+        {
+            throw new CHttpException(404);
+        }
+    }//actionOperationOutInfo
     
  
  

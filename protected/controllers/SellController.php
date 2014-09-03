@@ -148,7 +148,7 @@ class SellController extends Controller
             $operation->vat_id = $vat_id;
             $operation->invoice_code = '';
             $operation->stock_id = $stock_id;
-            $operation->status_id = 0;
+            $operation->status_id = 2; /* 2 - on the way, 1 - delivered */
             $operation->save();
 
             foreach($products as $pr_card_id => $product_item)
@@ -204,8 +204,16 @@ class SellController extends Controller
 
             if($operation->invoice_code == '')
             {
-                $prefix = $operation->stock->location->prefix;
-                $invoice_code = $prefix.'_'.$operation->model()->getLastInvoiceNrByPrefix($prefix);
+                $current_stock_id = $operation->stock->id;
+
+                $c = new CDbCriteria();
+                $c -> addInCondition('stock_id',array($current_stock_id));
+                $c -> addNotInCondition('invoice_code',array(''));
+
+                $operations_with_code_count = (int)OperationsOut::model()->count($c);
+                $current_invoice_nr = (string)($operations_with_code_count + 1);
+                $invoice_code = $operation->stock->location->prefix.'_'.str_pad($current_invoice_nr,4,'0',STR_PAD_LEFT);
+
                 $operation->invoice_code = $invoice_code;
                 $operation->invoice_date = time();
                 $operation->update();
@@ -218,5 +226,118 @@ class SellController extends Controller
         {
             throw new CHttpException(404);
         }
-    }
+    }//actionGenerate
+
+
+
+    /**
+     * Filter table ajax
+     */
+    public function actionFilterTable()
+    {
+        //get all params from post(or get)
+        $client_name = Yii::app()->request->getParam('cli_name', '');
+        $client_type_id = Yii::app()->request->getParam('client_type_id',null);
+        $invoice_code = Yii::app()->request->getParam('in_code','');
+        $operation_status_id = Yii::app()->request->getParam('in_status_id','');
+        $stock_city_id = Yii::app()->request->getParam('stock_city_id','');
+        $date_from_str = Yii::app()->request->getParam('date_from_str','');
+        $date_to_str = Yii::app()->request->getParam('date_to_str','');
+
+        //new criteria for filtering
+        $c = new CDbCriteria();
+
+        //if has invoice code
+        if(!empty($invoice_code))
+        {
+            //add to condition (search by invoice code)
+            $c -> addInCondition('invoice_code',array($invoice_code));
+        }
+
+        //if have client-name
+        if(!empty($client_name))
+        {
+            //get all client-rows from base by name and type (where name, or company name like $client_name parameter)
+            $clients = Clients::model()->getClients($client_name,$client_type_id);
+
+            //if found some clients
+            if(count($clients) > 0)
+            {
+                //declare empty array for client's ids
+                $found_ids = array();
+
+                //fill array of client ids
+                foreach($clients as $client_row)
+                {
+                    $found_ids[] = $client_row['id'];
+                }
+
+                //add ids to condition (search by client ids)
+                $c -> addInCondition('client_id',$found_ids);
+            }
+        }
+
+        //if operation status set
+        if(!empty($operation_status_id))
+        {
+            //search by status
+            $c -> addInCondition('status_id',array($operation_status_id));
+        }
+
+        //if city_id not empty
+        if(!empty($stock_city_id))
+        {
+            /* @var $city UserCities */
+
+            //get city by id
+            $city = UserCities::model()->findByPk($stock_city_id);
+
+            //get stocks by city
+            $stocks = $city->stocks;
+
+            //if found some stocks
+            if(count($stocks) > 0)
+            {
+                //get first stock (usually city has only one stock)
+                $stock = $stocks[0];
+                //find by stock id
+                $c -> addInCondition('stock_id',array($stock->id));
+            }
+        }
+
+        //if 'date-from' not empty but 'date-to' empty
+        if(!empty($date_from_str) && empty($date_to_str))
+        {
+            $date_from_arr = explode('/',$date_from_str); //explode string to get numbers
+            $time_from = mktime(0,0,0,(int)$date_from_arr[0],(int)$date_from_arr[1],(int)$date_from_arr[2]); // make time
+            $time_to = 9999999999; //maximal time ('date-to' not set)
+            $c -> addBetweenCondition('date_created',$time_from,$time_to); //search between these times
+        }
+
+        //if 'date-to' not empty but 'date-from' empty
+        if(!empty($date_to_str) && empty($date_from_str))
+        {
+            $date_to_arr = explode('/',$date_to_str); //explode string to get numbers
+            $time_from = 0; //beginning of time ('date-from' not set)
+            $time_to = mktime(0,0,0,(int)$date_to_arr[0],(int)$date_to_arr[1],(int)$date_to_arr[2]); // make time
+            $c -> addBetweenCondition('date_created',$time_from,$time_to); //search between these times
+        }
+
+        //if 'date-to' and 'date-from' not empty
+        if(!empty($date_from_str) && !empty($date_to_str))
+        {
+            $date_from_arr = explode('/',$date_from_str); //explode string to get numbers
+            $time_from = mktime(0,0,0,(int)$date_from_arr[0],(int)$date_from_arr[1],(int)$date_from_arr[2]); // make time
+            $date_to_arr = explode('/',$date_to_str); //explode string to get numbers
+            $time_to = mktime(0,0,0,(int)$date_to_arr[0],(int)$date_to_arr[1],(int)$date_to_arr[2]); // make time
+            $c -> addBetweenCondition('date_created',$time_from,$time_to); //search between these times
+        }
+
+        //get all operations
+        $operations = OperationsOut::model()->findAll($c);
+
+        //render partial
+        $this->renderPartial('_ajax_table_filtering',array('operations' => $operations));
+
+    }//FilterTable
 }

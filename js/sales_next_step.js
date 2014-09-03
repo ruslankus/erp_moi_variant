@@ -177,11 +177,7 @@ var loadFormByAddedItems = function()
 
 var filterByNameCodeStock = function(name,code,stock)
 {
-    /*jQuery.ajax({ url: '/ajax/filterbystockcodeandname/name/'+name+'/code/'+code+'/stock/'+stock, beforeSend: function(){}}).done(function(data)
-    {
-        jQuery('#filtered-body').html(data);
-    });
-    */
+   
      jQuery('#filtered-body').load('/ajax/filterbystockcodeandname/',
         {name:name,code:code,stock:stock}
      );

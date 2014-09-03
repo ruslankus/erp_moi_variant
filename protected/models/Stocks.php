@@ -6,16 +6,18 @@
  * The followings are the available columns in table 'stocks':
  * @property integer $id
  * @property string $name
- * @property string $location
+ * @property integer $location_id
  * @property string $description
  * @property integer $date_created
  * @property integer $date_changed
  * @property integer $user_modified_by
  *
  * The followings are the available model relations:
- * @property OperationsIn[] $operationsIns
+ * @property OperationsInItems[] $operationsInItems
  * @property OperationsOut[] $operationsOuts
+ * @property OperationsOutItems[] $operationsOutItems
  * @property ProductInStock[] $productInStocks
+ * @property UserCities $location
  */
 class Stocks extends CActiveRecord
 {
@@ -35,11 +37,11 @@ class Stocks extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('date_created, date_changed, user_modified_by', 'numerical', 'integerOnly'=>true),
-			array('name, location, description', 'safe'),
+			array('location_id, date_created, date_changed, user_modified_by', 'numerical', 'integerOnly'=>true),
+			array('name, description', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, location, description, date_created, date_changed, user_modified_by', 'safe', 'on'=>'search'),
+			array('id, name, location_id, description, date_created, date_changed, user_modified_by', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,10 +53,11 @@ class Stocks extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'operationsIns' => array(self::HAS_MANY, 'OperationsIn', 'stock_id'),
+			'operationsInItems' => array(self::HAS_MANY, 'OperationsInItems', 'stock_id'),
 			'operationsOuts' => array(self::HAS_MANY, 'OperationsOut', 'stock_id'),
+			'operationsOutItems' => array(self::HAS_MANY, 'OperationsOutItems', 'stock_id'),
 			'productInStocks' => array(self::HAS_MANY, 'ProductInStock', 'stock_id'),
-            'location' => array(self::BELONGS_TO, 'UserCities', 'location_id'),
+			'location' => array(self::BELONGS_TO, 'UserCities', 'location_id'),
 		);
 	}
 
@@ -66,7 +69,7 @@ class Stocks extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
-			'location' => 'Location',
+			'location_id' => 'Location',
 			'description' => 'Description',
 			'date_created' => 'Date Created',
 			'date_changed' => 'Date Changed',
@@ -94,7 +97,7 @@ class Stocks extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('location',$this->location,true);
+		$criteria->compare('location_id',$this->location_id);
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('date_created',$this->date_created);
 		$criteria->compare('date_changed',$this->date_changed);
@@ -115,4 +118,120 @@ class Stocks extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+
+    /**
+     * Returns all stocks as pairs array
+     * @param int $location_id
+     * @return array
+     */
+    public function getAsArrayPairs($location_id = null)
+    {
+        /* @var $stock Stocks */
+        /* @var $city USerCities  */
+        $result = array();
+
+        //try find city
+        $city = UserCities::model()->findByPk($location_id);
+
+        //if city found
+        if(!empty($city))
+        {
+            //get all by city
+            $all = $city->stocks;
+        }
+        //if not found
+        else
+        {
+            //get all
+            $all = self::model()->findAll();
+        }
+
+        //covert to pairs (id => name) array
+        foreach($all as $stock)
+        {
+            $result[$stock->id] = $stock->name;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Adds 'product_is_stock' record to table, or just increases quantity if product already in stock
+     * @param int $card_id
+     * @param int $qnt
+     * @param int $stock_id
+     * @return int
+     */
+    public function addToStockAndGetCount($card_id,$qnt,$stock_id)
+    {
+        /* @var $product_in_stock ProductInStock */
+
+        //if stock found
+        if($stock = Stocks::model()->findByPk($stock_id))
+        {
+            //try find product in stock by card_id and stock_id
+            $product_in_stock = ProductInStock::model()->findByAttributes(array('stock_id' => $stock_id, 'product_card_id' => $card_id));
+
+            //if found
+            if($product_in_stock)
+            {
+                $product_in_stock->qnt += $qnt;
+                $product_in_stock->date_changed = time();
+                $product_in_stock->update();
+            }
+            else
+            {
+                $product_in_stock = new ProductInStock();
+                $product_in_stock -> product_card_id = $card_id;
+                $product_in_stock -> qnt = $qnt;
+                $product_in_stock -> stock_id = $stock_id;
+                $product_in_stock -> date_changed = time();
+                $product_in_stock -> date_created = time();
+                $product_in_stock -> save();
+            }
+
+            return $product_in_stock->qnt;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    /**
+     * Decreases quantity in stock, if found product and returns resulted quantity
+     * @param int $card_id
+     * @param int $qnt
+     * @param int $stock_id
+     * @return int
+     */
+    public function removeFromStockAndGetCount($card_id, $qnt, $stock_id)
+    {
+        /* @var $product_in_stock ProductInStock */
+
+        if($stock = Stocks::model()->findByPk($stock_id))
+        {
+            //try find product in stock by card_id and stock_id
+            $product_in_stock = ProductInStock::model()->findByAttributes(array('stock_id' => $stock_id, 'product_card_id' => $card_id));
+
+            if($product_in_stock)
+            {
+                $product_in_stock->qnt -= $qnt;
+                $product_in_stock->date_changed = time();
+                $product_in_stock->update();
+
+                return $product_in_stock->qnt;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
 }
