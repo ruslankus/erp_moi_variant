@@ -5,6 +5,7 @@
 <?php /* @var $positions Array */ ?>
 <?php /* @var $roles Array */ ?>
 <?php /* @var $rights Array */ ?>
+<?php /* @var $cities Array*/ ?>
 
 
 <?php
@@ -17,7 +18,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/add_user.css');
 <div class="container content-wrapper">
     <div class="row">
         <div class="col-lg-12">
-                <?php $form=$this->beginWidget('CActiveForm', array('id' =>'add-user-form','enableAjaxValidation'=>false,'htmlOptions'=>array('class'=>'clearfix'))); ?>
+                <?php $form=$this->beginWidget('CActiveForm', array('id' =>'add-user-form','enableAjaxValidation'=>false,'htmlOptions'=>array('class'=>'clearfix', 'enctype'=>'multipart/form-data'))); ?>
 
                 <div class="form-group">
                     <?php echo $form->label($form_mdl,'username');?>
@@ -26,15 +27,10 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/add_user.css');
                 </div>
 
                 <div class="form-group">
-                    <?php echo $form->label($form_mdl,'password');?>
-                    <?php echo $form->textField($form_mdl,'password',array('class'=>'form-control', 'value' => $user->password, 'type' => 'password'));?>
-                    <?php echo $form->error($form_mdl,'password'); ?>
-                </div>
-
-                <div class="form-group">
-                    <?php echo $form->label($form_mdl,'repeat_password');?>
-                    <?php echo $form->textField($form_mdl,'repeat_password',array('class'=>'form-control', 'value' => $user->password, 'type' => 'password'));?>
-                    <?php echo $form->error($form_mdl,'repeat_password'); ?>
+                    <button user_id="<?php echo $user->id; ?>" class="reset-pass-button" type="button">
+                        <span><?php echo $this->labels['reset password'] ?></span>
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
                 </div>
 
                 <div class="form-group">
@@ -84,95 +80,26 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/add_user.css');
                 </div>
 
                 <div class="form-group">
+                    <?php echo $form->label($form_mdl,'city_id');?>
+                    <?php echo $form->dropDownList($form_mdl,'city_id',$cities,array('class'=>'form-control','options' => array($user->city_id =>array('selected'=>true))));?>
+                </div>
+
+                <div class="form-group">
                     <label><?php echo $form->label($form_mdl,'rights');?></label>
                 </div>
 
+                <?php $this->renderPartial('//partials/_right_edit_list',array('all_rights' => $this->GetRightsSettings(),'current_rights' => $rights, 'form_name' => 'UserForm')); ?>
 
+                <div class="form-group">
+                    <?php echo $form->label($form_mdl,'avatar');?>
+                    <br>
+                    <?php if($user->avatar != '' && file_exists('images/user_thumbs/'.$user->avatar)): ?>
+                        <?php echo CHtml::image('/images/user_thumbs/'.$user->avatar,'avatar',array('style' => 'width:100px;')); ?>
+                    <?php endif; ?>
 
-                <fieldset>
-                    <legend><?php echo $this->labels['product cards']; ?></legend>
-                    <div class="form-group">
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['products_delete']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][products_delete]"><?php echo $this->labels['delete'] ?>
-                        </label>
-
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['products_edit']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][products_edit]"><?php echo $this->labels['edit'] ?>
-                        </label>
-
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['products_add']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][products_add]"><?php echo $this->labels['create'] ?>
-                        </label>
-
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['products_see']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][products_see]"><?php echo $this->labels['see'] ?>
-                        </label>
-                    </div><!--/form-group -->
-                </fieldset>
-
-                <fieldset>
-                    <legend><?php echo $this->labels['product categories']; ?></legend>
-                    <div class="form-group">
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['categories_delete']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][categories_delete]"><?php echo $this->labels['delete'] ?>
-                        </label>
-
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['categories_edit']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][categories_edit]"><?php echo $this->labels['edit'] ?>
-                        </label>
-
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['categories_add']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][categories_add]"><?php echo $this->labels['create'] ?>
-                        </label>
-
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['categories_see']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][categories_see]"><?php echo $this->labels['see'] ?>
-                        </label>
-                    </div><!--/form-group -->
-                </fieldset>
-
-                <fieldset>
-                    <legend><?php echo $this->labels['clients']; ?></legend>
-                    <div class="form-group">
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['clients_delete']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][clients_delete]"><?php echo $this->labels['delete'] ?>
-                        </label>
-
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['clients_edit']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][clients_edit]"><?php echo $this->labels['edit'] ?>
-                        </label>
-
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['clients_add']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][clients_add]"><?php echo $this->labels['create'] ?>
-                        </label>
-
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['clients_see']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][clients_see]"><?php echo $this->labels['see'] ?>
-                        </label>
-                    </div><!--/form-group -->
-                </fieldset>
-
-                <fieldset>
-                    <legend><?php echo $this->labels['suppliers']; ?></legend>
-                    <div class="form-group">
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['suppliers_delete']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][suppliers_delete]"><?php echo $this->labels['delete'] ?>
-                        </label>
-
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['suppliers_edit']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][suppliers_edit]"><?php echo $this->labels['edit'] ?>
-                        </label>
-
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['suppliers_add']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][suppliers_add]"><?php echo $this->labels['create'] ?>
-                        </label>
-
-                        <label class="checkbox-inline">
-                            <input <?php if($rights['suppliers_see']): ?>checked<?php endif; ?> type="checkbox" name="UserForm[rights][suppliers_see]"><?php echo $this->labels['see'] ?>
-                        </label>
-                    </div><!--/form-group -->
-                </fieldset>
-
+                    <?php echo $form->fileField($form_mdl,'avatar', array('class' => 'form-control')); ?>
+                    <?php echo $form->error($form_mdl,'avatar'); ?>
+                </div>
 
                 <button type="submit"><span><?php echo $this->labels['save'] ?></span><span class="glyphicon glyphicon-plus"></span></button>
             <?php $this->endWidget(); ?>
