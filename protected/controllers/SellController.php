@@ -28,17 +28,60 @@ class SellController extends Controller
     /**
      * Render invoice table
      */
-    public function actionInvoices()
+    public function actionInvoices($generate = null,$page = 1)
     {
-        //get all sale-invoices
-        $invoices = OperationsOut::model()->with('client')->findAll();
+        //if should generate pdf
+        if(!empty($generate))
+        {
+            /* @var $operation OperationsOut */
+            $operation = OperationsOut::model()->findByPk($generate); //get operation for code-generation
 
+            //get all operations with generated code (belonging to stock of current operation)
+            $c = new CDbCriteria();
+            $c -> addInCondition('stock_id',array($operation->stock_id));
+            $c -> addNotInCondition('invoice_code',array(''));
+            //count all ops
+            $operations_with_code_count = (int)OperationsOut::model()->count($c);
+            //current number - quantity + 1
+            $current_invoice_nr = (string)($operations_with_code_count + 1);
+            //create code
+            $invoice_code = $operation->stock->location->prefix.'_'.str_pad($current_invoice_nr,4,'0',STR_PAD_LEFT);
+
+            //update operation
+            $operation->invoice_code = $invoice_code;
+            $operation->invoice_date = time();
+            $operation->update();
+        }
+
+        $countAll = $invoices = OperationsOut::model()->with('client')->count();
+        $pages = $this->calculatePageCount($countAll);
+
+        $ci = new CDbCriteria();
+        $ci -> limit = $this->on_one_page;
+        $ci -> offset = ($this->on_one_page) * ($page - 1);
+
+        //get all sale-invoices
+        $invoices = OperationsOut::model()->with('client')->findAll($ci);
+
+        //arrays for select-boxes
         $types = ClientTypes::model()->findAllAsArray();
         $statuses = OperationOutStatuses::model()->findAllAsArray();
         $cities = UserCities::model()->findAllAsArray();
 
-        //render table
-        $this->render('sales_list', array('invoices' => $invoices, 'types' => $types, 'cities' => $cities, 'statuses' => $statuses));
+
+        if(!empty($generate))
+        {
+            //create link PDF generation (if need to generate)
+            $gen_pdf_link = Yii::app()->createUrl('/pdf/invoice', array('id' => $generate));
+
+            //render table
+            $this->render('sales_list', array('invoices' => $invoices, 'types' => $types, 'cities' => $cities, 'statuses' => $statuses, 'gen_link' => $gen_pdf_link, 'pages' => $pages, 'current_page' => $page));
+        }
+        else
+        {
+            //render table
+            $this->render('sales_list', array('invoices' => $invoices, 'types' => $types, 'cities' => $cities, 'statuses' => $statuses, 'gen_link' => '', 'pages' => $pages, 'current_page' => $page));
+        }
     }
 
     /**
@@ -71,7 +114,7 @@ class SellController extends Controller
                 $client->attributes = $_POST['ClientForm'];
 
                 //set company or not
-                $client->type = $form_clients->company;
+                $form_clients->company == 1 ? $client->type = 1 : $client->type = 2;
 
                 //set creation parameters
                 $client->date_created = time();
@@ -123,7 +166,7 @@ class SellController extends Controller
     }
 
 
-    public function actionFinalStep($generate = false)
+    public function actionFinalStep()
     {
         /* @var $stock Stocks */
         /* @var $client Clients */
@@ -151,41 +194,59 @@ class SellController extends Controller
             $operation->status_id = 2; /* 2 - on the way, 1 - delivered */
             $operation->save();
 
-            foreach($products as $pr_card_id => $product_item)
+            if(!empty($products))
             {
-                if($product_item['qnt'] > 0 && $product_item['price'] > 0 && is_numeric($product_item['price']))
+                foreach($products as $pr_card_id => $product_item)
                 {
-                    $item_prod = new OperationsOutItems();
-                    $item_prod -> price = $this->priceStrToCents($product_item['price']);
-                    $item_prod -> discount_percent = $product_item['discount'];
-                    $item_prod -> qnt = $product_item['qnt'];
-                    $item_prod -> product_card_id = $pr_card_id;
-                    $item_prod -> operation_id = $operation->id;
-                    $item_prod -> stock_id = $stock_id;
-                    $item_prod -> stock_qnt_after_op = Stocks::model()->removeFromStockAndGetCount($pr_card_id,$product_item['qnt'],$stock_id);
-                    $item_prod -> client_id = $client_id;
-                    $item_prod -> save();
+                    if($product_item['qnt'] > 0 && $product_item['price'] > 0 && is_numeric($product_item['price']))
+                    {
+                        $item_prod = new OperationsOutItems();
+                        $item_prod -> price = $this->priceStrToCents($product_item['price']);
+                        $item_prod -> discount_percent = $product_item['discount'];
+                        $item_prod -> qnt = $product_item['qnt'];
+                        $item_prod -> product_card_id = $pr_card_id;
+                        $item_prod -> operation_id = $operation->id;
+                        $item_prod -> stock_id = $stock_id;
+                        $item_prod -> stock_qnt_after_op = Stocks::model()->removeFromStockAndGetCount($pr_card_id,$product_item['qnt'],$stock_id);
+                        $item_prod -> client_id = $client_id;
+                        $item_prod -> save();
+                    }
                 }
             }
 
-            foreach($options as $op_card_id => $option_item)
+            if(!empty($options))
             {
-                if($option_item['price'] > 0 && is_numeric($option_item['price']))
+                foreach($options as $op_card_id => $option_item)
                 {
-                    $item_option = new OperationsOutOptItems();
-                    $item_option -> operation_id = $operation->id;
-                    $item_option ->option_card_id = $op_card_id;
-                    $item_option -> price = $this->priceStrToCents($option_item['price']);
-                    $item_option -> qnt = 1;
-                    $item_option -> client_id = $client_id;
-                    $item_option -> save();
+                    if($option_item['price'] > 0 && is_numeric($option_item['price']))
+                    {
+                        $item_option = new OperationsOutOptItems();
+                        $item_option -> operation_id = $operation->id;
+                        $item_option ->option_card_id = $op_card_id;
+                        $item_option -> price = $this->priceStrToCents($option_item['price']);
+                        $item_option -> qnt = 1;
+                        $item_option -> client_id = $client_id;
+                        $item_option -> save();
+                    }
                 }
+            }
+
+
+            if(!isset($_POST['generate']))
+            {
+                $this->redirect(Yii::app()->createUrl('/sell/invoices'));
+            }
+            else
+            {
+                $this->redirect(Yii::app()->createUrl('/sell/invoices',array('generate' => $operation->id)));
             }
         }
+        else
+        {
+            throw new CHttpException(404);
+        }
 
-        $this->redirect(Yii::app()->createUrl('/sell/invoices'));
     }
-
 
     /****************************************** A J A X  S E C T I O N ************************************************/
 
@@ -229,6 +290,41 @@ class SellController extends Controller
     }//actionGenerate
 
 
+    /**
+     * Renders pagination block, by count of filtered data
+     */
+    public function actionAjaxPages()
+    {
+        //get all params from post(or get)
+        $client_name = Yii::app()->request->getParam('cli_name', '');
+        $client_type_id = Yii::app()->request->getParam('cli_type_id',null);
+        $invoice_code = Yii::app()->request->getParam('in_code','');
+        $operation_status_id = Yii::app()->request->getParam('in_status_id','');
+        $stock_city_id = Yii::app()->request->getParam('stock_city_id','');
+        $date_from_str = Yii::app()->request->getParam('date_from_str','');
+        $date_to_str = Yii::app()->request->getParam('date_to_str','');
+        $page = Yii::app()->request->getParam('page',1);
+
+        $c = new CDbCriteria(); //new criteria
+        $c = $this->addAllFilterCriterion($c,$client_name,$client_type_id,$invoice_code,$operation_status_id,$stock_city_id,$date_from_str,$date_to_str); //add filtering parameters
+        $count_all = OperationsOut::model()->count($c); //count all filtered records
+        $pages_count = $this->calculatePageCount($count_all); //get count of pages
+
+        //store all filter-params to array
+        $filter_params = array(
+            'cli_name' => $client_name,
+            'cli_type_id' => $client_type_id,
+            'in_code' => $invoice_code,
+            'in_status_id' => $operation_status_id,
+            'stock_city_id' => $stock_city_id,
+            'date_from_str' => $date_from_str,
+            'date_to_str' => $date_to_str
+        );
+
+        //render pagination-block
+        $this->renderPartial('_ajax_pages',array('pages' => $pages_count, 'current' => $page, 'filters' => $filter_params));
+
+    }//actionAjaxPages
 
     /**
      * Filter table ajax
@@ -237,15 +333,44 @@ class SellController extends Controller
     {
         //get all params from post(or get)
         $client_name = Yii::app()->request->getParam('cli_name', '');
-        $client_type_id = Yii::app()->request->getParam('client_type_id',null);
+        $client_type_id = Yii::app()->request->getParam('cli_type_id',null);
         $invoice_code = Yii::app()->request->getParam('in_code','');
         $operation_status_id = Yii::app()->request->getParam('in_status_id','');
         $stock_city_id = Yii::app()->request->getParam('stock_city_id','');
         $date_from_str = Yii::app()->request->getParam('date_from_str','');
         $date_to_str = Yii::app()->request->getParam('date_to_str','');
+        $page = Yii::app()->request->getParam('page',1);
 
         //new criteria for filtering
         $c = new CDbCriteria();
+        $c = $this->addAllFilterCriterion($c,$client_name,$client_type_id,$invoice_code,$operation_status_id,$stock_city_id,$date_from_str,$date_to_str); //add filtering parameters
+        $c -> limit = $this->on_one_page; //limit count of records on page
+        $c -> offset = ($this->on_one_page * ($page - 1)); //get offset
+
+        //get all filtered operations
+        $operations = OperationsOut::model()->findAll($c);
+
+        //render partial
+        $this->renderPartial('_ajax_table_filtering',array('operations' => $operations));
+
+    }//FilterTable
+
+
+    /**
+     * Adds all filtering params to criteria for filtering
+     * @param CDbCriteria $c criteria for filtration
+     * @param string $client_name filter param - client name
+     * @param int $client_type_id filter param - client type ID
+     * @param string $invoice_code filter param - invoice code
+     * @param int $operation_status_id filter param - operation status ID
+     * @param int $stock_city_id filter param - stock ID
+     * @param string $date_from_str filter param - start date
+     * @param string $date_to_str - filter param - end date
+     * @return CDbCriteria updated criteria
+     */
+    function addAllFilterCriterion($c,$client_name,$client_type_id,$invoice_code,$operation_status_id,$stock_city_id,$date_from_str,$date_to_str)
+    {
+        /* @var $c CDbCriteria */
 
         //if has invoice code
         if(!empty($invoice_code))
@@ -254,28 +379,19 @@ class SellController extends Controller
             $c -> addInCondition('invoice_code',array($invoice_code));
         }
 
-        //if have client-name
-        if(!empty($client_name))
+
+        //get all client-rows from base by name and type (where name, or company name like $client_name parameter)
+        $clients = Clients::model()->getClients($client_name,$client_type_id);
+        //declare empty array for client's ids
+        $found_ids = array();
+        //fill array of client ids
+        foreach($clients as $client_row)
         {
-            //get all client-rows from base by name and type (where name, or company name like $client_name parameter)
-            $clients = Clients::model()->getClients($client_name,$client_type_id);
-
-            //if found some clients
-            if(count($clients) > 0)
-            {
-                //declare empty array for client's ids
-                $found_ids = array();
-
-                //fill array of client ids
-                foreach($clients as $client_row)
-                {
-                    $found_ids[] = $client_row['id'];
-                }
-
-                //add ids to condition (search by client ids)
-                $c -> addInCondition('client_id',$found_ids);
-            }
+            $found_ids[] = $client_row['id'];
         }
+        //add ids to condition (search by client ids)
+        $c -> addInCondition('client_id',$found_ids);
+
 
         //if operation status set
         if(!empty($operation_status_id))
@@ -310,7 +426,7 @@ class SellController extends Controller
         {
             $date_from_arr = explode('/',$date_from_str); //explode string to get numbers
             $time_from = mktime(0,0,0,(int)$date_from_arr[0],(int)$date_from_arr[1],(int)$date_from_arr[2]); // make time
-            $time_to = 9999999999; //maximal time ('date-to' not set)
+            $time_to = time();
             $c -> addBetweenCondition('date_created',$time_from,$time_to); //search between these times
         }
 
@@ -333,11 +449,6 @@ class SellController extends Controller
             $c -> addBetweenCondition('date_created',$time_from,$time_to); //search between these times
         }
 
-        //get all operations
-        $operations = OperationsOut::model()->findAll($c);
-
-        //render partial
-        $this->renderPartial('_ajax_table_filtering',array('operations' => $operations));
-
-    }//FilterTable
+        return $c;
+    }
 }

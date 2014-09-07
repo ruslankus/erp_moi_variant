@@ -20,40 +20,30 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
-    
-    protected $labels;
-    protected $rights = array();
-    protected $messages = array();
+
+    //array of labels for forms
+    public $labels = array();
+    public $messages = array();
+
+    //array of rights of current user
+    public $rights = array();
+
     //default titles of site pages
     public $site_title = "ERP";
     public $page_title = "default";
-    
+    public $on_one_page = 3;
+
+    /**
+     * Initialization of controller
+     */
     public function init(){
-       $this->labels = Labels::model()->getLabels();
-       $this->rights = Yii::app()->user->getState('rights');
-       $this->messages = FormMessages::model()->getLabels();
+
+        $this->labels = Labels::model()->getLabels();
+        $this->messages = FormMessages::model()->getLabels();
     }
 
-    
-    //do before every action
-    protected function beforeAction($action) {
 
-        //if current action - not login
-        if (Yii::app()->controller->action->id!=='login')
-        {
-            //if user not logged in
-            if (Yii::app()->user->isGuest)
-            {
-                //redirect to login
-                $this->redirect($this->createUrl('//main/login'));
-            }
-        }
-
-        return parent::beforeAction($action);
-    }//before action
-    
-    
-       /**
+    /**
      * Converts entered by user price to cents-format for storing in database
      * @param string $str_price
      * @return int|mixed|string
@@ -74,7 +64,7 @@ class Controller extends CController
         }
 
         return $value;
-    }//priceStrToCents
+    }
 
     /**
      * Converts cent-format price to user readable price-value
@@ -104,6 +94,52 @@ class Controller extends CController
         }
 
         return $price;
-    }//centsToPriceStr 
-    
+    }
+
+    /**
+     * Calculates nu,ber of pages
+     * @param $onOnePage
+     * @param int $totalRecords
+     * @return int
+     */
+    public function calculatePageCount($totalRecords,$onOnePage = null)
+    {
+        if($onOnePage === null)$onOnePage = $this->on_one_page;
+        return (int)ceil($totalRecords/$onOnePage);
+    }
+
+    /**
+     * Performs before every action
+     * @param CAction $action
+     * @return bool
+     */
+    protected function beforeAction($action) {
+
+        //if current action - not login
+        if (Yii::app()->controller->action->id!=='login' && Yii::app()->controller->id!=='gateway')
+        {
+            //if user not logged in
+            if (Yii::app()->user->isGuest)
+            {
+                //redirect to login
+                $this->redirect($this->createUrl('//main/login'));
+            }
+        }
+
+        return parent::beforeAction($action);
+    }
+
+    /**
+     * Constructor override
+     * @param string $id
+     * @param null $module
+     */
+    public function __construct($id,$module=null)
+    {
+        //get rights from session
+        $this->rights = Yii::app()->user->GetState('rights');
+
+        //call parent constructor
+        parent::__construct($id, $module);
+    }
 }

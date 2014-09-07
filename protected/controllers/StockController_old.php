@@ -27,19 +27,19 @@ class StockController extends Controller
     /**
      * List all products in stock
      */
-    public function actionList($page = 1 )
+    public function actionList($page = 1)
     {
         $cities = UserCities::model()->findAllAsArray();
         $units = MeasureUnits::model()->findAllAsArray();
 
-        //$c = new CDbCriteria();
-        //$c -> limit = $this->on_one_page;
-        //$c -> offset = ($this->on_one_page * ($page - 1));
+        $c = new CDbCriteria();
+        $c -> limit = $this->on_one_page;
+        $c -> offset = ($this->on_one_page * ($page - 1));
 
-        //$count = ProductInStock::model()->count();
-        //$pages = $this->calculatePageCount($count);
+        $count = ProductInStock::model()->count();
+        $pages = $this->calculatePageCount($count);
 
-        $productsObj = ProductInStock::model()->with('stock','stock.location','productCard')->findAll();
+        $productsObj = ProductInStock::model()->with('stock','stock.location','productCard')->findAll($c);
         $this->render('list',array('products' => $productsObj, 'cities' => $cities, 'pages' => $pages, 'current_page' => $page, 'units' => $units));
     }
 
@@ -79,40 +79,14 @@ class StockController extends Controller
             $stock_loc_id = Yii::app()->request->getParam('location','');
             $units = Yii::app()->request->getParam('units','');
             $page = Yii::app()->request->getParam('page',1);
-            
+
             $c = new CDbCriteria();
             $c = $this->addAllFilterCriterion($c,$prod_name,$prod_code,$stock_loc_id,$units);
 
             $c -> limit = $this->on_one_page;
             $c -> offset = ($this->on_one_page * ($page - 1));
-            
-            //name 
-            if(!empty($prod_name)){
-              $nameCond = array('condition'=>'productCard.product_name= '.$prod_name);
-            }else{
-                $nameCond = null;    
-            }
-            
-            
-            //statements
-            if(!empty($units)){
-                $measureUnitsCond =  array('condition'=>'measureUnits.id= '.$units);
-            }else{
-               $measureUnitsCond = null; 
-            }
-            //location statement
-            if(!empty($stock_loc_id)){
-                $locationCond =  array('condition'=>'location.id= '.$stock_loc_id);
-            }else{
-               $locationCond = null; 
-            }
-            
-            
-            $items = ProductInStock::model()->with(array('productCard' => $nameCond,
-                                                    'productCard.measureUnits' => $measureUnitsCond,                         
-                                                    'stock',
-                                                    'stock.location' => $locationCond))->findAll();
-            Debug::d($items);
+
+            $items = ProductInStock::model()->findAll($c);
 
             $this->renderPartial('_ajax_table_filtering',array('items' => $items));
         }
