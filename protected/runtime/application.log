@@ -2765,3 +2765,237 @@ Stack trace:
 REQUEST_URI=/stock/filter
 HTTP_REFERER=http://yerp.local/stock
 ---
+2014/09/08 13:00:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Applications/AMPPS/www/yerp.local/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Applications/AMPPS/www/yerp.local/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2014/09/08 13:00:51 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'alex_erp_2.measure_units' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `measure_units`.
+in /Applications/AMPPS/www/yerp.local/protected/models/MeasureUnits.php (118)
+in /Applications/AMPPS/www/yerp.local/protected/controllers/StockController.php (33)
+in /Applications/AMPPS/www/yerp.local/protected/controllers/StockController.php (24)
+2014/09/08 13:00:51 [error] [exception.CDbException] exception 'CDbException' with message 'The table "measure_units" for active record class "MeasureUnits" cannot be found in the database.' in /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php:2362
+Stack trace:
+#0 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(MeasureUnits))
+#1 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(658): CActiveRecord->getMetaData()
+#2 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(1350): CActiveRecord->getTableSchema()
+#3 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /Applications/AMPPS/www/yerp.local/protected/models/MeasureUnits.php(118): CActiveRecord->findAll()
+#5 /Applications/AMPPS/www/yerp.local/protected/controllers/StockController.php(33): MeasureUnits->findAllAsArray()
+#6 /Applications/AMPPS/www/yerp.local/protected/controllers/StockController.php(24): StockController->actionList()
+#7 /Applications/AMPPS/www/yerp.local/framework/web/actions/CInlineAction.php(49): StockController->actionIndex()
+#8 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(282): CController->run('index')
+#12 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(141): CWebApplication->runController('stock/index')
+#13 /Applications/AMPPS/www/yerp.local/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Applications/AMPPS/www/yerp.local/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/stock
+HTTP_REFERER=http://yerp.local/main/index
+---
+2014/09/08 13:03:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "movements".' in /Applications/AMPPS/www/yerp.local/framework/web/CController.php:483
+Stack trace:
+#0 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(270): CController->missingAction('movements')
+#1 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(282): CController->run('movements')
+#2 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(141): CWebApplication->runController('stock/movements')
+#3 /Applications/AMPPS/www/yerp.local/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /Applications/AMPPS/www/yerp.local/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/stock/movements
+HTTP_REFERER=http://yerp.local/stock
+---
+2014/09/08 13:10:29 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "nextService" is not defined in active record class "Clients".' in /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveFinder.php:226
+Stack trace:
+#0 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'nextService')
+#1 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(909): CActiveFinder->__construct(Object(Clients), Array)
+#3 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#5 /Applications/AMPPS/www/yerp.local/protected/controllers/ContractorsController.php(39): CActiveRecord->findAll()
+#6 /Applications/AMPPS/www/yerp.local/protected/controllers/ContractorsController.php(26): ContractorsController->actionClients()
+#7 /Applications/AMPPS/www/yerp.local/framework/web/actions/CInlineAction.php(49): ContractorsController->actionIndex()
+#8 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(282): CController->run('index')
+#12 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(141): CWebApplication->runController('contractors/ind...')
+#13 /Applications/AMPPS/www/yerp.local/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Applications/AMPPS/www/yerp.local/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/contractors
+HTTP_REFERER=http://yerp.local/users/add
+---
+2014/09/08 13:12:50 [error] [exception.CException] exception 'CException' with message 'Property "Clients.nextService" is not defined.' in /Applications/AMPPS/www/yerp.local/framework/base/CComponent.php:130
+Stack trace:
+#0 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(145): CComponent->__get('nextService')
+#1 /Applications/AMPPS/www/yerp.local/protected/views/contractors/client_list.php(47): CActiveRecord->__get('nextService')
+#2 /Applications/AMPPS/www/yerp.local/framework/web/CBaseController.php(126): require('/Applications/A...')
+#3 /Applications/AMPPS/www/yerp.local/framework/web/CBaseController.php(95): CBaseController->renderInternal('/Applications/A...', Array, true)
+#4 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(869): CBaseController->renderFile('/Applications/A...', Array, true)
+#5 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(782): CController->renderPartial('client_list', Array, true)
+#6 /Applications/AMPPS/www/yerp.local/protected/controllers/ContractorsController.php(42): CController->render('client_list', Array)
+#7 /Applications/AMPPS/www/yerp.local/protected/controllers/ContractorsController.php(26): ContractorsController->actionClients()
+#8 /Applications/AMPPS/www/yerp.local/framework/web/actions/CInlineAction.php(49): ContractorsController->actionIndex()
+#9 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(282): CController->run('index')
+#13 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(141): CWebApplication->runController('contractors/ind...')
+#14 /Applications/AMPPS/www/yerp.local/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /Applications/AMPPS/www/yerp.local/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/contractors
+HTTP_REFERER=http://yerp.local/users/add
+---
+2014/09/08 13:14:49 [error] [exception.CException] exception 'CException' with message 'Property "Clients.nextService" is not defined.' in /Applications/AMPPS/www/yerp.local/framework/base/CComponent.php:130
+Stack trace:
+#0 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(145): CComponent->__get('nextService')
+#1 /Applications/AMPPS/www/yerp.local/protected/views/contractors/client_list.php(47): CActiveRecord->__get('nextService')
+#2 /Applications/AMPPS/www/yerp.local/framework/web/CBaseController.php(126): require('/Applications/A...')
+#3 /Applications/AMPPS/www/yerp.local/framework/web/CBaseController.php(95): CBaseController->renderInternal('/Applications/A...', Array, true)
+#4 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(869): CBaseController->renderFile('/Applications/A...', Array, true)
+#5 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(782): CController->renderPartial('client_list', Array, true)
+#6 /Applications/AMPPS/www/yerp.local/protected/controllers/ContractorsController.php(42): CController->render('client_list', Array)
+#7 /Applications/AMPPS/www/yerp.local/protected/controllers/ContractorsController.php(26): ContractorsController->actionClients()
+#8 /Applications/AMPPS/www/yerp.local/framework/web/actions/CInlineAction.php(49): ContractorsController->actionIndex()
+#9 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(282): CController->run('index')
+#13 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(141): CWebApplication->runController('contractors/ind...')
+#14 /Applications/AMPPS/www/yerp.local/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /Applications/AMPPS/www/yerp.local/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/contractors
+HTTP_REFERER=http://yerp.local/users/add
+---
+2014/09/08 13:20:30 [error] [exception.CException] exception 'CException' with message 'Property "Suppliers.type" is not defined.' in /Applications/AMPPS/www/yerp.local/framework/base/CComponent.php:130
+Stack trace:
+#0 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(145): CComponent->__get('type')
+#1 /Applications/AMPPS/www/yerp.local/protected/views/contractors/supplier_list.php(39): CActiveRecord->__get('type')
+#2 /Applications/AMPPS/www/yerp.local/framework/web/CBaseController.php(126): require('/Applications/A...')
+#3 /Applications/AMPPS/www/yerp.local/framework/web/CBaseController.php(95): CBaseController->renderInternal('/Applications/A...', Array, true)
+#4 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(869): CBaseController->renderFile('/Applications/A...', Array, true)
+#5 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(782): CController->renderPartial('supplier_list', Array, true)
+#6 /Applications/AMPPS/www/yerp.local/protected/controllers/ContractorsController.php(211): CController->render('supplier_list', Array)
+#7 /Applications/AMPPS/www/yerp.local/framework/web/actions/CInlineAction.php(49): ContractorsController->actionSuppliers()
+#8 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(282): CController->run('suppliers')
+#12 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(141): CWebApplication->runController('contractors/sup...')
+#13 /Applications/AMPPS/www/yerp.local/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Applications/AMPPS/www/yerp.local/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/contractors/suppliers
+HTTP_REFERER=http://yerp.local/contractors/clients
+---
+2014/09/08 13:49:25 [error] [exception.CException] exception 'CException' with message 'ProductCardCategories and its behaviors do not have a method or closure named "getDropList".' in /Applications/AMPPS/www/yerp.local/framework/base/CComponent.php:266
+Stack trace:
+#0 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(227): CComponent->__call('getDropList', Array)
+#1 /Applications/AMPPS/www/yerp.local/protected/controllers/ProductsController.php(228): CActiveRecord->__call('getDropList', Array)
+#2 /Applications/AMPPS/www/yerp.local/protected/controllers/ProductsController.php(228): ProductCardCategories->getDropList()
+#3 /Applications/AMPPS/www/yerp.local/framework/web/actions/CInlineAction.php(49): ProductsController->actionAddCard()
+#4 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(282): CController->run('addcard')
+#8 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(141): CWebApplication->runController('products/addcar...')
+#9 /Applications/AMPPS/www/yerp.local/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /Applications/AMPPS/www/yerp.local/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/products/addcard
+HTTP_REFERER=http://yerp.local/products
+---
+2014/09/08 14:12:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "pdf/invoice".' in /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(141): CWebApplication->runController('pdf/invoice')
+#1 /Applications/AMPPS/www/yerp.local/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Applications/AMPPS/www/yerp.local/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/pdf/invoice/5
+HTTP_REFERER=http://yerp.local/sell
+---
+2014/09/08 14:13:08 [error] [exception.CException] exception 'CException' with message 'Property "ProductCards.units" is not defined.' in /Applications/AMPPS/www/yerp.local/framework/base/CComponent.php:130
+Stack trace:
+#0 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(145): CComponent->__get('units')
+#1 /Applications/AMPPS/www/yerp.local/protected/views/ajax/_operation_out.php(50): CActiveRecord->__get('units')
+#2 /Applications/AMPPS/www/yerp.local/framework/web/CBaseController.php(126): require('/Applications/A...')
+#3 /Applications/AMPPS/www/yerp.local/framework/web/CBaseController.php(95): CBaseController->renderInternal('/Applications/A...', Array, true)
+#4 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(869): CBaseController->renderFile('/Applications/A...', Array, true)
+#5 /Applications/AMPPS/www/yerp.local/protected/controllers/AjaxController.php(310): CController->renderPartial('_operation_out', Array)
+#6 [internal function]: AjaxController->actionOperationOutInfo('7')
+#7 /Applications/AMPPS/www/yerp.local/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(AjaxController), Array)
+#8 /Applications/AMPPS/www/yerp.local/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(AjaxController), Object(ReflectionMethod), Array)
+#9 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(282): CController->run('operationoutinf...')
+#13 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(141): CWebApplication->runController('ajax/operationo...')
+#14 /Applications/AMPPS/www/yerp.local/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /Applications/AMPPS/www/yerp.local/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ajax/operationoutinfo/7
+HTTP_REFERER=http://yerp.local/sell
+---
+2014/09/08 14:13:12 [error] [exception.CException] exception 'CException' with message 'Property "ProductCards.units" is not defined.' in /Applications/AMPPS/www/yerp.local/framework/base/CComponent.php:130
+Stack trace:
+#0 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(145): CComponent->__get('units')
+#1 /Applications/AMPPS/www/yerp.local/protected/views/ajax/_operation_out.php(50): CActiveRecord->__get('units')
+#2 /Applications/AMPPS/www/yerp.local/framework/web/CBaseController.php(126): require('/Applications/A...')
+#3 /Applications/AMPPS/www/yerp.local/framework/web/CBaseController.php(95): CBaseController->renderInternal('/Applications/A...', Array, true)
+#4 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(869): CBaseController->renderFile('/Applications/A...', Array, true)
+#5 /Applications/AMPPS/www/yerp.local/protected/controllers/AjaxController.php(310): CController->renderPartial('_operation_out', Array)
+#6 [internal function]: AjaxController->actionOperationOutInfo('5')
+#7 /Applications/AMPPS/www/yerp.local/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(AjaxController), Array)
+#8 /Applications/AMPPS/www/yerp.local/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(AjaxController), Object(ReflectionMethod), Array)
+#9 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(282): CController->run('operationoutinf...')
+#13 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(141): CWebApplication->runController('ajax/operationo...')
+#14 /Applications/AMPPS/www/yerp.local/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /Applications/AMPPS/www/yerp.local/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ajax/operationoutinfo/5
+HTTP_REFERER=http://yerp.local/sell
+---
+2014/09/08 14:14:06 [error] [exception.CException] exception 'CException' with message 'ProductCardCategories and its behaviors do not have a method or closure named "getDropList".' in /Applications/AMPPS/www/yerp.local/framework/base/CComponent.php:266
+Stack trace:
+#0 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(227): CComponent->__call('getDropList', Array)
+#1 /Applications/AMPPS/www/yerp.local/protected/controllers/ProductsController.php(228): CActiveRecord->__call('getDropList', Array)
+#2 /Applications/AMPPS/www/yerp.local/protected/controllers/ProductsController.php(228): ProductCardCategories->getDropList()
+#3 /Applications/AMPPS/www/yerp.local/framework/web/actions/CInlineAction.php(49): ProductsController->actionAddCard()
+#4 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(282): CController->run('addcard')
+#8 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(141): CWebApplication->runController('products/addcar...')
+#9 /Applications/AMPPS/www/yerp.local/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /Applications/AMPPS/www/yerp.local/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/products/addcard
+HTTP_REFERER=http://yerp.local/products/addcat
+---
+2014/09/08 14:20:15 [error] [exception.CException] exception 'CException' with message 'ProductCardCategories and its behaviors do not have a method or closure named "getDropList".' in /Applications/AMPPS/www/yerp.local/framework/base/CComponent.php:266
+Stack trace:
+#0 /Applications/AMPPS/www/yerp.local/framework/db/ar/CActiveRecord.php(227): CComponent->__call('getDropList', Array)
+#1 /Applications/AMPPS/www/yerp.local/protected/controllers/ProductsController.php(228): CActiveRecord->__call('getDropList', Array)
+#2 /Applications/AMPPS/www/yerp.local/protected/controllers/ProductsController.php(228): ProductCardCategories->getDropList()
+#3 /Applications/AMPPS/www/yerp.local/framework/web/actions/CInlineAction.php(49): ProductsController->actionAddCard()
+#4 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /Applications/AMPPS/www/yerp.local/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(282): CController->run('addcard')
+#8 /Applications/AMPPS/www/yerp.local/framework/web/CWebApplication.php(141): CWebApplication->runController('products/addcar...')
+#9 /Applications/AMPPS/www/yerp.local/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /Applications/AMPPS/www/yerp.local/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/products/addcard
+HTTP_REFERER=http://yerp.local/products/addcat
+---

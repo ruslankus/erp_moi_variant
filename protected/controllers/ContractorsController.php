@@ -36,7 +36,7 @@ class ContractorsController extends Controller
     public function actionClients()
     {
         //get all clients and service which client waits
-        $clients = Clients::model()->with('nextService','firstInvoice')->findAll();
+        $clients = Clients::model()->with('firstInvoice')->findAll();
 
         //render
         $this->render('client_list', array('clients' => $clients));
@@ -47,9 +47,6 @@ class ContractorsController extends Controller
      */
     public function actionAddCli()
     {
-        //empty client
-        $client = new Clients();
-
         //form-validate object
         $form = new ClientForm();
 
@@ -61,17 +58,23 @@ class ContractorsController extends Controller
             {
                 //validate as company (company code required)
                 $form->company = 1;
-                //set type to client (1 = company)
-                $client->type = 1;
             }
 
             //set attributes and validate
             $form->attributes = $_POST['ClientForm'];
-            $client->attributes = $_POST['ClientForm'];
 
             //if no errors
             if($form->validate())
             {
+                //empty client
+                $client = new Clients();
+
+                //set attributes
+                $client->attributes = $_POST['ClientForm'];
+
+                //set company or not
+                $form->company == 1 ? $client->type = 1 : $client->type = 2;
+
                 //set creation parameters
                 $client->date_created = time();
                 $client->date_changed = time();
@@ -85,7 +88,8 @@ class ContractorsController extends Controller
             }
         }
 
-        $this->render('client_create', array('client' => $client, 'form_mdl' => $form));
+        //render form
+        $this->render('client_create', array('form_mdl' => $form));
     }
 
 
@@ -129,8 +133,7 @@ class ContractorsController extends Controller
                 //if no errors
                 if($form->validate())
                 {
-                    //set creation parameters
-                    $client->date_created = time();
+                    //set updating parameters
                     $client->date_changed = time();
                     $client->user_modified_by = Yii::app()->user->id;
 
@@ -162,13 +165,13 @@ class ContractorsController extends Controller
         /* @var $client Clients */
 
         //try find by pk
-        $client = Clients::model()->with('invoicesOuts')->findByPk($id);
+        $client = Clients::model()->with('operationsOuts', 'serviceProcesses')->findByPk($id);
 
         //if found
         if(!empty($client))
         {
             //if exist some invoices related with this client
-            if(count($client->invoicesOuts) > 0)
+            if(count($client->operationsOuts) > 0 || count($client->serviceProcesses) > 0)
             {
                 $this->render('restricts');
             }
@@ -231,15 +234,6 @@ class ContractorsController extends Controller
             //if got post
             if(isset($_POST['SupplierForm']))
             {
-                //if company
-                if($_POST['SupplierForm']['company'])
-                {
-                    //validate as company (company code required)
-                    $form->company = 1;
-                    //set type to client (1 = company)
-                    $supplier->type = 1;
-                }
-
                 //set attributes and validate
                 $form->attributes = $_POST['SupplierForm'];
                 $supplier->attributes = $_POST['SupplierForm'];
@@ -247,8 +241,7 @@ class ContractorsController extends Controller
                 //if no errors
                 if($form->validate())
                 {
-                    //set creation parameters
-                    $supplier->date_created = time();
+                    //set updating parameters
                     $supplier->date_changed = time();
                     $supplier->user_modified_by = Yii::app()->user->id;
 
@@ -276,60 +269,37 @@ class ContractorsController extends Controller
      */
     public function actionAddSupp()
     {
-        /* @var $supplier Clients */
+        //form-validate object
+        $form = new SupplierForm();
 
-        //try find by pk
-        $supplier = new Suppliers();
-
-        //if found
-        if(!empty($supplier))
+        //if got post
+        if(isset($_POST['SupplierForm']))
         {
-            //form-validate object
-            $form = new SupplierForm();
+            //set attributes and validate
+            $form->attributes = $_POST['SupplierForm'];
 
-            //set current client-id to validator, to avoid unique-check-error when updating
-            $form->current_supplier_id = $supplier->id;
 
-            //if got post
-            if(isset($_POST['SupplierForm']))
+            //if no errors
+            if($form->validate())
             {
-                //if company
-                if($_POST['SupplierForm']['company'])
-                {
-                    //validate as company (company code required)
-                    $form->company = 1;
-                    //set type to client (1 = company)
-                    $supplier->type = 1;
-                }
-
-                //set attributes and validate
-                $form->attributes = $_POST['SupplierForm'];
+                //create new supplier and set params
+                $supplier = new Suppliers();
                 $supplier->attributes = $_POST['SupplierForm'];
 
-                //if no errors
-                if($form->validate())
-                {
-                    //set creation parameters
-                    $supplier->date_created = time();
-                    $supplier->date_changed = time();
-                    $supplier->user_modified_by = Yii::app()->user->id;
+                //set creation parameters
+                $supplier->date_created = time();
+                $supplier->date_changed = time();
+                $supplier->user_modified_by = Yii::app()->user->id;
 
-                    //save to db
-                    $supplier->save();
+                //save to db
+                $supplier->save();
 
-                    //redirect to list
-                    $this->redirect('/'.$this->id.'/suppliers');
-                }
+                //redirect to list
+                $this->redirect('/'.$this->id.'/suppliers');
             }
+        }
 
-            $this->render('supplier_create', array('supplier' => $supplier, 'form_mdl' => $form));
-        }
-        //if not found
-        else
-        {
-            //exception
-            throw new CHttpException(404,$this->labels['item not found in base']);
-        }
+        $this->render('supplier_create', array('form_mdl' => $form));
     }
 
     /**
@@ -339,15 +309,15 @@ class ContractorsController extends Controller
     public function actionDeleteSupp($id = null)
     {
         /* @var $supplier Suppliers */
-
+                
         //try find by pk
-        $supplier = Suppliers::model()->with('invoicesIns')->findByPk($id);
+        $supplier = Suppliers::model()->with('operationsIns')->findByPk($id);
 
         //if found
         if(!empty($supplier))
         {
             //if exist some invoices related with this client
-            if(count($supplier->invoicesIns) > 0)
+            if(count($supplier->operationsIns) > 0)
             {
                 $this->render('restricts');
             }
@@ -368,4 +338,6 @@ class ContractorsController extends Controller
             throw new CHttpException(404,$this->labels['item not found in base']);
         }
     }
+
+
 }
