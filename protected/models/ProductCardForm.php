@@ -1,57 +1,114 @@
 <?php
 
 /**
- * LoginForm class.
- * LoginForm is the data structure for keeping
- * user login form data. It is used by the 'login' action of 'SiteController'.
+ * Class ProductCardForm
  */
-class ProductCardForm extends CFormModel
+class ProductCardForm extends CBaseForm
 {
-	
-    public $product_name;
+    public $files;
+
     public $product_code;
+	public $product_name;
     public $category_id;
-    public $units;
     public $description;
+
+    public $measure_units_id;
+    public $size_units_id;
+    public $weight;
+    public $weight_net;
+    public $width;
+    public $height;
+    public $length;
 
     public $current_card_id = null;
 
-
-    //declare rules
-	public function rules()
+    /**
+     * Declares rules
+     * @return array
+     */
+    public function rules()
 	{
 		return array(
 			// username and password are required
-			array('product_code, product_name, category_id', 'required'),
-            array('units', 'safe'),
+			array('product_code, product_name, category_id, weight, weight_net, width, height, length', 'required', 'message'=> $this->messages['fill the field'].' "{attribute}"'),
+
 			// password needs to be authenticated
-			array('product_code', 'unique'),
-		);
+			array('product_code', 'unique', 'model_class' => 'ProductCards', 'current_id' => $this->current_card_id),
+
+            //numerical field validation
+            array('weight, weight_net, height, length, width', 'numerical'),
+
+            // rules for file validation
+            array(
+                'files',//field name
+                'file', //file validation
+                'types'=>'jpg, gif, png', //available file-types
+                'allowEmpty' =>true, //can be empty
+                'maxSize' => 35000000, //35 mb
+                'maxFiles' => 5, //max count of files
+                'wrongType' => $this->messages['file has wrong type'], //message for wrong-type error
+                'tooLarge' => $this->messages['file is too large'], //message for 'too large' error
+                'tooMany' => $this->messages['max quantity of files is'].' 5', //message for 'too many files' error
+            ),
+        );
 	}
 
-	/**
-	 * Authenticates the password.
-	 * This is the 'authenticate' validator as declared in rules().
-	 */
-    public function unique()
+    /**
+     * Sets labels for attributes
+     * @return array
+     */
+    public function attributeLabels()
     {
-        //if no errors (all fields not empty)
+        return array(
+            'product_code' => $this->labels['product code'],
+            'product_name' => $this->labels['product name'],
+            'category_id' => $this->labels['category'],
+            'description' => $this->labels['description'],
+            'measure_units' => $this->labels['measure units'],
+            'size_units' => $this->labels['size units'],
+            'sizes' => $this->labels['sizes'],
+            'liters' => $this->labels['liters'],
+            'kg' => $this->labels['kg'],
+        );
+    }
+
+
+    /**
+     * Checks some field for unique in table
+     * @param $attribute
+     * @param $param
+     * @return bool
+     */
+    public function unique($attribute,$param)
+    {
+        /* @var $MODEL_NAME CActiveRecord */
+        /* @var $obj CActiveRecord */
+
+        $MODEL_NAME = $param['model_class'];
+        $param_name = $attribute;
+        $param_value = $this->$attribute;
+        $cur_id = $param['current_id'];
+
+
+        //if no errors (all required fields not empty)
         if(!$this->hasErrors())
         {
-            /* @var $card ProductCards */
-
-            //try find product card by product-code
-            $card = ProductCards::model()->findByAttributes(array('product_code' => $this->product_code));
+            //try find object by search value
+            $obj = $MODEL_NAME::model()->findByAttributes(array($param_name => $param_value));
 
             //if found
-            if($card)
+            if($obj)
             {
-                //if found card is not same as card that we need update (in that case product key can be the same)
-                if(!($this->current_card_id != null && $this->current_card_id == $card->id))
+                //if found object is not same as object that we need update (in that case unique fields can be the same)
+                if(!($cur_id != null && $cur_id == $obj->getAttribute('id')))
                 {
-                    $this->addError('product_code','product code already used');
+                    //error
+                    $this->addError($attribute,$this->labels[$attribute].' '.$this->messages['already used']);
                 }
             }
         }
+
+        //no errors
+        return false;
     }
 }

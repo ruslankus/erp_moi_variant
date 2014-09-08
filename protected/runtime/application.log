@@ -2999,3 +2999,322 @@ Stack trace:
 REQUEST_URI=/products/addcard
 HTTP_REFERER=http://yerp.local/products/addcat
 ---
+2014/09/08 18:46:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2014/09/08 18:46:18 [error] [exception.CException] exception 'CException' with message 'ProductCardCategories and its behaviors do not have a method or closure named "getDropList".' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(227): CComponent->__call('getDropList', Array)
+#1 C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php(184): CActiveRecord->__call('getDropList', Array)
+#2 C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php(184): ProductCardCategories->getDropList()
+#3 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ProductsController->actionCards()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('cards')
+#8 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('products/cards')
+#9 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/products/cards
+HTTP_REFERER=http://yerp.local/products
+---
+2014/09/08 18:49:52 [error] [exception.CException] exception 'CException' with message 'ProductCardCategories and its behaviors do not have a method or closure named "getDropList".' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(227): CComponent->__call('getDropList', Array)
+#1 C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php(184): CActiveRecord->__call('getDropList', Array)
+#2 C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php(184): ProductCardCategories->getDropList()
+#3 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ProductsController->actionCards()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('cards')
+#8 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('products/cards')
+#9 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/products/cards
+HTTP_REFERER=http://yerp.local/products
+---
+2014/09/08 18:51:20 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'alex_erp_2.measure_units' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `measure_units`.
+in C:\OpenServer\domains\yerp.local\protected\models\MeasureUnits.php (118)
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (195)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:51:20 [error] [exception.CDbException] exception 'CDbException' with message 'The table "measure_units" for active record class "MeasureUnits" cannot be found in the database.' in C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(MeasureUnits))
+#1 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(658): CActiveRecord->getMetaData()
+#2 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1350): CActiveRecord->getTableSchema()
+#3 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#4 C:\OpenServer\domains\yerp.local\protected\models\MeasureUnits.php(118): CActiveRecord->findAll()
+#5 C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php(195): MeasureUnits->findAllAsArray()
+#6 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ProductsController->actionAddCard()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('addcard')
+#11 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('products/addcar...')
+#12 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/products/addcard
+HTTP_REFERER=http://yerp.local/products/cards
+---
+2014/09/08 18:51:48 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'alex_erp_2.measure_units' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `measure_units`.
+in C:\OpenServer\domains\yerp.local\protected\models\MeasureUnits.php (118)
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (195)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:51:48 [error] [exception.CDbException] exception 'CDbException' with message 'The table "measure_units" for active record class "MeasureUnits" cannot be found in the database.' in C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(MeasureUnits))
+#1 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(658): CActiveRecord->getMetaData()
+#2 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1350): CActiveRecord->getTableSchema()
+#3 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#4 C:\OpenServer\domains\yerp.local\protected\models\MeasureUnits.php(118): CActiveRecord->findAll()
+#5 C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php(195): MeasureUnits->findAllAsArray()
+#6 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ProductsController->actionAddCard()
+#7 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('addcard')
+#11 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('products/addcar...')
+#12 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/products/addcard
+HTTP_REFERER=http://yerp.local/products/cards
+---
+2014/09/08 18:53:12 [error] [php] include(SizeUnits.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\OpenServer\domains\yerp.local\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php(196): spl_autoload_call()
+#1 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ProductsController->actionAddCard()
+#2 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): ProductsController->runAction()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): ProductsController->runActionWithFilters()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): ProductsController->run()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#7 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#8 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/products/addcard
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (196)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:53:37 [error] [exception.CException] exception 'CException' with message 'ProductsController cannot find the requested view "card_create".' in C:\OpenServer\domains\yerp.local\framework\web\CController.php:878
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('card_create', Array, true)
+#1 C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php(231): CController->render('card_create', Array)
+#2 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ProductsController->actionAddCard()
+#3 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('addcard')
+#7 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('products/addcar...')
+#8 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/products/addcard
+HTTP_REFERER=http://yerp.local/products/cards
+---
+2014/09/08 18:56:05 [error] [exception.CException] exception 'CException' with message 'Property "ProductCardForm.measure_units_id" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(2529): CComponent->__get('measure_units_i...')
+#1 C:\OpenServer\domains\yerp.local\framework\web\helpers\CHtml.php(1802): CHtml::resolveValue(Object(ProductCardForm), 'measure_units_i...')
+#2 C:\OpenServer\domains\yerp.local\framework\web\widgets\CActiveForm.php(847): CHtml::activeDropDownList(Object(ProductCardForm), 'measure_units_i...', Array, Array)
+#3 C:\OpenServer\domains\yerp.local\protected\views\products\card_create.php(46): CActiveForm->dropDownList(Object(ProductCardForm), 'measure_units_i...', Array, Array)
+#4 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#5 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#6 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#7 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('card_create', Array, true)
+#8 C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php(231): CController->render('card_create', Array)
+#9 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ProductsController->actionAddCard()
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('addcard')
+#14 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('products/addcar...')
+#15 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/products/addcard
+HTTP_REFERER=http://yerp.local/products/cards
+---
+2014/09/08 18:56:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/prod_cards.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/prod_cards.j...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/prod_cards.js
+HTTP_REFERER=http://yerp.local/products/addcard
+---
+2014/09/08 18:56:53 [warning] [application] Failed to set unsafe attribute "measure_units_id" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:56:53 [warning] [application] Failed to set unsafe attribute "size_units_id" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:56:53 [warning] [application] Failed to set unsafe attribute "description" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:56:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/prod_cards.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/prod_cards.j...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/prod_cards.js
+HTTP_REFERER=http://yerp.local/products/addcard
+---
+2014/09/08 18:57:50 [warning] [application] Failed to set unsafe attribute "measure_units_id" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:57:50 [warning] [application] Failed to set unsafe attribute "size_units_id" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:57:50 [warning] [application] Failed to set unsafe attribute "description" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:57:50 [error] [php] include(ProductFiles.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\OpenServer\domains\yerp.local\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php(220): spl_autoload_call()
+#1 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ProductsController->actionAddCard()
+#2 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): ProductsController->runAction()
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): ProductsController->runActionWithFilters()
+#5 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): ProductsController->run()
+#6 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#7 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#8 C:\OpenServer\domains\yerp.local\index.php(13): CWebApplication->run()
+REQUEST_URI=/products/addcard
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (220)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:58:10 [warning] [application] Failed to set unsafe attribute "measure_units_id" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:58:10 [warning] [application] Failed to set unsafe attribute "size_units_id" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:58:10 [warning] [application] Failed to set unsafe attribute "description" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:58:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/prod_cards.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/prod_cards.j...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/prod_cards.js
+HTTP_REFERER=http://yerp.local/products/addcard
+---
+2014/09/08 18:59:33 [warning] [application] Failed to set unsafe attribute "measure_units_id" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:59:33 [warning] [application] Failed to set unsafe attribute "size_units_id" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:59:33 [warning] [application] Failed to set unsafe attribute "description" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 18:59:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/prod_cards.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/prod_cards.j...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/prod_cards.js
+HTTP_REFERER=http://yerp.local/products/addcard
+---
+2014/09/08 19:00:10 [warning] [application] Failed to set unsafe attribute "measure_units_id" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 19:00:10 [warning] [application] Failed to set unsafe attribute "size_units_id" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 19:00:10 [warning] [application] Failed to set unsafe attribute "description" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 19:00:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/prod_cards.js".' in C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('js/prod_cards.j...')
+#1 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/prod_cards.js
+HTTP_REFERER=http://yerp.local/products/addcard
+---
+2014/09/08 19:00:52 [warning] [application] Failed to set unsafe attribute "measure_units_id" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 19:00:52 [warning] [application] Failed to set unsafe attribute "size_units_id" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 19:00:52 [warning] [application] Failed to set unsafe attribute "description" of "ProductCardForm".
+in C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php (202)
+in C:\OpenServer\domains\yerp.local\index.php (13)
+2014/09/08 19:00:53 [error] [exception.CException] exception 'CException' with message 'Property "ProductCards.units" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(145): CComponent->__get('units')
+#1 C:\OpenServer\domains\yerp.local\protected\views\products\card_list.php(67): CActiveRecord->__get('units')
+#2 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#3 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('card_list', Array, true)
+#6 C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php(183): CController->render('card_list', Array)
+#7 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ProductsController->actionCards()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('cards')
+#12 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('products/cards')
+#13 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/products/cards
+HTTP_REFERER=http://yerp.local/products/addcard
+---
+2014/09/08 19:01:40 [error] [exception.CException] exception 'CException' with message 'Property "ProductCards.units" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(145): CComponent->__get('units')
+#1 C:\OpenServer\domains\yerp.local\protected\views\products\card_list.php(67): CActiveRecord->__get('units')
+#2 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#3 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('card_list', Array, true)
+#6 C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php(183): CController->render('card_list', Array)
+#7 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ProductsController->actionCards()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('cards')
+#12 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('products/cards')
+#13 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/products/cards
+HTTP_REFERER=http://yerp.local/products/addcard
+---
+2014/09/08 19:03:24 [error] [exception.CException] exception 'CException' with message 'Property "ProductCards.units" is not defined.' in C:\OpenServer\domains\yerp.local\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\OpenServer\domains\yerp.local\framework\db\ar\CActiveRecord.php(145): CComponent->__get('units')
+#1 C:\OpenServer\domains\yerp.local\protected\views\products\card_list.php(67): CActiveRecord->__get('units')
+#2 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(126): require('C:\OpenServer\d...')
+#3 C:\OpenServer\domains\yerp.local\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\OpenServer\d...', Array, true)
+#4 C:\OpenServer\domains\yerp.local\framework\web\CController.php(869): CBaseController->renderFile('C:\OpenServer\d...', Array, true)
+#5 C:\OpenServer\domains\yerp.local\framework\web\CController.php(782): CController->renderPartial('card_list', Array, true)
+#6 C:\OpenServer\domains\yerp.local\protected\controllers\ProductsController.php(183): CController->render('card_list', Array)
+#7 C:\OpenServer\domains\yerp.local\framework\web\actions\CInlineAction.php(49): ProductsController->actionCards()
+#8 C:\OpenServer\domains\yerp.local\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\OpenServer\domains\yerp.local\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\OpenServer\domains\yerp.local\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(282): CController->run('cards')
+#12 C:\OpenServer\domains\yerp.local\framework\web\CWebApplication.php(141): CWebApplication->runController('products/cards')
+#13 C:\OpenServer\domains\yerp.local\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\OpenServer\domains\yerp.local\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/products/cards
+HTTP_REFERER=http://yerp.local/products/addcard
+---

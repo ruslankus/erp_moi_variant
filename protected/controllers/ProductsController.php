@@ -3,7 +3,8 @@
 class ProductsController extends Controller
 {
     /**
-     * R E T U R N S  S U B M E N U  F O R  T H I S  C O N T R O L L E R
+     * Returns sub-menu settings
+     * @return array
      */
     public function GetSubMenu()
     {
@@ -18,7 +19,7 @@ class ProductsController extends Controller
     }
 
     /**
-     * I N D E X
+     * Entry point
      */
     public function actionIndex()
     {
@@ -31,236 +32,308 @@ class ProductsController extends Controller
 
 
     /**
-     * L I S T  C A T E G O R I E S
+     * List all categories
      */
     public function actionCategories()
     {
         //get all categories from database
         $categories = ProductCardCategories::model()->findAll();
 
-        //actions for every record
-        $actions = array(
-            'edit' => array('controller' => Yii::app()->controller->id, 'action' => 'editcat', 'class' => 'actions action-edit', 'visible' => $this->rights['categories_edit'] ? 1 : 0),
-            'delete' => array('controller' => Yii::app()->controller->id, 'action' => 'deletecat', 'class' => 'actions action-delete' , 'visible' => $this->rights['categories_delete'] ? 1 : 0),
-        );
-
         //render list
-        $this->render('list_categories',array('categories' => $categories, 'table_actions' => $actions));
+        $this->render('category_list',array('categories' => $categories));
     }
 
-    /**
-     * E D I T  C A T E G O R Y
-     */
-    public function actionEditCat($id = null)
-    {
-        //find in base
-        $category = ProductCardCategories::model()->findByPk($id);
-
-        //if not found - 404 error
-        if(empty($category)){throw new CHttpException(404,$this->labels['item not found in base']);}
-
-        //render form
-        $this->render('edit_category',array('category' => $category));
-    }
 
     /**
-     * A D D  C A T E G O R Y
+     * Add category
      */
     public function actionAddCat()
     {
+        //create form-validator object
+        $form = new ProductCategoryForm();
+        $category = new ProductCardCategories();
+
+        //if isset right post param
+        if($_POST['ProductCategoryForm'])
+        {
+            //form model
+            $form -> attributes = $_POST['ProductCategoryForm'];
+
+            //if has errors
+            if($form -> validate())
+            {
+                //set attributes
+                $category -> attributes = $_POST['ProductCategoryForm'];
+                $category -> date_created = time();
+                $category -> date_changed = time();
+                $category -> user_modified_by = Yii::app()->user->id;
+
+                //save
+                $category -> save();
+
+                //redirect to list
+                $this->redirect('/'.$this->id.'/categories');
+            }
+        }
+
         //render form
-        $this->render('edit_category', array('category' => new ProductCardCategories()));
+        $this->render('category_create', array('category' => $category, 'form_mdl' => $form));
     }
 
-    //D E L E T E  C A T E G O R Y
-    public function actionDeleteCat($id = null)
+
+    /**
+     * Edit category
+     * @param null $id
+     * @throws CHttpException
+     */
+    public function actionEditCat($id = null)
     {
-        $id = (int)$id;
-
         /* @var $category ProductCardCategories */
-
-        //array of restrict-reasons
-        $restricts = array();
 
         //find in base
         $category = ProductCardCategories::model()->findByPk($id);
 
         //if not found - 404 error
-        if(empty($category)){throw new CHttpException(404,$this->labels['item not found in base']);}
-
-        //check if this category used in product cards
-        if(count($category->productCards) > 0){$restricts[]=$this->labels['this item used in'].' '.$this->labels['product cards'];}
-
-        //if have no restricts
-        if(empty($restricts))
+        if(!empty($category))
         {
-            //delete category
-            $category->delete();
+            //create form-validator object
+            $form = new ProductCategoryForm();
 
-            //redirect to list
-            $this->redirect(Yii::app()->createUrl(Yii::app()->controller->id.'/categories'));
+            //if isset right post param
+            if($_POST['ProductCategoryForm'])
+            {
+                //form model
+                $form -> attributes = $_POST['ProductCategoryForm'];
+
+                //if has errors
+                if($form -> validate())
+                {
+                    //set attributes
+                    $category -> attributes = $_POST['ProductCategoryForm'];
+                    $category -> date_changed = time();
+                    $category -> user_modified_by = Yii::app()->user->id;
+
+                    //update
+                    $category -> update();
+
+                    //redirect to list
+                    $this->redirect('/'.$this->id.'/categories');
+                }
+            }
+
+            //render form
+            $this->render('category_edit', array('category' => $category, 'form_mdl' => $form));
         }
-
-        //restrict
         else
         {
-            $this->render('restricts',array('restricts' => $restricts));
+            throw new CHttpException(404,$this->labels['item not found in base']);
         }
     }
 
-
-    //U P D A T E  C A T E G O R Y
-    public function actionUpdateCat()
+    /**
+     * Delete category
+     * @param null $id
+     * @throws CHttpException
+     */
+    public function actionDeleteCat($id = null)
     {
-        //get id from request
-        $id = Yii::app()->request->getParam('id',null);
-        $name = Yii::app()->request->getParam('category_name','');
-        $remark = Yii::app()->request->getParam('remark','');
+        /* @var $category ProductCardCategories */
 
-        //find category
+        //find in base
         $category = ProductCardCategories::model()->findByPk($id);
 
-        //if found nothing - create new
-        if(empty($category)){$category = new ProductCardCategories();}
-
-        //form-validation object
-        $validation = new ProductCategoryForm();
-        //set attributes
-        $validation->attributes = $_POST;
-        //validate
-        $validation->validate();
-        //get errors
-        $errors = $validation->getErrors();
-
-        //if have errors
-        if(empty($errors))
+        //if not found - 404 error
+        if(!empty($category))
         {
-            //set main params
-            $category->name = $name;
-            $category->remark = $remark;
-            $category->status = 1;
-            $category->date_changed = time();
-
-            //if created new object
-            if($category->isNewRecord)
+            //check if this category used in product cards
+            if(count($category->productCards) > 0)
             {
-                //creation time
-                $category->date_created = time();
-
-                //save
-                $category->save();
+                //render restrict message
+                $this->render('restricts');
             }
-            //if update old object
+            //if not used
             else
             {
-                //update
-                $category->update();
-            }
+                //delete category
+                $category->delete();
 
-            //redirect to list
-            $this->redirect(Yii::app()->createUrl(Yii::app()->controller->id.'/categories'));
+                //redirect to list
+                $this->redirect('/'.$this->id.'/categories');
+            }
         }
-        //if have som errors
         else
         {
-            //render form with errors
-            $this->render('edit_category',array('category' => $category, 'errors' => $errors));
+            throw new CHttpException(404,$this->labels['item not found in base']);
         }
-
     }
-
 
     /****************************************************************************************************************
      ****************************************** P R O D U C T  C A R D S ********************************************
      ***************************************************************************************************************/
 
-     /**
+    /**
      * List cards
      */
     public function actionCards()
     {
         //get all cards
         $cards = ProductCards::model()->with('category')->findAll();
-        $categories = ProductCardCategories::model()->getDropList();
-
+        $categories = ProductCardCategories::model()->getAllAsArray();
         //render list
         $this->render('card_list',array('cards' => $cards, 'categories' => $categories));
     }
 
 
-  /**
-   * E D I T
-   */ 
-    public function actionEditCard($id = null)
-    {
-        $id = (int)$id;
-        $card = ProductCards::model()->findByPk($id);
-        if(!empty($card)){
-              
-            $model = new ProductCardForm();
-    
-            //get all categories
-            $categories = ProductCardCategories::model()->getDropList();
-            if(isset($_POST['ProductCardForm'])){
-                $model->attributes = $_POST['ProductCardForm'];
-                if($model->validate()){
-                    $card->attributes = $_POST['ProductCardForm'];
-                    $card->update();
-                    $this->redirect('/products/cards');
-                }
-            }
-            //render form
-            $this->render('edit_card',array('categories' => $categories, 'card' => $card,'model'=>$model));
-            
-        }else{        
-            throw new CHttpException(404,$this->labels['item not found in base']);
-        }      
-    }// edit
-
-    
     /**
-     *  ADD CARD
+     * Add card
      */
     public function actionAddCard()
     {
-        $model = new ProductCardForm();
-        //get all categories
-        $categories = ProductCardCategories::model()->getDropList();
-        if(isset($_POST['ProductCardForm'])){
-            $model->attributes = $_POST['ProductCardForm'];
-            if($model->validate()){
-                $saveModel = new ProductCards();
-                $saveModel->attributes = $_POST['ProductCardForm'];
-                $saveModel->save();
-                $this->redirect('cards');
-            }
-        }        
-        //render form
-        $this->render('edit_card',array('categories' => $categories,'model'=>$model ,'card' => new ProductCards()));
-    }
-    
-    
+        //create form-validator-object and card object
+        $form = new ProductCardForm();
+        $card = new ProductCards();
+        $measure_units = MeasureUnits::model()->findAllAsArray();
+        $size_units = SizeUnits::model()->findAllAsArray();
 
-    
-    
-    /**
-     * DELETE
-     */
-    public function actionDeleteCard($id = null){
-        $id = (int)$id;
-        $card = ProductCards::model()->with('operationsIns','operationsOuts','productInStocks')->findByPk($id);
-        
-        if(!empty($card)){
-            if(count($card->operationsIns)== 0 && count($card->operationsOuts) == 0 && count($card->productInStocks)== 0 ){
-                $card->delete();
-                $this->redirect('/products/cards');
-            }else{
-                $restricts=$this->labels['this item used in'];
-                $this->render('restricts',array('restricts' => $restricts));
+        //if set post form params
+        if(isset($_POST['ProductCardForm']))
+        {
+            //validate all attributes
+            $form->attributes = $_POST['ProductCardForm'];
+
+            //if no errors
+            if($form->validate())
+            {
+                //set params
+                $card->attributes = $_POST['ProductCardForm'];
+                $card->date_changed = time();
+                $card->date_created = time();
+                $card->user_modified_by = Yii::app()->user->id;
+
+                //save to db
+                $card->save();
+
+                //get array of files
+                $files = CUploadedFile::getInstances($form,'files');
+
+                //save files
+                ProductFiles::model()->saveFiles($files,$card->id);
+
+                //redirect to list
+                $this->redirect('/'.$this->id.'/cards');
             }
-            
-        }else{
-            throw new CHttpException(404,$this->labels['item not found in base']);    
         }
-    }// delete
+
+        //get all categories
+        $categories_arr = ProductCardCategories::model()->getAllAsArray();
+
+        //render form
+        $this->render('card_create',array('categories_arr' => $categories_arr, 'card' => $card, 'm_units' => $measure_units, 's_units' => $size_units, 'form_mdl' => $form));
+    }
+
+
+    /**
+     * Edit card
+     * @param null $id
+     * @throws CHttpException
+     */
+    public function actionEditCard($id = null)
+    {
+        /* @var $card ProductCards */
+
+        //try find in base
+        $card = ProductCards::model()->with('productFiles')->findByPk($id);
+
+        $measure_units = MeasureUnits::model()->findAllAsArray();
+        $size_units = SizeUnits::model()->findAllAsArray();
+
+        //if found
+        if(!empty($card))
+        {
+            //create form-validator-object and card object
+            $form = new ProductCardForm();
+
+            //set current card-id to validator, to avoid unique-check-error when updating
+            $form -> current_card_id = $card->id;
+
+            //if set post form params
+            if(isset($_POST['ProductCardForm']))
+            {
+                //validate all attributes
+                $form->attributes = $_POST['ProductCardForm'];
+
+                //if no errors
+                if($form->validate())
+                {
+                    //set params
+                    $card->attributes = $_POST['ProductCardForm'];
+                    $card->date_changed = time();
+                    $card->user_modified_by = Yii::app()->user->id;
+
+                    //save to db
+                    $card->save();
+
+                    //get array of files
+                    $files = CUploadedFile::getInstances($form,'files');
+
+                    //save files
+                    ProductFiles::model()->saveFiles($files,$card->id);
+
+                    //redirect to list
+                    $this->redirect('/'.$this->id.'/cards');
+                }
+            }
+
+            //get all categories
+            $categories_arr = ProductCardCategories::model()->getAllAsArray();
+
+            //render form
+            $this->render('card_edit',array('categories_arr' => $categories_arr, 'card' => $card, 'm_units' => $measure_units, 's_units' => $size_units, 'form_mdl' => $form));
+        }
+        //if not found
+        else
+        {
+            //throw exception
+            throw new CHttpException(404,$this->labels['item not found in base']);
+        }
+    }
+
+
+    /**
+     * Delete card
+     * @param null $id
+     * @throws CHttpException
+     */
+    public function actionDeleteCard($id = null)
+    {
+        /* @var $card ProductCards */
+
+        //try find in base
+        $card = ProductCards::model()->with('OperationsInItemss','operationsOuts','productInStocks')->findByPk($id);
+
+        //if found
+        if(!empty($card))
+        {
+            //check for usages - if used somewhere
+            if(count($card->operationsInItems) > 0 || count($card->operationsOutItems) > 0 || $card->productInStocks)
+            {
+                //render restricts
+                $this->render('restricts');
+            }
+            else
+            {
+                //delete card
+                $card->delete();
+                //redirect to list
+                $this->redirect('/'.$this->id.'/cards');
+            }
+        }
+        //if not found
+        else
+        {
+            throw new CHttpException(404,$this->labels['item not found in base']);
+        }
+
+    }
+
 }
