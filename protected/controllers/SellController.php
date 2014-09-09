@@ -145,7 +145,8 @@ class SellController extends Controller
         /* @var $stocks Stocks[] */
         /* @var $available_stocks Stocks[] */
 
-        if($client = Clients::model()->findByPk($id))
+        $client = Clients::model()->findByPk($id);
+        if(!empty($client))
         {
             $available_stocks_id = array();
             $stocks = Stocks::model()->findAll();
@@ -178,13 +179,15 @@ class SellController extends Controller
         $products = $form['products'];
         $options = $form['options'];
 
-        if($stock = Stocks::model()->findByPk($stock_id) && $client = Clients::model()->findByPk($client_id))
+        $stock = Stocks::model()->findByPk($stock_id);
+        $client = Clients::model()->findByPk($client_id);
+        if(!empty($stock) && !empty($client))
         {
             $operation = new OperationsOut();
             $operation->client_id = $client_id;
             $operation->signer_name = "";
 //            $operation->payment_method_id = 0;
-            $operation->date_created = time();
+            $operation->date_created_ops = time();
             $operation->date_changed = time();
             $operation->warranty_start_date = time();
             $operation->user_modified_by = Yii::app()->user->id;
@@ -259,7 +262,8 @@ class SellController extends Controller
     {
         /* @var $operation OperationsOut */
 
-        if($operation = OperationsOut::model()->findByPk($id))
+        $operation = OperationsOut::model()->findByPk($id);
+        if(!empty($operation))
         {
             $invoice_code = $operation->invoice_code;
 
@@ -289,43 +293,6 @@ class SellController extends Controller
         }
     }//actionGenerate
 
-
-    /**
-     * Renders pagination block, by count of filtered data
-     */
-    public function actionAjaxPages()
-    {
-        //get all params from post(or get)
-        $client_name = Yii::app()->request->getParam('cli_name', '');
-        $client_type_id = Yii::app()->request->getParam('cli_type_id',null);
-        $invoice_code = Yii::app()->request->getParam('in_code','');
-        $operation_status_id = Yii::app()->request->getParam('in_status_id','');
-        $stock_city_id = Yii::app()->request->getParam('stock_city_id','');
-        $date_from_str = Yii::app()->request->getParam('date_from_str','');
-        $date_to_str = Yii::app()->request->getParam('date_to_str','');
-        $page = Yii::app()->request->getParam('page',1);
-
-        $c = new CDbCriteria(); //new criteria
-        $c = $this->addAllFilterCriterion($c,$client_name,$client_type_id,$invoice_code,$operation_status_id,$stock_city_id,$date_from_str,$date_to_str); //add filtering parameters
-        $count_all = OperationsOut::model()->count($c); //count all filtered records
-        $pages_count = $this->calculatePageCount($count_all); //get count of pages
-
-        //store all filter-params to array
-        $filter_params = array(
-            'cli_name' => $client_name,
-            'cli_type_id' => $client_type_id,
-            'in_code' => $invoice_code,
-            'in_status_id' => $operation_status_id,
-            'stock_city_id' => $stock_city_id,
-            'date_from_str' => $date_from_str,
-            'date_to_str' => $date_to_str
-        );
-
-        //render pagination-block
-        $this->renderPartial('_ajax_pages',array('pages' => $pages_count, 'current' => $page, 'filters' => $filter_params));
-
-    }//actionAjaxPages
-
     /**
      * Filter table ajax
      */
@@ -341,114 +308,116 @@ class SellController extends Controller
         $date_to_str = Yii::app()->request->getParam('date_to_str','');
         $page = Yii::app()->request->getParam('page',1);
 
-        //new criteria for filtering
-        $c = new CDbCriteria();
-        $c = $this->addAllFilterCriterion($c,$client_name,$client_type_id,$invoice_code,$operation_status_id,$stock_city_id,$date_from_str,$date_to_str); //add filtering parameters
-        $c -> limit = $this->on_one_page; //limit count of records on page
-        $c -> offset = ($this->on_one_page * ($page - 1)); //get offset
 
-        //get all filtered operations
-        $operations = OperationsOut::model()->findAll($c);
+        //conditions - null by default
+        $client_con_arr = null;
+        $stock_con_arr = null;
+        $date_condition = null;
 
-        //render partial
-        $this->renderPartial('_ajax_table_filtering',array('operations' => $operations));
+        //date range by default
+        $time_from = 0;
+        $time_to = time() + (60 * 60 * 24);
 
-    }//FilterTable
+        //attr condition
+        $attr_conditions = array();
 
+        //if client name not empty
+        if(!empty($client_name))
+        {
+            if(!empty($client_type_id))
+            {
+                //if not company (physical person)
+                if($client_type_id != 1)
+                {
+                    $names = explode(" ",$client_name,2);
+                    if(count($names) > 1)
+                    {
+                        $client_con_arr = array('condition' => 'client.name LIKE "%'.$names[0].'%" AND client.surname LIKE "%'.$names[1].'%"');
+                    }
+                    else
+                    {
+                        $client_con_arr = array('condition' => 'client.name LIKE "%'.$client_name.'%"');
+                    }
+                }
 
-    /**
-     * Adds all filtering params to criteria for filtering
-     * @param CDbCriteria $c criteria for filtration
-     * @param string $client_name filter param - client name
-     * @param int $client_type_id filter param - client type ID
-     * @param string $invoice_code filter param - invoice code
-     * @param int $operation_status_id filter param - operation status ID
-     * @param int $stock_city_id filter param - stock ID
-     * @param string $date_from_str filter param - start date
-     * @param string $date_to_str - filter param - end date
-     * @return CDbCriteria updated criteria
-     */
-    function addAllFilterCriterion($c,$client_name,$client_type_id,$invoice_code,$operation_status_id,$stock_city_id,$date_from_str,$date_to_str)
-    {
-        /* @var $c CDbCriteria */
+                //if company
+                else
+                {
+                    $client_con_arr = array('condition' => 'client.company_name LIKE "%'.$client_name.'%"');
+                }
+            }
+            else
+            {
 
-        //if has invoice code
+                $names = explode(" ",$client_name,2);
+                if(count($names) > 1)
+                {
+                    $client_con_arr = array('condition' => 'client.name LIKE "%'.$names[0].'%" AND client.surname LIKE "%'.$names[1].'%" OR client.company_name LIKE "%'.$client_name.'%"');
+                }
+                else
+                {
+                    $client_con_arr = array('condition' => 'client.name LIKE "%'.$client_name.'%" OR client.company_name LIKE "%'.$client_name.'%"');
+                }
+            }
+        }
+        elseif(!empty($client_type_id))
+        {
+            $client_con_arr = array('condition' => 'client.type = '.$client_type_id.'');
+        }
+
+        if(!empty($stock_city_id))
+        {
+            $stock_con_arr = array('condition' => 'stock.location_id = '.$stock_city_id.'');
+        }
+
+        //if given dates
+        if(!empty($date_from_str))
+        {
+            $dt = DateTime::createFromFormat('m/d/Y',$date_from_str);
+            $time_from = $dt->getTimestamp();
+        }
+        if(!empty($date_to_str))
+        {
+            $dt = DateTime::createFromFormat('m/d/Y',$date_to_str);
+            $time_to = $dt->getTimestamp();
+            $time_to += (60*60*24); //add one day
+        }
+
+        //if invoice code set
         if(!empty($invoice_code))
         {
-            //add to condition (search by invoice code)
-            $c -> addInCondition('invoice_code',array($invoice_code));
+            $attr_conditions['invoice_code'] = $invoice_code;
         }
-
-
-        //get all client-rows from base by name and type (where name, or company name like $client_name parameter)
-        $clients = Clients::model()->getClients($client_name,$client_type_id);
-        //declare empty array for client's ids
-        $found_ids = array();
-        //fill array of client ids
-        foreach($clients as $client_row)
-        {
-            $found_ids[] = $client_row['id'];
-        }
-        //add ids to condition (search by client ids)
-        $c -> addInCondition('client_id',$found_ids);
-
 
         //if operation status set
         if(!empty($operation_status_id))
         {
-            //search by status
-            $c -> addInCondition('status_id',array($operation_status_id));
+            $attr_conditions['status_id'] = $operation_status_id;
         }
 
-        //if city_id not empty
-        if(!empty($stock_city_id))
-        {
-            /* @var $city UserCities */
 
-            //get city by id
-            $city = UserCities::model()->findByPk($stock_city_id);
+        //set time-range criteria
+        $c_time = new CDbCriteria();
+        $c_time -> addBetweenCondition('date_created_ops',$time_from,$time_to);
 
-            //get stocks by city
-            $stocks = $city->stocks;
+        //create new criteria by time-range, for limit count of record
+        $c_lim = Pagination::getFilterCriteria(3,$page,$c_time);
 
-            //if found some stocks
-            if(count($stocks) > 0)
-            {
-                //get first stock (usually city has only one stock)
-                $stock = $stocks[0];
-                //find by stock id
-                $c -> addInCondition('stock_id',array($stock->id));
-            }
-        }
+        //count all filtered items
+        $count = OperationsOut::model()->with(array(
+            'client' => $client_con_arr,
+            'stock.location' => $stock_con_arr))->countByAttributes($attr_conditions,$c_time);
 
-        //if 'date-from' not empty but 'date-to' empty
-        if(!empty($date_from_str) && empty($date_to_str))
-        {
-            $date_from_arr = explode('/',$date_from_str); //explode string to get numbers
-            $time_from = mktime(0,0,0,(int)$date_from_arr[0],(int)$date_from_arr[1],(int)$date_from_arr[2]); // make time
-            $time_to = time();
-            $c -> addBetweenCondition('date_created',$time_from,$time_to); //search between these times
-        }
+        //calculate count of pages
+        $pages = Pagination::calcPagesCount($count,3);
 
-        //if 'date-to' not empty but 'date-from' empty
-        if(!empty($date_to_str) && empty($date_from_str))
-        {
-            $date_to_arr = explode('/',$date_to_str); //explode string to get numbers
-            $time_from = 0; //beginning of time ('date-from' not set)
-            $time_to = mktime(0,0,0,(int)$date_to_arr[0],(int)$date_to_arr[1],(int)$date_to_arr[2]); // make time
-            $c -> addBetweenCondition('date_created',$time_from,$time_to); //search between these times
-        }
+        //get all items by conditions and limit them by criteria
+        $operations = OperationsOut::model()->with(array(
+            'client' => $client_con_arr,
+            'stock.location' => $stock_con_arr))->findAllByAttributes($attr_conditions,$c_lim);
 
-        //if 'date-to' and 'date-from' not empty
-        if(!empty($date_from_str) && !empty($date_to_str))
-        {
-            $date_from_arr = explode('/',$date_from_str); //explode string to get numbers
-            $time_from = mktime(0,0,0,(int)$date_from_arr[0],(int)$date_from_arr[1],(int)$date_from_arr[2]); // make time
-            $date_to_arr = explode('/',$date_to_str); //explode string to get numbers
-            $time_to = mktime(0,0,0,(int)$date_to_arr[0],(int)$date_to_arr[1],(int)$date_to_arr[2]); // make time
-            $c -> addBetweenCondition('date_created',$time_from,$time_to); //search between these times
-        }
+        //render partial
+        $this->renderPartial('_ajax_table_filtering',array('operations' => $operations, 'current_page' => $page, 'pages' => $pages));
 
-        return $c;
-    }
+    }//actionFilterTable
 }

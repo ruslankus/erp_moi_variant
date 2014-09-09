@@ -3,10 +3,14 @@
 <?php /* @var $cities array */ ?>
 <?php /* @var $types array */ ?>
 <?php /* @var $statuses array */ ?>
+<?php /* @var $gen_link string */ ?>
+<?php /* @var $pages int */ ?>
+<?php /* @var $current_page int */ ?>
 
 <?php
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/invoice_list.css');
+$cs->registerCssFile(Yii::app()->request->baseUrl.'/css/paginator.css');
 $cs->registerScriptFile(Yii::app()->baseUrl.'/js/sales_list.js',CClientScript::POS_END);
 ?>
 
@@ -14,7 +18,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl.'/js/sales_list.js',CClientScript::P
 
 <div class="container-fluid  main-content-holder content-wrapper">
     <div class="row filter-holder">
-        <form class="filter-form" method="get" action="<?php echo Yii::app()->createUrl('/sell/filtertable'); ?>">
+        <form class="filter-form" method="get" action="<?php echo Yii::app()->createUrl('/sell/filtertable'); ?>" data-pages="<?php echo Yii::app()->createUrl('/sell/ajaxpages'); ?>">
             <input type="text" id="client-name-inputs" placeholder="<?php echo $this->labels['client name']; ?>">
             <input type="text" id="invoice-code-input" placeholder="<?php echo $this->labels['invoice code']; ?>">
             <select id="cli-type">
@@ -64,7 +68,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl.'/js/sales_list.js',CClientScript::P
                     <td><?php echo $operation->client->getFullName(); ?></td>
                     <td><?php echo $operation->client->typeObj->name; ?></td>
                     <td><?php echo $operation->stock->location->city_name; ?></td>
-                    <td><?php echo date('Y.m.d G:i',$operation->date_created); ?></td>
+                    <td><?php echo date('Y.m.d G:i',$operation->date_created_ops); ?></td>
                     <td class="invoice-code"><?php echo $operation->invoice_code; ?></td>
                     <td><a class="gen-pdf" data-id="<?php echo $operation->id; ?>" href="<?php echo Yii::app()->createUrl('sell/generate',array('id' => $operation->id)); ?>"><?php echo $this->labels['generate pdf']; ?></a></td>
                     <td><?php echo $operation->status->name; ?></td>
@@ -73,19 +77,26 @@ $cs->registerScriptFile(Yii::app()->baseUrl.'/js/sales_list.js',CClientScript::P
             <?php endforeach;?>
             </tbody>
         </table>
+
+        <div class="pages-holder">
+            <ul class="paginator">
+                <?php for($i = 0; $i < $pages; $i++): ?>
+                    <li class="<?php if(($i+1) == $current_page): ?>current-page<?php endif; ?> links-pages"><?php echo ($i+1) ?></li>
+                <?php endfor; ?>
+            </ul>
+        </div>
     </div><!--/table-holder -->
+
+
 
     <div class="modals-holder">
         <div class="invoice-ready">
-
             <div class="modal fade" id="invoiceInfo" tabindex="-1" role="dialog">
                 <div id="modal-operation-info" class="modal-dialog">
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
-
         </div><!--/invoice-ready -->
-
     </div><!--/modals-holder -->
 
 </div><!--/container -->
-<iframe class="file-load-frame" style="display: none; width: 0; height: 0" src=""></iframe>
+<iframe class="file-load-frame" style="display: none; width: 0; height: 0" src="<?php echo $gen_link; ?>"></iframe>

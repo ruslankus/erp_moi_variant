@@ -9,7 +9,6 @@
 
 <?php
 $cs = Yii::app()->clientScript;
-$cs->registerCssFile(Yii::app()->request->baseUrl."/css/ui-lightness/jquery-ui-1.10.4.custom.css");
 $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/stock_list.css');
 $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/paginator.css');
 $cs->registerScriptFile(Yii::app()->request->baseUrl.'/js/stock.js',CClientScript::POS_END);
@@ -20,9 +19,10 @@ $cs->registerScriptFile(Yii::app()->request->baseUrl.'/js/stock.js',CClientScrip
 	<div class="container-fluid  main-content-holder content-wrapper">
 
     	<div class="row filter-holder">
-            <form method="post" action="<?php echo Yii::app()->createUrl('/stock/filter'); ?>">
+            <form method="post" action="#">
                 <input id="prod-name" type="text" placeholder="<?php echo $this->labels['product name']; ?>">
                 <input id="prod-code" type="text" placeholder="<?php echo $this->labels['product code']; ?>">
+
                 <select id="stock-location">
                 	<option value=""><?php echo $this->labels['stock location']; ?></option>
                     <?php foreach($cities as $id => $name): ?>
@@ -40,7 +40,7 @@ $cs->registerScriptFile(Yii::app()->request->baseUrl.'/js/stock.js',CClientScrip
         </div><!--/filter-holder -->
 
         <div class="row table-holder">
-        	<table class="table table-bordered table-striped table-hover" >
+        	<table class="table table-bordered table-striped table-hover">
             	<thead>
                 	<tr>
                     	<th>#</th>
@@ -53,7 +53,7 @@ $cs->registerScriptFile(Yii::app()->request->baseUrl.'/js/stock.js',CClientScrip
                         <th><?php echo $this->labels['actions']; ?></th>
                     </tr>
                 </thead>
-                <tbody class="filtered-body">
+                <tbody>
                 <?php foreach($products as $nr => $product):?>
                 	<tr>
                     	<td><?php echo $nr; ?></td>
@@ -68,15 +68,16 @@ $cs->registerScriptFile(Yii::app()->request->baseUrl.'/js/stock.js',CClientScrip
                    <?php endforeach;?>
                 </tbody>
             </table>
+
+            <div class="pages-holder">
+                <ul class="paginator">
+                    <?php for($i = 0; $i < $pages; $i++): ?>
+                        <li class="<?php if(($i+1) == $current_page): ?>current-page<?php endif; ?> links-pages"><?php echo ($i+1) ?></li>
+                    <?php endfor; ?>
+                </ul>
+            </div>
         </div><!--/table-holder -->
 
-        <div class="pages-holder">
-            <ul class="paginator">
-                <?php for($i = 0; $i < $pages; $i++): ?>
-                    <li class="<?php if(($i+1) == $current_page): ?>current-page<?php endif; ?> links-pages"><?php echo ($i+1) ?></li>
-                <?php endfor; ?>
-            </ul>
-        </div>
 
         <div class="modals-holder">
         <!--/ modal area -->
